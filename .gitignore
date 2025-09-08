@@ -5,6 +5,7 @@ target/
 !**/src/test/**/target/
 .DS_Store
 *.log
+.metadata/
 
 ### STS ###
 .apt_generated
