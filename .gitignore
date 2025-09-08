@@ -6,6 +6,9 @@ target/
 .DS_Store
 *.log
 .metadata/
+*.gz
+jpa.log.*
+/logs/
 
 ### STS ###
 .apt_generated
