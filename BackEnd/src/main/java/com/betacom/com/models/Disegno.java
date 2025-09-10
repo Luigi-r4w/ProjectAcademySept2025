@@ -26,9 +26,5 @@ public class Disegno extends Oggetto{
     @Column(name = "tecnica")
     private String tecnica;
     
-    /*@OneToOne
-	@JoinColumn(
-			name="oggetto_id",
-			referencedColumnName = "id")
-	private Oggetto oggetto;*/
+    private String aaaaa;
 }
