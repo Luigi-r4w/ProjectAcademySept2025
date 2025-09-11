@@ -6,9 +6,12 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.betacom.com.dto.OggettoDTO;
 import com.betacom.com.dto.UtenteDTO;
 import com.betacom.com.exception.AcademyException;
+import com.betacom.com.models.Oggetto;
 import com.betacom.com.models.Utente;
+import com.betacom.com.repositories.IOggettoRepository;
 import com.betacom.com.repositories.IUtenteRepository;
 import com.betacom.com.request.UtenteReq;
 import com.betacom.com.services.interfaces.IUtenteServices;
@@ -20,9 +23,11 @@ import lombok.extern.log4j.Log4j2;
 public class UtenteImpl implements IUtenteServices{
     
     private IUtenteRepository utenteRepository;
+    private IOggettoRepository oggettoRepository;
 	
-	public UtenteImpl(IUtenteRepository utenteRepository) {
+	public UtenteImpl(IUtenteRepository utenteRepository, IOggettoRepository oggettoRepository) {
 		this.utenteRepository=utenteRepository;
+        this.oggettoRepository=oggettoRepository;
 	}
 
     @Override
@@ -34,7 +39,7 @@ public class UtenteImpl implements IUtenteServices{
                 .nome(u.getNome())
                 .email(u.getEmail())
                 .password(u.getPassword())
-                .carrello(u.getCarrello())
+                .carrello(buildCarrello(u.getCarrello()))
                 .build()
                 ).collect(Collectors.toList());
     }
@@ -47,7 +52,6 @@ public class UtenteImpl implements IUtenteServices{
 			throw new AcademyException("email già utilizzata");
 		}
         Utente utente = new Utente();
-        utente.setCarrello(req.getCarrello());
         utente.setNome(req.getNome());
         utente.setEmail(req.getEmail());
         utente.setPassword(req.getPassword());
@@ -82,8 +86,6 @@ public class UtenteImpl implements IUtenteServices{
 			u.setPassword(req.getPassword());
 		if(req.getNome()!=null && !req.getNome().trim().isEmpty())
 			u.setNome(req.getNome());
-        if(req.getCarrello()!=null && req.getCarrello().length!=0)
-            u.setCarrello(req.getCarrello());
 		utenteRepository.save(u);	    
     }
 
@@ -103,7 +105,69 @@ public class UtenteImpl implements IUtenteServices{
             .nome(u.getNome())
             .email(u.getEmail())
             .password(u.getPassword())
-            .carrello(u.getCarrello())
+            .carrello(buildCarrello(u.getCarrello()))
+            .build();
+    }
+
+    public List<OggettoDTO> buildCarrello(List<Oggetto> lo){
+		return lo.stream()
+		.map(o -> OggettoDTO.builder()
+				.id(o.getId())
+                .categoria(o.getCategoria())
+                .prezzo(o.getPrezzo())
+                .descrizione(o.getDescrizione())
+                .titolo(o.getTitolo())
+                .dataCreazione(o.getDataCreazione())
+                .dimensione(o.getDimensione())
+                .autore(o.getAutore())
+                .immagine(o.getImmagine())
+                .isAI(o.getIsAI())
+				.build()
+				)
+		.collect(Collectors.toList());
+	}
+
+    @Override
+    public void addAlCarrello(Integer utenteId, Integer oggettoId) throws AcademyException {
+        Optional<Utente> u = utenteRepository.findById(utenteId);
+        if(u.isEmpty()){
+            throw new AcademyException("utente non trovato ");
+        }
+        Optional<Oggetto> o = oggettoRepository.findById(oggettoId);
+        if(u.isEmpty()){
+            throw new AcademyException("oggetto non trovato ");
+        }
+        u.get().getCarrello().add(o.get());
+        utenteRepository.save(u.get());
+    }
+
+    @Override
+    public void rmDalCarrello(Integer utenteId, Integer oggettoId) throws AcademyException {
+        Optional<Utente> u = utenteRepository.findById(utenteId);
+        if(u.isEmpty()){
+            throw new AcademyException("utente non trovato ");
+        }
+        Optional<Oggetto> o = oggettoRepository.findById(oggettoId);
+        if(u.isEmpty()){
+            throw new AcademyException("oggetto non trovato ");
+        }
+        u.get().getCarrello().remove(o.get());
+        utenteRepository.save(u.get());
+    }
+
+    @Override
+    public UtenteDTO findById(Integer id) throws AcademyException {
+        Optional<Utente> optionalU = utenteRepository.findById(id);
+        if(optionalU.isEmpty()){
+            throw new AcademyException("utente non trovato ");
+        }
+        Utente u = optionalU.get();
+        return UtenteDTO.builder()
+            .id(u.getId())
+            .nome(u.getNome())
+            .email(u.getEmail())
+            .password(u.getPassword())
+            .carrello(buildCarrello(u.getCarrello()))
             .build();
     }
     

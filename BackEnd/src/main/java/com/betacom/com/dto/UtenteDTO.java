@@ -1,5 +1,7 @@
 package com.betacom.com.dto;
 
+import java.util.List;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,5 +16,5 @@ public class UtenteDTO {
     private String nome;
     private String email;
     private String password;
-    private Integer[] carrello;
+    private List<OggettoDTO> carrello;
 }

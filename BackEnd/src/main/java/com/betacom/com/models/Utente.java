@@ -1,5 +1,8 @@
 package com.betacom.com.models;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +26,12 @@ public class Utente {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "carrello", columnDefinition = "integer[]")
-    private Integer[] carrello;
+    @ManyToMany
+    @JoinTable(
+        name = "carrello_utente_oggetto", 
+        joinColumns = @JoinColumn(name = "utente_id"),
+        inverseJoinColumns = @JoinColumn(name = "oggetto_id")
+    )
+    private List<Oggetto> carrello = new ArrayList<>();
 
 }
