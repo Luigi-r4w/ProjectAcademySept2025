@@ -17,4 +17,10 @@ public interface IUtenteServices {
 	void update(UtenteReq req) throws AcademyException;
 
     UtenteDTO autenticazione(String email, String password) throws AcademyException;
+
+    void addAlCarrello(Integer utenteId, Integer oggettoId) throws AcademyException;
+
+    void rmDalCarrello(Integer utenteId, Integer oggettoId) throws AcademyException;
+
+    UtenteDTO findById(Integer id) throws AcademyException;
 }
