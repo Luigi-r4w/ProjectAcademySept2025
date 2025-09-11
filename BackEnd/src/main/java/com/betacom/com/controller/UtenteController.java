@@ -40,7 +40,7 @@ public class UtenteController {
 		return r;
 	}
 
-	@GetMapping("/fingById")
+	@GetMapping("/findById")
 	public ResponseObject<UtenteDTO> findById(@RequestParam Integer id){
 		ResponseObject<UtenteDTO> r = new ResponseObject<UtenteDTO>();
 		try {
