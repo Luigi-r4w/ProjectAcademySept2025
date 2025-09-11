@@ -27,7 +27,7 @@ public class Oggetto {
     private String categoria;
 	
 	@Column(name = "prezzo")
-    private String prezzo;
+    private Double prezzo;
 
     @Column(name = "descrizione")
     private String descrizione;

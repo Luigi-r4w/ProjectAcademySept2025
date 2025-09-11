@@ -14,7 +14,7 @@ import lombok.ToString;
 public class OggettoDTO {
     private Integer id;
     private String categoria;
-	private String prezzo;
+	private Double prezzo;
     private String descrizione;
     private String titolo;
     private LocalDate dataCreazione;

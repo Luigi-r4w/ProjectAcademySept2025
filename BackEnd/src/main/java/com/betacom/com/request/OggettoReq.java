@@ -15,7 +15,7 @@ import lombok.ToString;
 @ToString
 public class OggettoReq {
 	private Integer id;
-	private String prezzo;
+	private Double prezzo;
     private String descrizione;  
     private String titolo; 
     private LocalDate dataCreazione;
