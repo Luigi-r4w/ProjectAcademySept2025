@@ -26,5 +26,4 @@ public class Disegno extends Oggetto{
     @Column(name = "tecnica")
     private String tecnica;
     
-    private String aaaaa;
 }
