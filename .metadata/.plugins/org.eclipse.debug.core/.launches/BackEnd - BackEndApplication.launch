@@ -9,7 +9,7 @@
     </listAttribute>
     <mapAttribute key="org.eclipse.debug.core.environmentVariables">
         <mapEntry key="db_password" value="qwerty"/>
-        <mapEntry key="db_url" value="jdbc:postgresql://localhost:5432/current_jpa"/>
+        <mapEntry key="db_url" value="jdbc:postgresql://localhost:5432/project_academy"/>
         <mapEntry key="db_user" value="postgres"/>
         <mapEntry key="language" value="IT"/>
         <mapEntry key="log_mode" value="debug"/>
