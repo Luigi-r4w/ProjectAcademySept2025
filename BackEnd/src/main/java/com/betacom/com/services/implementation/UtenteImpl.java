@@ -6,8 +6,10 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.betacom.com.dto.OggettoDTO;
 import com.betacom.com.dto.UtenteDTO;
 import com.betacom.com.exception.AcademyException;
+import com.betacom.com.models.Oggetto;
 import com.betacom.com.models.Utente;
 import com.betacom.com.repositories.IUtenteRepository;
 import com.betacom.com.request.UtenteReq;
@@ -34,7 +36,7 @@ public class UtenteImpl implements IUtenteServices{
                 .nome(u.getNome())
                 .email(u.getEmail())
                 .password(u.getPassword())
-                .carrello(u.getCarrello())
+                .carrello(buildCarrello(u.getCarrello()))
                 .build()
                 ).collect(Collectors.toList());
     }
@@ -47,7 +49,6 @@ public class UtenteImpl implements IUtenteServices{
 			throw new AcademyException("email già utilizzata");
 		}
         Utente utente = new Utente();
-        utente.setCarrello(req.getCarrello());
         utente.setNome(req.getNome());
         utente.setEmail(req.getEmail());
         utente.setPassword(req.getPassword());
@@ -82,8 +83,6 @@ public class UtenteImpl implements IUtenteServices{
 			u.setPassword(req.getPassword());
 		if(req.getNome()!=null && !req.getNome().trim().isEmpty())
 			u.setNome(req.getNome());
-        if(req.getCarrello()!=null && req.getCarrello().length!=0)
-            u.setCarrello(req.getCarrello());
 		utenteRepository.save(u);	    
     }
 
@@ -103,8 +102,18 @@ public class UtenteImpl implements IUtenteServices{
             .nome(u.getNome())
             .email(u.getEmail())
             .password(u.getPassword())
-            .carrello(u.getCarrello())
+            .carrello(buildCarrello(u.getCarrello()))
             .build();
     }
+
+    public List<OggettoDTO> buildCarrello(List<Oggetto> ab){
+		return ab.stream()
+		.map(a -> OggettoDTO.builder()
+				
+				.build()
+				)
+		.collect(Collectors.toList());
+		
+	}
     
 }
