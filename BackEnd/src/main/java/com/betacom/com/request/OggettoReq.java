@@ -23,4 +23,5 @@ public class OggettoReq {
     private String autore;
     private String immagine;
     private String isAI;
+    private String categoria;
 }
