@@ -22,9 +22,12 @@ public class Oggetto {
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Integer id;
+
+    @Column(name = "categoria")
+    private String categoria;
 	
 	@Column(name = "prezzo")
-    private String prezzo;
+    private Double prezzo;
 
     @Column(name = "descrizione")
     private String descrizione;
@@ -45,6 +48,6 @@ public class Oggetto {
     private String immagine;
     
     @Column(name = "is_ai")
-    private String isAI;
+    private Boolean isAI;
     
 }
