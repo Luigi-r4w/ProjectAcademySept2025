@@ -13,17 +13,9 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class DisegnoReq {
-	
+public class DisegnoReq extends OggettoReq{
 	private Integer id;
     private String supporto;
     private String tecnica;
-    private String prezzo;
-    private String descrizione;  
-    private String titolo; 
-    private LocalDate dataCreazione;
-    private String dimensione;
-    private String autore;
-    private String immagine;
-    private String isAI;
+    
 }
