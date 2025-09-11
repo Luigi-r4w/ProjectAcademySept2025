@@ -10,12 +10,13 @@ import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 @NoArgsConstructor
 @AllArgsConstructor
-@ToString
-public class DisegnoReq extends OggettoReq{
+public class IllustrazioneReq {
 	private Integer id;
-    private String supporto;
-    private String tecnica;
-    
+	//private Integer id_oggetto;
+	private String urlIllustrazione;
+	private String stile;
+	private LocalDate dataIllustrazione;
 }
