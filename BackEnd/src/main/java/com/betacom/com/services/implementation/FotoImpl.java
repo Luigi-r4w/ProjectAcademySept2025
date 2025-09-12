@@ -7,7 +7,6 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Service;
 
 import com.betacom.com.dto.FotoDTO;
-import com.betacom.com.dto.OggettoDTO;
 import com.betacom.com.exception.AcademyException;
 import com.betacom.com.models.Foto;
 import com.betacom.com.repositories.IFotoRepository;
@@ -40,18 +39,7 @@ public class FotoImpl implements IFotoServices{
 						.device(f.getDevice())
 						.widthResolution(f.getWidthResolution())
 						.heightResolution(f.getHeightResolution())
-						.oggetto(OggettoDTO.builder()
-								.id(f.getId())
-								.categoria(f.getCategoria())
-								.prezzo(f.getPrezzo())
-								.descrizione(f.getDescrizione())
-								.titolo(f.getTitolo())
-								.dataCreazione(f.getDataCreazione())
-								.dimensione(f.getDimensione())
-								.autore(f.getAutore())
-								.immagine(f.getImmagine())
-								.isAI(f.getIsAI())
-								.build())
+						.oggetto(Utilities.buildOggettoDTO(f))
 				.build()).collect(Collectors.toList());
 	}
 
