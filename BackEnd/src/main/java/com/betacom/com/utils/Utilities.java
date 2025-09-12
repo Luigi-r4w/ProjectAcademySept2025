@@ -13,7 +13,7 @@ public class Utilities {
 	
 	public static <R extends OggettoReq> void verificaOggetto(R req) throws AcademyException{
 		
-		if (req.getPrezzo() == null || req.getPrezzo().isBlank())
+		if (req.getPrezzo() == null)
 		    throw new AcademyException("Prezzo obbligatorio");
 
 		if (req.getDescrizione() == null || req.getDescrizione().isBlank()) 
