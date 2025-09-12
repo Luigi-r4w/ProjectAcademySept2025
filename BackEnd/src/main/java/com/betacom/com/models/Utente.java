@@ -26,7 +26,7 @@ public class Utente {
     @Column(name = "password")
     private String password;
 
-    @ManyToMany
+    @ManyToMany (fetch = FetchType.EAGER)
     @JoinTable(
         name = "carrello_utente_oggetto", 
         joinColumns = @JoinColumn(name = "utente_id"),
