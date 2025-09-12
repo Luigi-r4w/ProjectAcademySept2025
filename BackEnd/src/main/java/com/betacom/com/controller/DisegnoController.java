@@ -1,13 +1,16 @@
 package com.betacom.com.controller;
 
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.betacom.com.dto.DisegnoDTO;
 import com.betacom.com.request.DisegnoReq;
 import com.betacom.com.response.ResponseBase;
+import com.betacom.com.response.ResponseList;
 import com.betacom.com.services.interfaces.IDisegnoServices;
 
 @RestController
@@ -19,7 +22,19 @@ public class DisegnoController {
 		super();
 		this.disS = disS;
 	}
-
+	
+	@GetMapping("/listAll")
+	public ResponseList<DisegnoDTO> listAll() {
+		ResponseList<DisegnoDTO> r = new ResponseList<DisegnoDTO>();
+		try {
+			r.setList(disS.listAll());
+			r.setRc(true);
+		} catch (Exception e) {
+			r.setRc(false);
+			r.setMsg(e.getMessage());
+		}
+		return r;
+	}
 
 	@PostMapping("create")
 	public ResponseBase create(@RequestBody (required = true)  DisegnoReq req) {
