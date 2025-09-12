@@ -40,6 +40,20 @@ public class UtenteController {
 		return r;
 	}
 
+	@GetMapping("/findById")
+	public ResponseObject<UtenteDTO> findById(@RequestParam Integer id){
+		ResponseObject<UtenteDTO> r = new ResponseObject<UtenteDTO>();
+		try {
+			r.setRc(true);
+			r.setMsg(null);
+			r.setDati(utenteService.findById(id));
+		} catch (Exception e) {
+			r.setRc(true);
+			r.setMsg(e.getMessage());
+		}
+		return r;
+	}
+
     @PostMapping("/insert")
 	public ResponseBase create(@RequestBody (required = true) UtenteReq sR) {
 		ResponseBase r = new ResponseBase();
@@ -81,8 +95,8 @@ public class UtenteController {
 		}
 		return r;
 	}
-	
-     @PostMapping("/login")
+    
+	@PostMapping("/login")
     public ResponseObject<UtenteDTO> login(@RequestParam String email, @RequestParam String password) {
         ResponseObject<UtenteDTO> r = new ResponseObject<>();
         try{
@@ -96,5 +110,33 @@ public class UtenteController {
 		}
         return r;
     }
+
+	@PostMapping("/aggAlCarrello")
+	public ResponseBase aggiungiAlCarrello(@RequestParam Integer utenteId,@RequestParam Integer oggettoId){
+		ResponseBase r = new ResponseBase();
+		try{
+            utenteService.addAlCarrello(utenteId, oggettoId);
+            r.setMsg(null);
+            r.setRc(true);
+        }catch (Exception e) {
+			r.setMsg(e.getMessage());
+			r.setRc(false);
+		}
+		return r;
+	}
+
+	@PostMapping("/rmDalCarrello")
+	public ResponseBase rimuoviDalCarrello(@RequestParam Integer utenteId,@RequestParam Integer oggettoId){
+		ResponseBase r = new ResponseBase();
+		try{
+            utenteService.rmDalCarrello(utenteId, oggettoId);
+            r.setMsg(null);
+            r.setRc(true);
+        }catch (Exception e) {
+			r.setMsg(e.getMessage());
+			r.setRc(false);
+		}
+		return r;
+	}
 
 }
