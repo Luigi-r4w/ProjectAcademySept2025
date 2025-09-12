@@ -12,11 +12,13 @@ import jakarta.persistence.InheritanceType;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Table(name = "oggetti")
 @Getter
 @Setter
+@ToString
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Oggetto {
 	@Id
@@ -45,6 +47,6 @@ public class Oggetto {
     private String immagine;
     
     @Column(name = "is_ai")
-    private String isAI;
+    private Boolean isAI;
     
 }

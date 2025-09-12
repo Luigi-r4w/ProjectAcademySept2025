@@ -81,6 +81,7 @@ public class UtenteController {
 		}
 		return r;
 	}
+	
      @PostMapping("/login")
     public ResponseObject<UtenteDTO> login(@RequestParam String email, @RequestParam String password) {
         ResponseObject<UtenteDTO> r = new ResponseObject<>();

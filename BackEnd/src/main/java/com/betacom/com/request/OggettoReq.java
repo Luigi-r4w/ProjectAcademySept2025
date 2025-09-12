@@ -14,7 +14,7 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class OggettoReq {
-	private Integer id;
+	private Integer idOggetto;
 	private String prezzo;
     private String descrizione;  
     private String titolo; 
@@ -22,6 +22,6 @@ public class OggettoReq {
     private String dimensione;
     private String autore;
     private String immagine;
-    private String isAI;
+    private Boolean isAI;
     private String categoria;
 }

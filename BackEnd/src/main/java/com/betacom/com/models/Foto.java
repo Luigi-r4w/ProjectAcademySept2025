@@ -14,7 +14,7 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "foto")
-public class Foto {
+public class Foto extends Oggetto{
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Integer id;
@@ -22,7 +22,7 @@ public class Foto {
 	private String device;
 	
 	@Column (name = "width_resolution")
-	private String widthResolution;
+	private Integer widthResolution;
 	@Column (name = "height_resolution")
-	private String heightResolution;
+	private Integer heightResolution;
 }
