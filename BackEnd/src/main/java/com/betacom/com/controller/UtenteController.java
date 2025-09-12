@@ -34,7 +34,7 @@ public class UtenteController {
 			r.setMsg(null);
 			r.setList(utenteService.listAll());
 		} catch (Exception e) {
-			r.setRc(true);
+			r.setRc(false);
 			r.setMsg(e.getMessage());
 		}
 		return r;
@@ -48,7 +48,7 @@ public class UtenteController {
 			r.setMsg(null);
 			r.setDati(utenteService.findById(id));
 		} catch (Exception e) {
-			r.setRc(true);
+			r.setRc(false);
 			r.setMsg(e.getMessage());
 		}
 		return r;

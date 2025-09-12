@@ -52,6 +52,10 @@ public class UtenteImpl implements IUtenteServices{
 			throw new AcademyException("email già utilizzata");
 		}
         Utente utente = new Utente();
+        if(req.getEmail().isEmpty())
+        	throw new AcademyException("email non inserita");
+        if(req.getPassword().isEmpty())
+        	throw new AcademyException("password non inserita");
         utente.setNome(req.getNome());
         utente.setEmail(req.getEmail());
         utente.setPassword(req.getPassword());
@@ -72,7 +76,7 @@ public class UtenteImpl implements IUtenteServices{
         log.debug("Utente update : "+req);
         Optional<Utente> s = utenteRepository.findById(req.getId());
 		if (s.isEmpty()) {
-			throw new AcademyException("socio non trovato");
+			throw new AcademyException("utente non trovato");
 		}
 		Utente u = s.get();
 		if(req.getEmail()!=null && !req.getEmail().trim().isEmpty()){
