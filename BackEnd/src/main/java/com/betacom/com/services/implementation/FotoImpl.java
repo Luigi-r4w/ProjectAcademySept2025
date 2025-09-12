@@ -1,9 +1,12 @@
 package com.betacom.com.services.implementation;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
+import com.betacom.com.dto.FotoDTO;
 import com.betacom.com.exception.AcademyException;
 import com.betacom.com.models.Foto;
 import com.betacom.com.repositories.IFotoRepository;
@@ -22,6 +25,22 @@ public class FotoImpl implements IFotoServices{
 	public FotoImpl(IFotoRepository fotoR) {
 		super();
 		this.fotoR = fotoR;
+	}
+	
+	@Override
+	public List<FotoDTO> listAll() {
+		log.debug("listAll() foto");
+		
+		List<Foto> fotoList = fotoR.findAll();
+		
+		return fotoList.stream()
+				.map(f -> FotoDTO.builder()
+						.id(f.getId())
+						.device(f.getDevice())
+						.widthResolution(f.getWidthResolution())
+						.heightResolution(f.getHeightResolution())
+						.oggetto(Utilities.buildOggettoDTO(f))
+				.build()).collect(Collectors.toList());
 	}
 
 	@Override
@@ -90,6 +109,8 @@ public class FotoImpl implements IFotoServices{
 		fotoR.save(foto);
 		
 	}
+
+
 	
 	
 
