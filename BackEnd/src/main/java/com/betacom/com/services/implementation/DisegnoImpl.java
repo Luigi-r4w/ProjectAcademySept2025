@@ -3,22 +3,25 @@ package com.betacom.com.services.implementation;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.betacom.com.dto.DisegnoDTO;
+import com.betacom.com.dto.OggettoDTO;
 import com.betacom.com.exception.AcademyException;
 import com.betacom.com.models.Disegno;
 import com.betacom.com.repositories.IDisegnoRepository;
 import com.betacom.com.request.DisegnoReq;
 import com.betacom.com.services.interfaces.IDisegnoServices;
+import com.betacom.com.utils.Utilities;
 
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @Service
-public class DisegnoImpl implements IDisegnoServices{
+public class DisegnoImpl extends Utilities implements IDisegnoServices{
 	private IDisegnoRepository disR;
 	
 	public DisegnoImpl(IDisegnoRepository disR) {
@@ -28,8 +31,17 @@ public class DisegnoImpl implements IDisegnoServices{
 
 	@Override
 	public List<DisegnoDTO> listAll() {
-		// TODO Auto-generated method stub
-		return null;
+		
+		List<Disegno> lD = disR.findAll();
+		
+		return lD.stream()
+				.map(d -> DisegnoDTO.builder()
+						.id(d.getId())
+						.tecnica(d.getTecnica())
+						.supporto(d.getSupporto())
+						.oggetto(buildOggettoDTO(d))
+						.build())
+				.collect(Collectors.toList());
 	}
 	
 	@Transactional (rollbackFor = Exception.class)
@@ -39,45 +51,19 @@ public class DisegnoImpl implements IDisegnoServices{
 		
 		Disegno dis = new Disegno();
 		
-		if (req.getAutore() == null)
-			throw new AcademyException("Autore obbligatorio");
-		if (req.getCategoria() == null)
-			throw new AcademyException("Categoria obbligatoria");
-		if (req.getDescrizione() == null)
-			throw new AcademyException("Descrizione obbligatoria");
-		if (req.getDimensione() == null)
-			throw new AcademyException("Dimensione obbligatoria");
-		if (req.getImmagine() == null)
-			throw new AcademyException("Immagine obbligatoria");
-		if (req.getIsAI() == null)
-			throw new AcademyException("IsAi obbligatorio");
-		if (req.getPrezzo() == null)
-			throw new AcademyException("Prezzo obbligatorio");
-		if (req.getTitolo() == null)
-			throw new AcademyException("Titolo obbligatorio");
+		verificaOggetto(req);
+		
 		if (req.getSupporto() == null)
 			throw new AcademyException("Supporto obbligatorio");
 		if (req.getTecnica() == null)
 			throw new AcademyException("Tecnica obbligatoria");
 		
-		dis.setAutore(req.getAutore());
-		//dis.setCategoria(req.getCategoria());
-		if (req.getDataCreazione() == null)
-			dis.setDataCreazione(LocalDate.now());
-		else
-			dis.setDataCreazione(req.getDataCreazione());
-		dis.setDescrizione(req.getDescrizione());
-		dis.setDimensione(req.getDimensione());
-		dis.setImmagine(req.getImmagine());
-		dis.setIsAI(req.getIsAI());
-		dis.setPrezzo(req.getPrezzo());
-		dis.setTitolo(req.getTitolo());
+		dis = riempiOggetto(dis, req);
+		
 		dis.setSupporto(req.getSupporto());
 		dis.setTecnica(req.getTecnica());
 		
-		Integer idDisegno = disR.save(dis).getId();
-		
-		return idDisegno;
+		return disR.save(dis).getId();
 	}
 
 	@Transactional (rollbackFor = Exception.class)
@@ -102,24 +88,8 @@ public class DisegnoImpl implements IDisegnoServices{
 			throw new AcademyException("Disegno non trovato nel database :" + req.getId());
 		Disegno dis = d.get();
 		
-		if (req.getAutore() != null)
-			dis.setAutore(req.getAutore());
-		if (req.getCategoria() != null)
-			//dis.setCategoria(req.getCategoria());
-		if (req.getDataCreazione() != null)
-			dis.setDataCreazione(req.getDataCreazione());
-		if (req.getDescrizione() != null)
-			dis.setDescrizione(req.getDescrizione());
-		if (req.getDimensione() != null)
-			dis.setDimensione(req.getDimensione());
-		if (req.getImmagine() != null)
-			dis.setImmagine(req.getImmagine());
-		if (req.getIsAI() != null)
-			dis.setIsAI(req.getIsAI());
-		if (req.getPrezzo() != null)
-			dis.setPrezzo(req.getPrezzo());
-		if (req.getTitolo() != null)
-			dis.setTitolo(req.getTitolo());
+		dis = modificaOggetto(dis, req);
+		
 		if (req.getSupporto() != null)
 			dis.setSupporto(req.getSupporto());
 		if (req.getTecnica() != null)
