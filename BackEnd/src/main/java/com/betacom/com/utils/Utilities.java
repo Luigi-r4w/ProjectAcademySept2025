@@ -2,16 +2,19 @@ package com.betacom.com.utils;
 
 import java.time.LocalDate;
 
+import com.betacom.com.dto.OggettoDTO;
 import com.betacom.com.exception.AcademyException;
 import com.betacom.com.models.Oggetto;
 import com.betacom.com.request.OggettoReq;
 
 import lombok.extern.log4j.Log4j2;
 
-@Log4j2
 public class Utilities {
 	
 	public static <R extends OggettoReq> void verificaOggetto(R req) throws AcademyException{
+		
+		if (req.getCategoria() == null)
+		    throw new AcademyException("Categoria obbligatoria");
 		
 		if (req.getPrezzo() == null)
 		    throw new AcademyException("Prezzo obbligatorio");
@@ -38,6 +41,7 @@ public class Utilities {
 	
 	public static <T extends Oggetto, R extends OggettoReq> T riempiOggetto(T oggetto, R req) {
 		
+		oggetto.setCategoria(req.getCategoria());
 		oggetto.setPrezzo(req.getPrezzo());
 		oggetto.setDescrizione(req.getDescrizione());
 		oggetto.setTitolo(req.getTitolo());
@@ -47,12 +51,13 @@ public class Utilities {
 		oggetto.setImmagine(req.getImmagine());
 		oggetto.setIsAI(req.getIsAI());
 		
-		
 		return oggetto;
 	}
 	
 	public static <T extends Oggetto, R extends OggettoReq> T modificaOggetto(T oggetto, R req) {
-		log.debug("modificaOggetto: " + req);
+
+		if (req.getCategoria() != null)
+			oggetto.setCategoria(req.getCategoria());
 		if (req.getPrezzo() != null)
 			oggetto.setPrezzo(req.getPrezzo());
 		if (req.getDescrizione()!= null)
@@ -71,5 +76,20 @@ public class Utilities {
 			oggetto.setIsAI(req.getIsAI());
 		
 		return oggetto;
+	}
+	
+	public static <T extends Oggetto> OggettoDTO buildOggettoDTO(T oggetto) {
+		return OggettoDTO.builder()
+			.id(oggetto.getId())
+	        .categoria(oggetto.getCategoria())
+	        .prezzo(oggetto.getPrezzo())
+	        .descrizione(oggetto.getDescrizione())
+	        .titolo(oggetto.getTitolo())
+	        .dataCreazione(oggetto.getDataCreazione())
+	        .dimensione(oggetto.getDimensione())
+	        .autore(oggetto.getAutore())
+	        .immagine(oggetto.getImmagine())
+	        .isAI(oggetto.getIsAI())
+			.build();
 	}
 }
