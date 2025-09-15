@@ -7,8 +7,6 @@ import com.betacom.com.exception.AcademyException;
 import com.betacom.com.models.Oggetto;
 import com.betacom.com.request.OggettoReq;
 
-import lombok.extern.log4j.Log4j2;
-
 public class Utilities {
 	
 	public static <R extends OggettoReq> void verificaOggetto(R req) throws AcademyException{
