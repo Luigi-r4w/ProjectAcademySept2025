@@ -23,14 +23,14 @@ public class Illustrazione extends Oggetto{
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Integer id;
 	
-	
+	/*
 	@OneToOne(
 			cascade=CascadeType.REMOVE)
 	@JoinColumn(
             name="oggetto_id",
             referencedColumnName = "id")
 	private Oggetto oggetto;
-	
+	*/
 	
 	@Column(name="url_illustrazione", length=5000, unique=true/*, nullable = false*/)
 	private String urlIllustrazione;

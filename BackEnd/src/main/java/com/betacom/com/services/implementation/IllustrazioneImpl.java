@@ -31,11 +31,20 @@ public class IllustrazioneImpl implements IIllustrazioneServices{
 	@Override
 	public Integer insert(IllustrazioneReq req) throws AcademyException {
 		log.debug("create illustrazione");
-		Optional<Illustrazione> i = illustrazioneRepository.findById(req.getId());
-		if(i.isPresent()) throw new AcademyException();
+		/*Optional<Illustrazione> i = illustrazioneRepository.findById(req.getId());
+		if(i.isPresent()) throw new AcademyException();*/
 		Illustrazione illustrazione = new Illustrazione();
+		
+		if(req.getStile() == null)
+			throw new AcademyException("Devi inserire uno stile");
 		illustrazione.setStile(req.getStile());
+		
+		if(req.getUrlIllustrazione() == null)
+			throw new AcademyException("Devi inserire un url");
 		illustrazione.setUrlIllustrazione(req.getUrlIllustrazione());
+		
+		if(req.getDataIllustrazione() == null)
+			throw new AcademyException("Devi inserire una data per l'illustrazione");
 		illustrazione.setDataIllustrazione(req.getDataIllustrazione());
 		
 		Utilities.verificaOggetto(req);
