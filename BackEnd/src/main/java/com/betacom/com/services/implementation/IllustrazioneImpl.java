@@ -12,13 +12,14 @@ import com.betacom.com.exception.AcademyException;
 import com.betacom.com.models.Illustrazione;
 import com.betacom.com.repositories.IIllustrazioneRepository;
 import com.betacom.com.request.IllustrazioneReq;
-import com.betacom.com.services.interfaces.IllustrazioneServices;
+import com.betacom.com.services.interfaces.IIllustrazioneServices;
+import com.betacom.com.utils.Utilities;
 
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @Service
-public class IllustrazioneImpl implements IllustrazioneServices{
+public class IllustrazioneImpl implements IIllustrazioneServices{
 
 	private IIllustrazioneRepository illustrazioneRepository;
 	
@@ -37,7 +38,9 @@ public class IllustrazioneImpl implements IllustrazioneServices{
 		illustrazione.setUrlIllustrazione(req.getUrlIllustrazione());
 		illustrazione.setDataIllustrazione(req.getDataIllustrazione());
 		
-		//utenteImpl().insert(req.getOggetto...) 
+		Utilities.verificaOggetto(req);
+		
+		illustrazione = Utilities.riempiOggetto(illustrazione, req);
 		
 		return illustrazioneRepository.save(illustrazione).getId();
 	}
@@ -50,7 +53,7 @@ public class IllustrazioneImpl implements IllustrazioneServices{
 		if(i.isEmpty()) throw new AcademyException("Illustrazione non trovata: id "+ req.getId());
 		
 		Illustrazione illustrazioneDaEliminare = i.get();
-		//utenteImpl().delete(req.getOggetto...)
+		
 		illustrazioneRepository.delete(illustrazioneDaEliminare);
 	}
 	
@@ -72,7 +75,7 @@ public class IllustrazioneImpl implements IllustrazioneServices{
 		if(req.getUrlIllustrazione()!=null)
 			illustrazioneDaAggiornare.setUrlIllustrazione(req.getUrlIllustrazione());
 		
-		//utenteImpl().save(req.getOggetto...)
+		Utilities.modificaOggetto(illustrazioneDaAggiornare, req);
 		
 		illustrazioneRepository.save(illustrazioneDaAggiornare);
 		
@@ -85,7 +88,7 @@ public class IllustrazioneImpl implements IllustrazioneServices{
 		return list.stream().map(
 				illustrazione -> IllustrazioneDTO.builder()
 					.id(illustrazione.getId())
-					//oggetto
+					.oggetto(Utilities.buildOggettoDTO(illustrazione))
 					.dataIllustrazione(illustrazione.getDataIllustrazione())
 					.stile(illustrazione.getStile())
 					.urlIllustrazione(illustrazione.getUrlIllustrazione())

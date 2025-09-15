@@ -6,7 +6,7 @@ import com.betacom.com.dto.IllustrazioneDTO;
 import com.betacom.com.exception.AcademyException;
 import com.betacom.com.request.IllustrazioneReq;
 
-public interface IllustrazioneServices {
+public interface IIllustrazioneServices {
 	List<IllustrazioneDTO> listAll();
 	Integer insert(IllustrazioneReq req) throws AcademyException;
 	void delete(IllustrazioneReq req) throws AcademyException;

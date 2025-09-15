@@ -13,7 +13,7 @@ import lombok.ToString;
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class IllustrazioneReq {
+public class IllustrazioneReq extends OggettoReq{
 	private Integer id;
 	//private Integer id_oggetto;
 	private String urlIllustrazione;

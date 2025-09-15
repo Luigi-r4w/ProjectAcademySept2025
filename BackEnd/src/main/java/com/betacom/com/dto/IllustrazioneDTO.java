@@ -13,7 +13,7 @@ import lombok.ToString;
 @Builder
 public class IllustrazioneDTO {
 	private Integer id;
-	//private Oggetto oggetto;
+	private OggettoDTO oggetto;
 	private String urlIllustrazione;
 	private String stile;
 	private LocalDate dataIllustrazione;

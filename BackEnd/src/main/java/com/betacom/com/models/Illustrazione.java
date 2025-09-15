@@ -18,7 +18,7 @@ import lombok.Setter;
 @Table(name = "illustrazioni")
 @Getter
 @Setter
-public class Illustrazione {
+public class Illustrazione extends Oggetto{
 	@Id
 	@GeneratedValue (strategy = GenerationType.IDENTITY)
 	private Integer id;
