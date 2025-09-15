@@ -8,7 +8,6 @@ import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.betacom.com.controller.DisegnoController;
@@ -18,8 +17,10 @@ import com.betacom.com.response.ResponseBase;
 import com.betacom.com.response.ResponseList;
 import com.betacom.com.dto.DisegnoDTO;
 import com.betacom.com.response.ResponseObject;
+import org.springframework.test.annotation.DirtiesContext;
 
 @SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class DisegnoServicesTest {
 	@Autowired
@@ -48,7 +49,7 @@ public class DisegnoServicesTest {
 	}
 	
 	@Test
-	@Order(3)
+	@Order(2)
 	public void updateDisegnoTest() throws AcademyException{
 		DisegnoReq d = new DisegnoReq();
 		
@@ -94,7 +95,7 @@ public class DisegnoServicesTest {
 		
 		Assertions.assertThat(r.getRc()).isEqualTo(true);
 		
-		Assertions.assertThat(r.getList().getFirst().getSupporto()).isEqualTo("ProvaSupporto1");
+		Assertions.assertThat(r.getList().getFirst().getSupporto()).isEqualTo("ProvaSupporto2");
 	}
 	
 	@Test
