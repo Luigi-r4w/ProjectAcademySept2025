@@ -8,7 +8,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 @Suite
 @SelectClasses({
 	UtenteServicesTest.class,
-	DisegnoServicesTest.class
+	DisegnoServicesTest.class,
+	FotoControllerTest.class
 })
 @SpringBootTest
 class BackEndApplicationTests {
