@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.betacom.com.dto.FotoDTO;
-import com.betacom.com.dto.UtenteDTO;
 import com.betacom.com.request.FotoReq;
 import com.betacom.com.response.ResponseBase;
 import com.betacom.com.response.ResponseList;
