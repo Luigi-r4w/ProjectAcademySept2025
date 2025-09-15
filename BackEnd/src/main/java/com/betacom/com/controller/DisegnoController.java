@@ -5,11 +5,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.betacom.com.dto.DisegnoDTO;
 import com.betacom.com.request.DisegnoReq;
 import com.betacom.com.response.ResponseBase;
+import com.betacom.com.response.ResponseObject;
 import com.betacom.com.response.ResponseList;
 import com.betacom.com.services.interfaces.IDisegnoServices;
 
@@ -28,6 +30,19 @@ public class DisegnoController {
 		ResponseList<DisegnoDTO> r = new ResponseList<DisegnoDTO>();
 		try {
 			r.setList(disS.listAll());
+			r.setRc(true);
+		} catch (Exception e) {
+			r.setRc(false);
+			r.setMsg(e.getMessage());
+		}
+		return r;
+	}
+	
+	@GetMapping("/findById")
+	public ResponseObject<DisegnoDTO> findById(@RequestParam(required = true) Integer id) {
+		ResponseObject<DisegnoDTO> r = new ResponseObject<DisegnoDTO>();
+		try {
+			r.setDati(disS.findById(id));
 			r.setRc(true);
 		} catch (Exception e) {
 			r.setRc(false);

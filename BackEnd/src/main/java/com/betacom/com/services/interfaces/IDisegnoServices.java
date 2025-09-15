@@ -8,10 +8,14 @@ import com.betacom.com.request.DisegnoReq;
 
 public interface IDisegnoServices {
 	List<DisegnoDTO> listAll();
+	
+	DisegnoDTO findById(Integer id) throws AcademyException;
 
     Integer insert(DisegnoReq req) throws AcademyException;
 	
 	void delete(DisegnoReq req) throws AcademyException;
 	
 	void update(DisegnoReq req) throws AcademyException;
+	
+	
 }
