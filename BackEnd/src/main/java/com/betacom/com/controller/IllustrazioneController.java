@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.betacom.com.dto.IllustrazioneDTO;
 import com.betacom.com.request.IllustrazioneReq;
@@ -11,11 +13,13 @@ import com.betacom.com.response.ResponseBase;
 import com.betacom.com.response.ResponseList;
 import com.betacom.com.services.interfaces.IIllustrazioneServices;
 
-public class IllustrazioniController {
+@RestController
+@RequestMapping("/rest/illustrazione")
+public class IllustrazioneController {
 	
 	private IIllustrazioneServices illustrazioneServices;
 
-	public IllustrazioniController(IIllustrazioneServices illustrazioneServices) {
+	public IllustrazioneController(IIllustrazioneServices illustrazioneServices) {
 		this.illustrazioneServices = illustrazioneServices;
 	}
 	
