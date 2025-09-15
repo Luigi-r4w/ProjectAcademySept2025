@@ -1,6 +1,5 @@
 package com.betacom.com.services.implementation;
 
-import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.betacom.com.dto.DisegnoDTO;
-import com.betacom.com.dto.OggettoDTO;
 import com.betacom.com.exception.AcademyException;
 import com.betacom.com.models.Disegno;
 import com.betacom.com.repositories.IDisegnoRepository;
@@ -85,7 +83,7 @@ public class DisegnoImpl extends Utilities implements IDisegnoServices{
 		Optional<Disegno> d = disR.findById(req.getId());
 		
 		if (d.isEmpty())
-			throw new AcademyException("Disegno non trovato nel database :" + req.getId());
+			throw new AcademyException("Disegno non trovato nel database");
 		Disegno dis = d.get();
 		
 		dis = modificaOggetto(dis, req);
@@ -96,6 +94,23 @@ public class DisegnoImpl extends Utilities implements IDisegnoServices{
 			dis.setTecnica(req.getTecnica());
 
 		disR.save(dis);
+	}
+	
+	@Override
+	public DisegnoDTO findById(Integer id) throws AcademyException {
+		log.debug("findById :" + id);
+		Optional<Disegno> dis = disR.findById(id);
+		
+		if (dis.isEmpty())
+			throw new AcademyException("Disegno non trovato nel database");
+		Disegno d = dis.get();
+	
+		return DisegnoDTO.builder()
+				.id(d.getId())
+				.tecnica(d.getTecnica())
+				.supporto(d.getSupporto())
+				.oggetto(buildOggettoDTO(d))
+				.build();
 	}
 
 }
