@@ -9,6 +9,7 @@ target/
 *.gz
 jpa.log.*
 /logs/
+.metadata
 
 ### STS ###
 .apt_generated

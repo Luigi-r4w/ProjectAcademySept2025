@@ -1,5 +1,6 @@
 package com.betacom.com.controller;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -15,7 +16,7 @@ import com.betacom.com.response.ResponseList;
 import com.betacom.com.response.ResponseObject;
 import com.betacom.com.services.interfaces.IUtenteServices;
 
-
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/rest/utente")
 public class UtenteController {
@@ -58,8 +59,8 @@ public class UtenteController {
 	public ResponseBase create(@RequestBody (required = true) UtenteReq sR) {
 		ResponseBase r = new ResponseBase();
 		try {
-			utenteService.insert(sR);
-			r.setMsg(null);
+			Integer i = utenteService.insert(sR);
+			r.setMsg(i.toString());
 			r.setRc(true);
 		} catch (Exception e) {
 			r.setMsg(e.getMessage());
@@ -97,10 +98,10 @@ public class UtenteController {
 	}
     
 	@PostMapping("/login")
-    public ResponseObject<UtenteDTO> login(@RequestParam String email, @RequestParam String password) {
+    public ResponseObject<UtenteDTO> login(@RequestBody (required = true) UtenteReq sR) {
         ResponseObject<UtenteDTO> r = new ResponseObject<>();
         try{
-            UtenteDTO utente = utenteService.autenticazione(email, password);
+            UtenteDTO utente = utenteService.autenticazione(sR.getEmail(), sR.getPassword());
             r.setDati(utente);
             r.setMsg(null);
             r.setRc(true);
