@@ -108,12 +108,6 @@ public class FotoImpl implements IFotoServices{
 		
 		fotoR.save(foto);
 		
-	}
-
-
-	
-	
-
-	
+	}	
 	
 }
