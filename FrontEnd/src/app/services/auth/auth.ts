@@ -5,12 +5,21 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 })
 export class Auth {
 
-  isLogged = true;
+  isLogged = false;
+  id!: number;
   
   constructor() {}
 
   isAutentificated() {
     return this.isLogged;
+  }
+
+  setId(iD : number){
+    this.id=iD;
+  }
+
+  getId() {
+    return this.id;
   }
 
   setAuthentificated() {
@@ -19,5 +28,6 @@ export class Auth {
 
   resetAll() {
     this.isLogged = false;
+    this.id=0;
   }
 }
