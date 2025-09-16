@@ -1,0 +1,14 @@
+<p>Elenco disegni</p>
+<div style="display: flex; gap: 20px">
+    <div *ngFor="let disegno of disegni">
+        <a routerLink="/disegni/{{disegno.id}}">
+            <!--<img src={{disegno.oggetto.immagine}}
+                 alt={{disegno.oggetto.titolo}}
+                 style="width: 100%; height: 150px; object-fit: contain; border-radius: 4px;">-->
+            <div [align]="'center'">{{disegno.oggetto.titolo}}</div>
+        </a>  
+    </div>
+</div>
+<div>
+    <router-outlet></router-outlet>
+</div>

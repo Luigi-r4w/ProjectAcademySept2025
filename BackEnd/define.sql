@@ -22,7 +22,6 @@
     create table illustrazioni (
         data_illustrazione date not null,
         id integer not null,
-        oggetto_id integer unique,
         stile varchar(100),
         url_illustrazione varchar(5000) unique,
         primary key (id)
@@ -68,11 +67,6 @@
     alter table if exists foto 
        add constraint FK5ums9iqv49uko7mid0pxv6arb 
        foreign key (id) 
-       references oggetti;
-
-    alter table if exists illustrazioni 
-       add constraint FKkwmktow89vxupk4xghal0uson 
-       foreign key (oggetto_id) 
        references oggetti;
 
     alter table if exists illustrazioni 

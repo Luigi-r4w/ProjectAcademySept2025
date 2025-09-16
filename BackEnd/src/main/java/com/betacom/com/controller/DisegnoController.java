@@ -1,5 +1,6 @@
 package com.betacom.com.controller;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -15,6 +16,7 @@ import com.betacom.com.response.ResponseObject;
 import com.betacom.com.response.ResponseList;
 import com.betacom.com.services.interfaces.IDisegnoServices;
 
+@CrossOrigin("*")
 @RestController
 @RequestMapping("/rest/disegno")
 public class DisegnoController {

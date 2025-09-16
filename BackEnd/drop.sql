@@ -14,9 +14,6 @@
        drop constraint if exists FK5ums9iqv49uko7mid0pxv6arb;
 
     alter table if exists illustrazioni 
-       drop constraint if exists FKkwmktow89vxupk4xghal0uson;
-
-    alter table if exists illustrazioni 
        drop constraint if exists FKm5r0v4t2lwuwdw0wt890wm8cj;
 
     drop table if exists carrello_utente_oggetto cascade;
