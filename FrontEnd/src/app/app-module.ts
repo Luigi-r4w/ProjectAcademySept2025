@@ -4,7 +4,11 @@ import { BrowserModule, provideClientHydration, withEventReplay } from '@angular
 import {MatFormFieldModule} from '@angular/material/form-field'; 
 import { FormsModule } from '@angular/forms'; 
 import { provideHttpClient, withFetch } from '@angular/common/http';
-
+import { MatCardModule } from '@angular/material/card';
+import { RouterModule } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import { MatInputModule} from '@angular/material/input';
 
 
 
@@ -15,6 +19,10 @@ import { Sidebar } from './shared/sidebar/sidebar/sidebar';
 import { Header } from './shared/header/header/header';
 import { Utente } from './component/utente/utente';
 import { Login } from './component/login/login';
+import { Disegni } from './component/disegni/disegni';
+import { Disegno } from './component/disegno/disegno';
+
+
 
 @NgModule({
   declarations: [
@@ -23,13 +31,20 @@ import { Login } from './component/login/login';
     Sidebar,
     Header,
     Utente,
-    Login
+    Login,
+    Disegni,
+    Disegno
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MatFormFieldModule,
     FormsModule,
+    MatCardModule,
+    RouterModule,
+    ReactiveFormsModule,
+    MatCheckboxModule,
+    MatInputModule
   ],
   providers: [
     provideHttpClient(withFetch()),
