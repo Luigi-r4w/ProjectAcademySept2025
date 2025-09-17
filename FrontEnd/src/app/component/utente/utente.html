@@ -1,1 +1,24 @@
-<p>utente works!</p>
+<div *ngIf="isLoading">
+  <p>Caricamento dati...</p>
+</div>
+
+<div class="user-container" *ngIf="!isLoading">
+    <h1>Ciao, <span class="username">{{ nome }}</span>!</h1>
+    
+    <div class="user-info">
+      <p><strong>Email:</strong> {{ email }}</p> 
+    </div>
+  
+    <div class="cart-info">
+      <p><strong>Carrello:</strong> </p> 
+    </div>
+    
+    <div class="account-actions">
+      <button class="btn-delete" (click)="deleteAccount()">Cancella Account</button>
+    </div>
+
+    <div *ngIf="msgEr" class="error-message">
+      <p>{{ msgEr }}</p>
+    </div>
+  </div>
+  

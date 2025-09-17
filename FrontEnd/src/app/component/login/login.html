@@ -1,14 +1,15 @@
 <div class="container">
-    <h1> {{ isLogin ? 'Accedi' : 'Registrati' }}</h1>
     <form #signinForm="ngForm" (ngSubmit)="onSubmit(signinForm)" class="form-container">
+      <h2> {{ isLogin ? 'Accedi' : 'Registrati' }}</h2>
+
         <div class="form-field">
-          <label for="nome">Nome</label>
-          <input type="text" id="nome" name="nome" ngModel required>
-        </div>
-      
-        <div class="form-field" *ngIf="!isLogin">
           <label for="email">Email</label>
           <input type="email" id="email" name="email" ngModel required>
+        </div>
+
+        <div class="form-field" *ngIf="!isLogin">
+          <label for="nome">Nome</label>
+          <input type="text" id="nome" name="nome" ngModel required>
         </div>
       
         <div class="form-field">
@@ -23,6 +24,9 @@
           <button type="button" class="btn-toggle" (click)="toggleForm()">
             {{ isLogin ? 'Non hai un account? Registrati' : 'Hai già un account? Accedi' }}
           </button>
+          <div *ngIf="msgEr" class="error-message">
+            <p>{{ msgEr }}</p>
+          </div>
         </div>
       </form>
       
