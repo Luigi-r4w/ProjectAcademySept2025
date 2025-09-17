@@ -12,8 +12,10 @@ export class FotoBackend {
   listFoto(){
     return this.http.get(this.url + 'list');
   }
-
   
+  insertFoto(body:{}){
+    return this.http.post(this.url + 'insert', body)
+  }
 }
 
 

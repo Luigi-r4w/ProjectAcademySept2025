@@ -56,7 +56,7 @@ public class FotoImpl implements IFotoServices{
 		foto = Utilities.riempiOggetto(foto, req);
 		
 		if(req.getDevice() == null)
-			throw new AcademyException("Autore obbligatorio");
+			throw new AcademyException("Device obbligatorio");
 		
 		if(req.getWidthResolution() == null)
 			throw new AcademyException("Width-Resolution obbligatorio");

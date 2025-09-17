@@ -1,0 +1,17 @@
+main {
+    margin-left: 250px; 
+    padding: 20px;
+    margin-top: 60px; 
+    
+  }
+  
+  @media (max-width: 768px) {
+    .main-content {
+      margin-left: 0;
+    }
+  
+    .sidebar {
+      display: none;
+    }
+  }
+  

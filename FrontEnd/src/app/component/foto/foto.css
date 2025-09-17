@@ -1,6 +1,7 @@
 /* CARD */
 .example-card {
-  max-width: 400px;
+  max-width: 300px;
+  max-height: 600px;
 }
 
 .example-header-image {
@@ -21,4 +22,12 @@
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
+}
+
+
+/* GRID */
+.foto-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px; /* spazio tra gli elementi (opzionale) */
 }
