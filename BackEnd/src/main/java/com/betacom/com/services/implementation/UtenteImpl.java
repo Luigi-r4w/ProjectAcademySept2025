@@ -15,6 +15,7 @@ import com.betacom.com.repositories.IOggettoRepository;
 import com.betacom.com.repositories.IUtenteRepository;
 import com.betacom.com.request.UtenteReq;
 import com.betacom.com.services.interfaces.IUtenteServices;
+import com.betacom.com.utils.Roles;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -40,6 +41,7 @@ public class UtenteImpl implements IUtenteServices{
                 .email(u.getEmail())
                 .password(u.getPassword())
                 .carrello(buildCarrello(u.getCarrello()))
+                .role(u.getRole().toString())
                 .build()
                 ).collect(Collectors.toList());
     }
@@ -59,6 +61,7 @@ public class UtenteImpl implements IUtenteServices{
         utente.setNome(req.getNome());
         utente.setEmail(req.getEmail());
         utente.setPassword(req.getPassword());
+        utente.setRole(Roles.valueOf(req.getRole()));
         return utenteRepository.save(utente).getId();
     }
 
@@ -110,6 +113,7 @@ public class UtenteImpl implements IUtenteServices{
             .email(u.getEmail())
             .password(u.getPassword())
             .carrello(buildCarrello(u.getCarrello()))
+            .role(u.getRole().toString())
             .build();
     }
 
@@ -172,6 +176,7 @@ public class UtenteImpl implements IUtenteServices{
             .email(u.getEmail())
             .password(u.getPassword())
             .carrello(buildCarrello(u.getCarrello()))
+            .role(u.getRole().toString())
             .build();
     }
 

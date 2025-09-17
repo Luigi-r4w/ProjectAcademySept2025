@@ -3,6 +3,8 @@ package com.betacom.com.models;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.betacom.com.utils.Roles;
+
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -33,5 +35,7 @@ public class Utente {
         inverseJoinColumns = @JoinColumn(name = "oggetto_id")
     )
     private List<Oggetto> carrello = new ArrayList<>();
+    
+    private Roles role;
 
 }

@@ -9,7 +9,7 @@
       <p><strong>Email:</strong> {{ email }}</p> 
     </div>
   
-    <div class="cart-info">
+    <div class="cart-info" *ngIf="!isAdmin">
       <p><strong>Carrello:</strong></p>
       <span class="spazio"></span>
       <div *ngIf="carrello.length > 0">

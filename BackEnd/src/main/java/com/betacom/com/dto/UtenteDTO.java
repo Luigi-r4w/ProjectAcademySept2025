@@ -17,4 +17,5 @@ public class UtenteDTO {
     private String email;
     private String password;
     private List<OggettoDTO> carrello;
+    private String role;
 }
