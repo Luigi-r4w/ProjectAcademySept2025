@@ -174,5 +174,16 @@ public class UtenteImpl implements IUtenteServices{
             .carrello(buildCarrello(u.getCarrello()))
             .build();
     }
+
+	@Override
+	public void svuotaCarrello(Integer utenteId) throws AcademyException {
+		Optional<Utente> optionalU = utenteRepository.findById(utenteId);
+        if(optionalU.isEmpty()){
+            throw new AcademyException("utente non trovato ");
+        }
+        Utente u = optionalU.get();
+        u.getCarrello().clear();
+        utenteRepository.save(u);
+	}
     
 }

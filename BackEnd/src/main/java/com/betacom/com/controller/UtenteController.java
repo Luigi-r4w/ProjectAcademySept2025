@@ -139,5 +139,19 @@ public class UtenteController {
 		}
 		return r;
 	}
+	
+	@PostMapping("/svuotaCarello")
+	public ResponseBase svuotaCarello(@RequestParam Integer utenteId){
+		ResponseBase r = new ResponseBase();
+		try{
+            utenteService.svuotaCarrello(utenteId);
+            r.setMsg(null);
+            r.setRc(true);
+        }catch (Exception e) {
+			r.setMsg(e.getMessage());
+			r.setRc(false);
+		}
+		return r;
+	}
 
 }

@@ -10,15 +10,35 @@
     </div>
   
     <div class="cart-info">
-      <p><strong>Carrello:</strong> </p> 
+      <p><strong>Carrello:</strong></p>
+      <span class="spazio"></span>
+      <div *ngIf="carrello.length > 0">
+        <div class="cart-item" *ngFor="let item of carrello; let i = index">
+          <div class="card">
+            <img [src]="item.immagine" alt="{{ item.titolo }}" class="item-image"/>
+            <div class="item-details">
+              <h3>{{ item.titolo }}</h3>
+              <p>{{ item.descrizione }}</p>
+              <p><strong>Prezzo:</strong> €{{ item.prezzo }}</p>
+            </div>
+            <span class="spazio10"></span>
+            <button class="btn-remove" (click)="removeItem(item.id)">Rimuovi</button>
+          </div>
+        </div>
+        <span class="spazio10"></span>
+        <button class="btn-confirm" (click)="confirmPurchase()">Conferma Acquisto</button>
+      </div>
+      <div *ngIf="carrello.length === 0">
+        <p>Il tuo carrello è vuoto.</p>
+      </div>
     </div>
-    
+
     <div class="account-actions">
       <button class="btn-delete" (click)="deleteAccount()">Cancella Account</button>
     </div>
 
-    <div *ngIf="msgEr" class="error-message">
-      <p>{{ msgEr }}</p>
-    </div>
+  <div *ngIf="msgEr" class="error-message">
+    <p>{{ msgEr }}</p>
   </div>
+</div>
   

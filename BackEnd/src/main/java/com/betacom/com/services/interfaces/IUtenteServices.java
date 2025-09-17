@@ -23,4 +23,7 @@ public interface IUtenteServices {
     void rmDalCarrello(Integer utenteId, Integer oggettoId) throws AcademyException;
 
     UtenteDTO findById(Integer id) throws AcademyException;
+
+	void svuotaCarrello(Integer utenteId) throws AcademyException;
+
 }

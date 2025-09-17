@@ -22,4 +22,19 @@ export class UtenteServices {
   delete(id: number) {
     return  this.http.post(this.url+'delete' , {'id': id} );
   }
+  rmItem(utenteId: number, oggettoId: any) {
+    let params = new HttpParams().set('utenteId', utenteId)
+                .set('oggettoId', oggettoId);
+    return this.http.post(this.url+'rmDalCarrello' , null , {params} );
+  }
+  addItem(utenteId: number, oggettoId: any) {
+    let params = new HttpParams().set('utenteId', utenteId)
+                .set('oggettoId', oggettoId);
+    return this.http.post(this.url+'aggAlCarrello' , null , {params} );
+  }
+
+  svuotaCarrello(utenteId: number) {
+    let params = new HttpParams().set('utenteId', utenteId);
+    return this.http.post(this.url+'svuotaCarello' ,null , {params} );
+  }
 }

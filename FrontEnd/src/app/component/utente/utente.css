@@ -1,77 +1,151 @@
 /* Contenitore principale della pagina utente */
 .user-container {
-    max-width: 500px;
-    width: 100%;
-    padding: 30px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    margin: 20px auto;
-    font-family: 'Arial', sans-serif;
-  }
-  
-  /* Titolo principale (Ciao, nomeUtente) */
-  h1 {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  /* Nome utente stilizzato */
-  .username {
-    font-weight: bold;
-    color: #4e90d7; /* Blu per il nome utente */
-  }
-  
-  /* Sezione informazioni utente (Email) */
-  .user-info {
-    font-size: 1.2rem;
-    color: #555;
-    margin-bottom: 20px;
-  }
-  
-  .user-info p {
-    margin: 5px 0;
-  }
-  
-  /* Sezione carrello */
-  .cart-info {
-    font-size: 1.2rem;
-    color: #555;
-    margin-bottom: 20px;
-  }
-  
-  .cart-info p {
-    margin: 5px 0;
-  }
-  
-  /* Pulsante per cancellare l'account */
-  .account-actions {
-    display: flex;
-    justify-content: center;
-  }
-  
-  .btn-delete {
-    padding: 12px 20px;
-    font-size: 1.1rem;
-    background-color: #e74c3c;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-  }
-  
-  .btn-delete:hover {
-    background-color: #c0392b;
-  }
+  max-width: 600px; /* Aumentato per una migliore visibilità */
+  width: 100%;
+  padding: 40px;
+  background-color: #f9f9f9; /* Colore più chiaro per un aspetto più morbido */
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1); /* Ombra più prominente */
+  margin: 30px auto;
+  font-family: 'Arial', sans-serif;
+  box-sizing: border-box;
+}
 
-  .error-message {
-    color: red;
-    font-weight: bold;
-    margin-top: 20px;
-    text-align: center;
-  }
-  
-  
+/* Titolo principale (Ciao, nomeUtente) */
+h1 {
+  font-size: 2.4rem;
+  color: #2c3e50;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Nome utente stilizzato */
+.username {
+  font-weight: bold;
+  color: #3498db; /* Azzurro più brillante */
+}
+
+/* Sezione informazioni utente (Email) */
+.user-info {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+.user-info p {
+  margin: 8px 0;
+}
+
+/* Sezione carrello */
+.cart-info {
+  font-size: 1.2rem;
+  color: #555;
+  margin-bottom: 30px;
+}
+
+/* Gestione del layout carrello */
+.cart-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-bottom: 25px;
+  padding: 15px;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.cart-item:hover {
+  transform: translateY(-5px); /* Effetto hover per dinamismo */
+}
+
+.card {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  align-items: center;
+}
+
+.item-image {
+  width: 80px;
+  height: 80px;
+  margin-right: 20px;
+  border-radius: 10px;
+}
+
+.item-details {
+  flex-grow: 1;
+}
+
+.item-details h3 {
+  font-size: 1.4rem;
+  margin: 0;
+  color: #2c3e50;
+}
+
+.item-details p {
+  font-size: 1.1rem;
+  color: #7f8c8d;
+}
+
+/* Pulsante per rimuovere dal carrello */
+.btn-remove {
+  padding: 8px 16px;
+  font-size: 1rem;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-left: 20px;
+}
+
+.btn-remove:hover {
+  background-color: #c0392b;
+}
+
+/* Pulsante per confermare l'acquisto */
+.btn-confirm {
+  padding: 14px 30px;
+  font-size: 1.2rem;
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 30px;
+}
+
+.btn-confirm:hover {
+  background-color: #2ecc71;
+}
+
+/* Pulsante per cancellare account */
+.btn-delete {
+  padding: 14px 30px;
+  font-size: 1.2rem;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  margin-top: 30px;
+  width: 100%;
+}
+
+.btn-delete:hover {
+  background-color: #c0392b;
+}
+
+/* Messaggio di errore */
+.error-message {
+  color: red;
+  font-weight: bold;
+  margin-top: 20px;
+  text-align: center;
+}
