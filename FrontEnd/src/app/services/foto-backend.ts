@@ -16,6 +16,13 @@ export class FotoBackend {
   insertFoto(body:{}){
     return this.http.post(this.url + 'insert', body)
   }
+  getFotoByID(id:number){
+    return this.http.get(this.url + 'findById?id=' + id)
+  }
+  modifyFoto(body:{}){
+    console.log("update");
+    return this.http.put(this.url + 'update', body)
+  }
 }
 
 
