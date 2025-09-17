@@ -8,6 +8,7 @@ import com.betacom.com.request.IllustrazioneReq;
 
 public interface IIllustrazioneServices {
 	List<IllustrazioneDTO> listAll();
+	IllustrazioneDTO getById(Integer id) throws AcademyException;
 	Integer insert(IllustrazioneReq req) throws AcademyException;
 	void delete(IllustrazioneReq req) throws AcademyException;
 	void update(IllustrazioneReq req) throws AcademyException;
