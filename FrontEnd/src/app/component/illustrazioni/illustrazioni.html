@@ -1,0 +1,23 @@
+<mat-grid-list class="container_grid" cols="3">
+    @for (illustrazione of illustrazioni; track illustrazione.id){
+        <mat-grid-tile class="container_tile">
+        <mat-card class="example-card" appearance="outlined">
+            <div class="header">
+                <div class="title">{{illustrazione.oggetto.titolo}}</div>
+                <div class="author">{{illustrazione.oggetto.autore}}</div>
+            </div>
+            <img class= "image" mat-card-image src={{illustrazione.oggetto.immagine}}
+            alt="Example Image">
+            <mat-card-content class="description">
+                <p>
+                {{illustrazione.oggetto.descrizione}}
+                </p>
+            </mat-card-content>
+            <mat-card-actions class="button">
+                <button matButton (click)="onBuy()">Wanna buy it</button>
+                <!--<button matButton>SHARE</button>-->
+            </mat-card-actions>
+        </mat-card>
+        </mat-grid-tile>
+    }
+</mat-grid-list>
