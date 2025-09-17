@@ -21,4 +21,7 @@ export class BackendIllustrazioneService {
   updateDisegno(body:{}){
     return this.http.put(this.url + 'update', body);
   }
+  insert(body:{}){
+    return this.http.post(this.url + 'insert', body)
+  }
 }
