@@ -1,0 +1,72 @@
+<h2 mat-dialog-title>Aggiungi una nuova foto</h2>
+<form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+  <mat-dialog-content class="mat-typography">
+    <!-- TITOLO -->
+    <mat-form-field>
+      <mat-label>Titolo</mat-label>
+      <input matInput type="text" formControlName="titolo">
+    </mat-form-field>
+    <!-- DESCRIZIONE -->
+    <mat-form-field>
+      <mat-label>Descrizione</mat-label>
+      <input matInput type="text" formControlName="descrizione">
+    </mat-form-field>
+    <!-- AUTORE -->
+    <mat-form-field>
+      <mat-label>Autore</mat-label>
+      <input matInput type="text" formControlName="autore">
+    </mat-form-field>
+    <!-- DATA CREAZIONE -->
+    <mat-form-field>
+      <mat-label>Data creazione</mat-label>
+      <input matInput type="date" formControlName="dataCreazione">
+    </mat-form-field>
+    <!-- DIMENSIONE -->
+    <mat-form-field>
+      <mat-label>Dimensione</mat-label>
+      <input matInput type="text" formControlName="dimensione">
+    </mat-form-field>
+    <!-- PREZZO -->
+    <mat-form-field>
+      <mat-label>Prezzo</mat-label>
+      <input matInput type="number" formControlName="prezzo">
+    </mat-form-field>
+    <!-- IS AI -->
+    <mat-checkbox formControlName="isAI">AI</mat-checkbox>
+    <!-- se la il tipo dell'oggetto è FOTO ci metto questi attributi -->
+    @if (data.type == "foto") {
+      <mat-form-field>
+        <mat-label>Device</mat-label>
+        <input matInput type="text" formControlName="device">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Width Resolution</mat-label>
+        <input matInput type="number" formControlName="widthResolution">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Height Resolution</mat-label>
+        <input matInput type="number" formControlName="heightResolution">
+      </mat-form-field>
+    } 
+    <!-- se la il tipo dell'oggetto è DISEGNO ci metto questi attributi -->
+    @else if (data.type == "disegno") {
+      <mat-form-field>
+        <mat-label>Supporto</mat-label>
+        <input matInput type="text" formControlName="supporto">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Tecnica</mat-label>
+        <input matInput type="text" formControlName="tecnica">
+      </mat-form-field>
+    }
+    <!-- qua manca ILLUSTRAZIONE -->
+
+    <!-- caricamento immagine -->
+    <h2>Carica un'immagine</h2>
+    <input type="file" (change)="onFileSelected($event)" />
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button matButton mat-dialog-close>Annulla</button>
+    <button matButton cdkFocusInitial type="submit" [disabled]="!uploadForm.valid">Carica</button>
+  </mat-dialog-actions>
+</form> 
