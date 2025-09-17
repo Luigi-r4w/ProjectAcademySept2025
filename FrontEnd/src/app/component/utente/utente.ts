@@ -52,5 +52,29 @@ export class Utente implements OnInit {
       }
     })
   }
+
+  confirmPurchase() {
+    this.utente.svuotaCarrello(this.auth.getId()).subscribe((resp: any) => {
+      console.log(resp);
+      if(resp.rc){
+        console.log("cancellazione effettuata");
+        this.ngOnInit();
+      } else{
+        console.log(resp.msg)
+      }
+    })
+  }
+
+  removeItem(idItem: number) {
+    this.utente.rmItem(this.auth.getId(), idItem ).subscribe((resp: any) => {
+      console.log(resp);
+      if(resp.rc){
+        console.log("cancellazione effettuata");
+        this.ngOnInit();
+      } else{
+        console.log(resp.msg)
+      }
+    })
+  }
   
 }
