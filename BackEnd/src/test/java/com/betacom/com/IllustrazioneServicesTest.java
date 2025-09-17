@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.betacom.com.controller.IllustrazioneController;
-import com.betacom.com.dto.FotoDTO;
 import com.betacom.com.dto.IllustrazioneDTO;
 import com.betacom.com.exception.AcademyException;
 import com.betacom.com.request.IllustrazioneReq;
