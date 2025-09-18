@@ -97,7 +97,7 @@ public class FotoImpl implements IFotoServices{
 		
 		foto = Utilities.modificaOggetto(foto, req);
 		
-		if(req.getDevice() != null)
+		if(req.getDevice() != null && req.getDevice().isBlank())
 			foto.setDevice(req.getDevice());
 		
 		if(req.getWidthResolution() != null)
@@ -108,6 +108,26 @@ public class FotoImpl implements IFotoServices{
 		
 		fotoR.save(foto);
 		
+	}
+
+	@Override
+	public FotoDTO getByID(Integer id) throws AcademyException {
+		log.debug("getByID: " + id);
+		
+		Optional<Foto> foto = fotoR.findById(id);
+		
+		if(foto.isEmpty())
+			throw new AcademyException("Foto non esistente");
+		
+		Foto f = foto.get();
+		
+		return FotoDTO.builder()
+				.id(f.getId())
+				.device(f.getDevice())
+				.widthResolution(f.getWidthResolution())
+				.heightResolution(f.getHeightResolution())
+				.oggetto(Utilities.buildOggettoDTO(f))
+		.build();
 	}	
 	
 }

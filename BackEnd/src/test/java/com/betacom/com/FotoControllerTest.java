@@ -17,6 +17,7 @@ import com.betacom.com.exception.AcademyException;
 import com.betacom.com.request.FotoReq;
 import com.betacom.com.response.ResponseBase;
 import com.betacom.com.response.ResponseList;
+import com.betacom.com.response.ResponseObject;
 
 import lombok.extern.log4j.Log4j2;
 
@@ -88,6 +89,28 @@ public class FotoControllerTest {
 	
 	@Test
 	@Order(3)
+	void findByIDTest() throws AcademyException{
+		log.debug("Test Method: findByIDTest()");
+	
+		ResponseObject<FotoDTO> rB = fotoC.findById(1);
+		
+		Assertions.assertThat(rB.getDati().getOggetto().getAutore()).isEqualTo("Nome Autore");
+	
+	}
+	
+	@Test
+	@Order(4)
+	void errorFindByIDTest() throws AcademyException{
+		log.debug("Test Method: errorFindByIDTest()");
+
+		ResponseObject<FotoDTO> rB = fotoC.findById(2);
+		
+		Assertions.assertThat(rB.getRc()).isEqualTo(false);
+	
+	}
+	
+	@Test
+	@Order(5)
 	void updateFotoTest() throws AcademyException{
 		log.debug("Test Method: updateFotoTest()");
 		
@@ -108,7 +131,7 @@ public class FotoControllerTest {
 	}
 	
 	@Test
-	@Order(4)
+	@Order(6)
 	void errorUpdateFotoTest() throws AcademyException{
 		log.debug("Test Method: errorUpdateFotoTest()");
 		
@@ -123,7 +146,7 @@ public class FotoControllerTest {
 	}
 	
 	@Test
-	@Order(5)
+	@Order(7)
 	void deleteFotoTest() throws AcademyException{
 		log.debug("Test Method: deleteFotoTest()");
 		
@@ -139,7 +162,7 @@ public class FotoControllerTest {
 	}
 	
 	@Test
-	@Order(6)
+	@Order(8)
 	void errorDeleteFotoTest() throws AcademyException{
 		log.debug("Test Method: errorDeleteFotoTest()");
 		
@@ -153,5 +176,7 @@ public class FotoControllerTest {
 		Assertions.assertThat(rB.getRc()).isEqualTo(false);
 	
 	}
+	
+
 
 }

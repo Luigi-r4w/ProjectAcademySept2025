@@ -11,4 +11,5 @@ public interface IFotoServices {
 	void createFoto(FotoReq req) throws AcademyException;
 	void updateFoto(FotoReq req) throws AcademyException;
 	void deleteFoto(FotoReq req) throws AcademyException;
+	FotoDTO getByID(Integer id)  throws AcademyException;
 }
