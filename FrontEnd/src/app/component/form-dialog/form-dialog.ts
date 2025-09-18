@@ -49,18 +49,19 @@ export class FormDialog implements OnInit{
       this.uploadForm.addControl('supporto', new FormControl());
       this.uploadForm.addControl('tecnica', new FormControl());
     }
-<<<<<<< HEAD
 
-    // se il dialog riceve i dati di una foto gia esistente riempe il form
-    if (this.data.oggetto) {
-      this.riempiCampiForm();
-=======
     if (this.data.type === 'illustrazione') {
       this.uploadForm.addControl('urlIllustrazione', new FormControl());
       this.uploadForm.addControl('stile', new FormControl());
       this.uploadForm.addControl('dataIllustrazione', new FormControl());
->>>>>>> updates
+
     }
+
+    // se il dialog riceve i dati di una foto gia esistente riempe il form
+    if (this.data.oggetto) {
+      this.riempiCampiForm();
+    }
+    
   }
 
   onFileSelected(event: Event) {

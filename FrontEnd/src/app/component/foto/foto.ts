@@ -92,7 +92,7 @@ export class Foto implements OnInit{
             console.log("autore: ", resp.autore);
             if (resp.rc) {
               console.log("immagine nuova ", result.immagine);
-              //window.location.reload(); // se tutto va bene refresh pagina
+              window.location.reload(); // se tutto va bene refresh pagina
             }
             else {
               // se l'update di foto non va a buon fine elimino la foto che avevo caricato
