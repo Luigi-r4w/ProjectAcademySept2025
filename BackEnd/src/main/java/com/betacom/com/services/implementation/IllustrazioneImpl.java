@@ -95,14 +95,27 @@ public class IllustrazioneImpl implements IIllustrazioneServices{
 		log.debug("Illustrazione listAll");
 		List<Illustrazione> list= illustrazioneRepository.findAll();
 		return list.stream().map(
-				illustrazione -> IllustrazioneDTO.builder()
-					.id(illustrazione.getId())
-					.oggetto(Utilities.buildOggettoDTO(illustrazione))
-					.dataIllustrazione(illustrazione.getDataIllustrazione())
-					.stile(illustrazione.getStile())
-					.urlIllustrazione(illustrazione.getUrlIllustrazione())
-					.build()
+				illustrazione -> buildDTO(illustrazione)
 				).collect(Collectors.toList());
+	}
+
+	@Override
+	public IllustrazioneDTO getById(Integer id) throws AcademyException {
+		log.debug("ottenere illustrazione dall'id:" + id);
+		Optional<Illustrazione> i = illustrazioneRepository.findById(id);
+		if(i.isEmpty()) throw new AcademyException("Illustrazione non trovata");
+		Illustrazione illustrazione = i.get();
+		return buildDTO(illustrazione);
+	}
+	
+	private IllustrazioneDTO buildDTO(Illustrazione illustrazione) {
+		return IllustrazioneDTO.builder()
+				.id(illustrazione.getId())
+				.oggetto(Utilities.buildOggettoDTO(illustrazione))
+				.dataIllustrazione(illustrazione.getDataIllustrazione())
+				.stile(illustrazione.getStile())
+				.urlIllustrazione(illustrazione.getUrlIllustrazione())
+				.build();
 	}
 
 }

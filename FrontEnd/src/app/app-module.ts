@@ -11,6 +11,7 @@ import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule } from '@angular/forms';
 import {MatCheckboxModule} from '@angular/material/checkbox';
 import { MatInputModule} from '@angular/material/input';
+import {MatGridListModule} from '@angular/material/grid-list';
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
 import { Home } from './component/home/home';
@@ -22,7 +23,7 @@ import { Login } from './component/login/login';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDialogModule} from '@angular/material/dialog';
 import { FormDialog } from './component/form-dialog/form-dialog';
-
+import { Illustrazioni } from './component/illustrazioni/illustrazioni'
 import { Disegni } from './component/disegni/disegni';
 import { Disegno } from './component/disegno/disegno';
 
@@ -38,7 +39,8 @@ import { Disegno } from './component/disegno/disegno';
     Utente,
     Login,
     Disegni,
-    Disegno
+    Disegno,
+    Illustrazioni
   ],
   imports: [
     BrowserModule,
@@ -52,7 +54,8 @@ import { Disegno } from './component/disegno/disegno';
     CommonModule,
     MatInputModule,
     MatCheckboxModule,
-    RouterModule
+    RouterModule,
+    MatGridListModule
   ],
   providers: [
     provideHttpClient((withFetch())),

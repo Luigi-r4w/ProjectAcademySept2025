@@ -14,6 +14,7 @@ export class Login {
   constructor(private utente : UtenteServices, private router:Router, private auth:Auth, private cdr: ChangeDetectorRef){}
 
   ngOnInit(): void {
+    this.auth.resetAll();
 }
 
   isLogin = true;
@@ -33,6 +34,12 @@ export class Login {
           this.auth.setAuthentificated();
           console.log(resp.dati.id);
           this.auth.setId(resp.dati.id);
+          if(resp.dati.role=='ADMIN'){
+            console.log("è un ADMIN")
+            this.auth.setIsAdmin();
+          } else{
+            console.log("non è un ADMIN")
+          }
           this.router.navigate(['home'])
         } else {
           this.msgEr=resp.msg;
@@ -44,6 +51,7 @@ export class Login {
         nome: signin.form.value.nome,
         password: signin.form.value.pwd,
         email: signin.form.value.email,
+        role: 'USER'
       }).subscribe((resp: any) => {
         console.log(resp);
         if(resp.rc){

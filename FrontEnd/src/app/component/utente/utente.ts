@@ -19,6 +19,7 @@ export class Utente implements OnInit {
   carrello: any;
   msgEr: any;
   isLoading: boolean = true;
+  isAdmin= false;
 
   ngOnInit(): void {
     console.log("findbyId di : " + this.auth.getId() );
@@ -30,6 +31,7 @@ export class Utente implements OnInit {
         this.carrello=resp.dati.carrello;
         this.isLoading = false;
         this.msgEr=null;
+        this.isAdmin=this.auth.getIsAdmin();
         this.cdr.detectChanges();
       } else {
         this.msgEr=resp.msg;
@@ -39,42 +41,51 @@ export class Utente implements OnInit {
   }
 
   deleteAccount() {
-    console.log("cancello l'account id : " + this.auth.getId() )
-    this.utente.delete(this.auth.getId() ).subscribe((resp: any) => {
-      console.log(resp);
-      if(resp.rc){
-        console.log("cancellazione effettuata");
-        this.auth.resetAll();
-        console.log(this.auth.isAutentificated());
-        this.router.navigate(['login']);
-      } else{
-        console.log(resp.msg)
-      }
-    })
+    const confirmed = window.confirm('Sei sicuro di voler eliminare il tuo account?');
+    if(confirmed){
+      console.log("cancello l'account id : " + this.auth.getId() )
+      this.utente.delete(this.auth.getId() ).subscribe((resp: any) => {
+        console.log(resp);
+        if(resp.rc){
+          console.log("cancellazione effettuata");
+          this.auth.resetAll();
+          console.log(this.auth.isAutentificated());
+          this.router.navigate(['login']);
+        } else{
+          console.log(resp.msg)
+        }
+      })
+    }
   }
 
   confirmPurchase() {
-    this.utente.svuotaCarrello(this.auth.getId()).subscribe((resp: any) => {
-      console.log(resp);
-      if(resp.rc){
-        console.log("cancellazione effettuata");
-        this.ngOnInit();
-      } else{
-        console.log(resp.msg)
-      }
-    })
+    const confirmed = window.confirm('Sei sicuro di voler acquistare questi prodotti?');
+    if(confirmed){
+      this.utente.svuotaCarrello(this.auth.getId()).subscribe((resp: any) => {
+        console.log(resp);
+        if(resp.rc){
+          console.log("cancellazione effettuata");
+          this.ngOnInit();
+        } else{
+          console.log(resp.msg)
+        }
+      })
+    }
   }
 
   removeItem(idItem: number) {
-    this.utente.rmItem(this.auth.getId(), idItem ).subscribe((resp: any) => {
-      console.log(resp);
-      if(resp.rc){
-        console.log("cancellazione effettuata");
-        this.ngOnInit();
-      } else{
-        console.log(resp.msg)
-      }
-    })
+    const confirmed = window.confirm('Sei sicuro di voler rimuovere questo prodotto dal carrello?');
+    if(confirmed){
+      this.utente.rmItem(this.auth.getId(), idItem ).subscribe((resp: any) => {
+        console.log(resp);
+        if(resp.rc){
+          console.log("cancellazione effettuata");
+          this.ngOnInit();
+        } else{
+          console.log(resp.msg)
+        }
+      })
+    }
   }
   
 }

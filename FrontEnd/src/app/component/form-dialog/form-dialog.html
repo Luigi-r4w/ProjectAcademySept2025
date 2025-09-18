@@ -59,8 +59,21 @@
         <input matInput type="text" formControlName="tecnica">
       </mat-form-field>
     }
-    <!-- qua manca ILLUSTRAZIONE -->
-
+    <!-- se la il tipo dell'oggetto è ILLUSTRAZIONE ci metto questi attributi -->
+    @else if (data.type == "illustrazione") {
+      <mat-form-field>
+        <mat-label>url dell'illustrazione</mat-label>
+        <input matInput type="text" formControlName="urlIllustrazione">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Stile</mat-label>
+        <input matInput type="text" formControlName="stile">
+      </mat-form-field>
+      <mat-form-field>
+        <mat-label>Data Illustrazione</mat-label>
+        <input matInput type="date" formControlName="dataIllustrazione">
+      </mat-form-field>
+    }
     <!-- caricamento immagine -->
     <h2>Carica un'immagine</h2>
     <input type="file" (change)="onFileSelected($event)" />

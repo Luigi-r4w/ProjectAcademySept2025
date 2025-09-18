@@ -1,0 +1,45 @@
+.container_grid{
+    width: stretch;
+    height: stretch;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    grid-template-rows: 50% 50%;
+}
+.container_tile{
+    width: 100%;
+}
+.example-card{
+    height: 100%;
+    width: 80%;
+}
+.header{
+    align-content: center;
+    text-align: center;
+    align-self:center;
+    max-height: 20%;
+}
+.image{
+    max-height: 50%;
+    max-width:80%;
+    align-self: center;
+    width:min-content;
+    
+}
+.title{
+    align-self:center;
+    text-align:center;
+    font-weight: bold;
+    font-size: 20px;
+}
+.author{
+    font-weight: bold;
+    font-size: 16px;
+}
+.description{
+    text-align: center;
+    height: 20%;
+}
+.button{
+    align-self: center;
+    height: 10%;
+}

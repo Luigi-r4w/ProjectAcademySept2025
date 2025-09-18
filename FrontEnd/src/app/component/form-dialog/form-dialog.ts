@@ -49,10 +49,17 @@ export class FormDialog implements OnInit{
       this.uploadForm.addControl('supporto', new FormControl());
       this.uploadForm.addControl('tecnica', new FormControl());
     }
+<<<<<<< HEAD
 
     // se il dialog riceve i dati di una foto gia esistente riempe il form
     if (this.data.oggetto) {
       this.riempiCampiForm();
+=======
+    if (this.data.type === 'illustrazione') {
+      this.uploadForm.addControl('urlIllustrazione', new FormControl());
+      this.uploadForm.addControl('stile', new FormControl());
+      this.uploadForm.addControl('dataIllustrazione', new FormControl());
+>>>>>>> updates
     }
   }
 
@@ -181,6 +188,14 @@ export class FormDialog implements OnInit{
         ...campiInComune,
         supporto: this.uploadForm.value.supporto,
         tecnica: this.uploadForm.value.tecnica
+        };
+      }
+      if (this.data.type === 'illustrazione') {
+      payload = {
+        ...campiInComune,
+        urlIllustrazione: this.uploadForm.value.urlIllustrazione,
+        stile: this.uploadForm.value.stile,
+        dataIllustrazione:this.uploadForm.value.dataIllustrazione
         };
       }
       // chiudo il dialog e ritorno l'oggetto compreso di tutti i suoi dati (nel mio caso a foto.ts)
