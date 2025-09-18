@@ -3,6 +3,7 @@ import { BackendIllustrazioneService } from '../../services/backend-illustrazion
 import { FormDialog } from '../form-dialog/form-dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { Upload } from '../../services/upload';
+import { UtenteServices } from '../../services/utenteServices';
 
 @Component({
   selector: 'app-illustrazioni',
@@ -17,7 +18,8 @@ export class Illustrazioni implements OnInit{
   constructor(private service:BackendIllustrazioneService,
     private changeDetectorRef:ChangeDetectorRef,
     private dialog: MatDialog,
-    private uploadService: Upload
+    private uploadService: Upload,
+    private utenteService:UtenteServices
   ){}
   ngOnInit(): void {
     console.log("ngOnInit Illustrazioni");
@@ -95,6 +97,6 @@ export class Illustrazioni implements OnInit{
   }];*/
 
   onBuy(){
-
+    //this.utenteService.addItem(X, y);
   }
 }
