@@ -97,7 +97,7 @@ public class FotoImpl implements IFotoServices{
 		
 		foto = Utilities.modificaOggetto(foto, req);
 		
-		if(req.getDevice() != null)
+		if(req.getDevice() != null && req.getDevice().isBlank())
 			foto.setDevice(req.getDevice());
 		
 		if(req.getWidthResolution() != null)

@@ -82,14 +82,17 @@ export class Foto implements OnInit{
         data: { type: 'foto', oggetto : this.fotoSingola }
       });
 
-        // quando il dialog si chiude mi torna i dati
+      // quando il dialog si chiude mi torna i dati
       this.dialogRef.afterClosed().subscribe((result:any) => {
         if (result) {
           console.log("Modify: Payload ricevuto dal dialog: ", result);
 
           this.fotoService.modifyFoto(result).subscribe((resp: any) => {
+            console.log("rc: ", resp.rc);
+            console.log("autore: ", resp.autore);
             if (resp.rc) {
-              window.location.reload(); // se tutto va bene refresh pagina
+              console.log("immagine nuova ", result.immagine);
+              //window.location.reload(); // se tutto va bene refresh pagina
             }
             else {
               // se l'update di foto non va a buon fine elimino la foto che avevo caricato

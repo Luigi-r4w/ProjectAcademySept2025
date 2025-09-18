@@ -1,6 +1,6 @@
 import { ChangeDetectorRef, Component, inject, Inject, OnInit } from '@angular/core';
 import { Upload } from '../../services/upload';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Foto } from '../foto/foto';
 import { FotoBackend } from '../../services/foto-backend';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
@@ -50,6 +50,7 @@ export class FormDialog implements OnInit{
       this.uploadForm.addControl('tecnica', new FormControl());
     }
 
+    // se il dialog riceve i dati di una foto gia esistente riempe il form
     if (this.data.oggetto) {
       this.riempiCampiForm();
     }
@@ -77,6 +78,7 @@ export class FormDialog implements OnInit{
   modifyForm(){
     const updateBody: any = {id: this.data.oggetto.id}
 
+    // funzione insterna
     const completaFormEInvia = () => {
       if (this.uploadForm.controls['titolo'].touched)
       updateBody.titolo = this.uploadForm.value.titolo;
@@ -118,6 +120,7 @@ export class FormDialog implements OnInit{
     }
 
     if(this.selectedFile){
+      console.log("immagine vecchia: ", this.uploadForm.value.immagine);
       this.uploadService.deleteFile(this.uploadForm.value.immagine).subscribe((resp:any) => {
         console.log(resp.msg);
         this.uploadService.upload(this.selectedFile!).subscribe((resp: any) => {
@@ -190,12 +193,12 @@ export class FormDialog implements OnInit{
     const oggettoSingolo = this.data.oggetto
     // creo il form con i campi comuni, già precompilati
     this.uploadForm = new FormGroup({
-      titolo: new FormControl(oggettoSingolo.oggetto.titolo),
-      descrizione: new FormControl(oggettoSingolo.oggetto.descrizione),
-      autore: new FormControl(oggettoSingolo.oggetto.autore),
-      dataCreazione: new FormControl(oggettoSingolo.oggetto.dataCreazione),
-      dimensione: new FormControl(oggettoSingolo.oggetto.dimensione),
-      prezzo: new FormControl(oggettoSingolo.oggetto.prezzo),
+      titolo: new FormControl(oggettoSingolo.oggetto.titolo,  Validators.required),
+      descrizione: new FormControl(oggettoSingolo.oggetto.descrizione, Validators.required),
+      autore: new FormControl(oggettoSingolo.oggetto.autore, Validators.required),
+      dataCreazione: new FormControl(oggettoSingolo.oggetto.dataCreazione, Validators.required),
+      dimensione: new FormControl(oggettoSingolo.oggetto.dimensione, Validators.required),
+      prezzo: new FormControl(oggettoSingolo.oggetto.prezzo, [Validators.required, Validators.min(1)]),
       isAI: new FormControl(oggettoSingolo.oggetto.isAI),
       categoria: new FormControl(oggettoSingolo.oggetto.categoria),
       immagine: new FormControl(oggettoSingolo.oggetto.immagine)
@@ -203,9 +206,9 @@ export class FormDialog implements OnInit{
 
     // se la categoria è foto → aggiungo i campi extra e li precompilo
     if (oggettoSingolo.oggetto.categoria === 'foto') {
-      this.uploadForm.addControl('device', new FormControl(oggettoSingolo.device));
-      this.uploadForm.addControl('widthResolution', new FormControl(oggettoSingolo.widthResolution));
-      this.uploadForm.addControl('heightResolution', new FormControl(oggettoSingolo.heightResolution));
+      this.uploadForm.addControl('device', new FormControl(oggettoSingolo.device, Validators.required));
+      this.uploadForm.addControl('widthResolution', new FormControl(oggettoSingolo.widthResolution, [Validators.required, Validators.min(1)]));
+      this.uploadForm.addControl('heightResolution', new FormControl(oggettoSingolo.heightResolution, [Validators.required, Validators.min(1)]));
     }
   }
       

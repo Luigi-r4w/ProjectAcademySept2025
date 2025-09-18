@@ -54,19 +54,19 @@ public class Utilities {
 	
 	public static <T extends Oggetto, R extends OggettoReq> T modificaOggetto(T oggetto, R req) {
 
-		if (req.getCategoria() != null)
+		if (req.getCategoria() != null && !req.getCategoria().isBlank())
 			oggetto.setCategoria(req.getCategoria());
 		if (req.getPrezzo() != null)
 			oggetto.setPrezzo(req.getPrezzo());
-		if (req.getDescrizione()!= null)
+		if (req.getDescrizione()!= null && !req.getDescrizione().isBlank())
 			oggetto.setDescrizione(req.getDescrizione());
-		if (req.getTitolo()!= null)
+		if (req.getTitolo()!= null && !req.getTitolo().isBlank())
 			oggetto.setTitolo(req.getTitolo());
 		if (req.getDataCreazione() != null)
 			oggetto.setDataCreazione(req.getDataCreazione());
-		if (req.getDimensione() != null)
+		if (req.getDimensione() != null && !req.getDimensione().isBlank())
 			oggetto.setDimensione(req.getDimensione());
-		if (req.getAutore() != null)
+		if (req.getAutore() != null && !req.getAutore().isBlank())
 			oggetto.setAutore(req.getAutore());
 		if (req.getImmagine() != null)
 			oggetto.setImmagine(req.getImmagine());
