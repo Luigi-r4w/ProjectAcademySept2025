@@ -1,5 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { BackendIllustrazioneService } from '../../services/backend-illustrazioni-service';
+import { FormDialog } from '../form-dialog/form-dialog';
+import { MatDialog } from '@angular/material/dialog';
+import { Upload } from '../../services/upload';
+import { UtenteServices } from '../../services/utenteServices';
 
 @Component({
   selector: 'app-illustrazioni',
@@ -10,17 +14,58 @@ import { BackendIllustrazioneService } from '../../services/backend-illustrazion
 export class Illustrazioni implements OnInit{
   response:any;
   illustrazioni:any;
-  constructor(private service:BackendIllustrazioneService){}
+  msg:string = '';
+  constructor(private service:BackendIllustrazioneService,
+    private changeDetectorRef:ChangeDetectorRef,
+    private dialog: MatDialog,
+    private uploadService: Upload,
+    private utenteService:UtenteServices
+  ){}
   ngOnInit(): void {
-    console.log("ngOnInit Illustrazioni")
+    console.log("ngOnInit Illustrazioni");
+    this.checkIllustrazioni();
+  }
+  checkIllustrazioni():void{
     this.service.listAll()
       .subscribe((resp:any) => {
         this.response = resp;
         console.log(resp);
         this.illustrazioni = this.response.list;
+
+        this.changeDetectorRef.detectChanges();
       });
   }
+  
+  // to open insert form dialog
+  openDialog() {
+    const dialogRef = this.dialog.open(FormDialog, {
+      width: '400px',
+      data: { type: 'illustrazione' }
+    });
 
+    // quando il dialog si chiude mi torna i dati (grazie Elia per il codice)
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        console.log("Payload ricevuto dal dialog: ", result);
+
+        this.service.insert(result).subscribe((resp: any) => {
+          if (resp.rc) {
+            window.location.reload(); // se tutto va bene refresh pagina
+            console.log(resp.msg)
+          }
+          else {
+            // se l'insert di foto non va a buon fine elimino la foto che avevo caricato
+            this.uploadService.deleteFile(result.immagine).subscribe((resp:any) => {
+            console.log(resp.msg);
+          })
+          
+          this.msg = resp.msg;
+          console.log(this.msg);
+          }
+        });
+      }
+    });
+  }
   
  /*illustrazioni = [{
   id:1,
@@ -52,6 +97,6 @@ export class Illustrazioni implements OnInit{
   }];*/
 
   onBuy(){
-
+    //this.utenteService.addItem(X, y);
   }
 }

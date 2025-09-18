@@ -1,3 +1,8 @@
+<div>
+    <div class="example-button-row">
+      <button mat-flat-button (click)="openDialog()">Insert</button>
+    </div>
+</div>
 <mat-grid-list class="container_grid" cols="3">
     @for (illustrazione of illustrazioni; track illustrazione.id){
         <mat-grid-tile class="container_tile">
@@ -6,7 +11,7 @@
                 <div class="title">{{illustrazione.oggetto.titolo}}</div>
                 <div class="author">{{illustrazione.oggetto.autore}}</div>
             </div>
-            <img class= "image" mat-card-image src={{illustrazione.oggetto.immagine}}
+            <img class= "image" mat-card-image src="http://localhost:8080/images/{{illustrazione.oggetto.immagine}}"
             alt="Example Image">
             <mat-card-content class="description">
                 <p>
