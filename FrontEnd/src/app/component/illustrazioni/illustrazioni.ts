@@ -37,7 +37,7 @@ export class Illustrazioni implements OnInit{
   }
   
   // to open insert form dialog
-  openDialog() {
+  openInsertDialog() {
     const dialogRef = this.dialog.open(FormDialog, {
       width: '400px',
       data: { type: 'illustrazione' }
@@ -55,46 +55,57 @@ export class Illustrazioni implements OnInit{
           }
           else {
             // se l'insert di foto non va a buon fine elimino la foto che avevo caricato
-            this.uploadService.deleteFile(result.immagine).subscribe((resp:any) => {
-            console.log(resp.msg);
+            this.uploadService.deleteFile(result.immagine).subscribe((respCreate:any) => {
+            console.log(respCreate.msg)
           })
-          
-          this.msg = resp.msg;
-          console.log(this.msg);
+          console.log(resp.msg)
           }
         });
       }
     });
   }
-  
- /*illustrazioni = [{
-  id:1,
-  descrizione: "lorem ipsum diabolico",
-  title: "Il titolazzo",
-  author: "alex",
-  urlImage:"data:image/png;base64,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"
- },
-  {
-    id:2,
-    descrizione: "operetta",
-    title: "La Monnezza",
-    author: "qualcun altro",
-    urlImage:"https://patrimonidarte.com/wp-content/uploads/2022/01/viso-della-monnalisa.webp"
-  },
-    {
-      id:3,
-      descrizione: "operetta",
-      title: "La MonaLisa",
-      author: "qualcun altro",
-      urlImage:"https://patrimonidarte.com/wp-content/uploads/2022/01/viso-della-monnalisa.webp"
-  },
-    {
-      id:4,
-      descrizione: "operetta",
-      title: "Ridateci la Monnalisa",
-      author: "qualcun altro",
-      urlImage:"https://patrimonidarte.com/wp-content/uploads/2022/01/viso-della-monnalisa.webp"
-  }];*/
+
+  openModifyDialog(id:number){
+    console.log("Modify illustration id: " + id)
+    var illustrazione:any
+    this.service.findById(id).subscribe((resp:any)=>{
+      if(resp.rc){
+        illustrazione = resp.dati
+      }else{
+        console.log(resp.msg)
+      }
+      this.changeDetectorRef.detectChanges
+
+      var dialogRef = this.dialog.open(FormDialog, {
+        width: '400px',
+        data: { type: 'illustrazione', oggetto : illustrazione}
+      })
+
+      dialogRef.afterClosed().subscribe((result:any)=>{
+        if(result){
+          this.modifyImage(result)
+        }else{
+          console.log("Nothing to update")
+        }
+      })
+    })
+  }
+
+  modifyImage(result:any){
+    console.log("Trying to modify the illustration")
+      this.service.updateDisegno(result).subscribe((resp:any) =>{
+        if(resp.rc){
+          console.log("Image updated")
+          window.location.reload()
+        }else{
+          console.log("Failed update: deleting caricated image from our database")
+          this.uploadService.deleteFile(result.immagine).subscribe((respDelete:any) => {
+            console.log(respDelete.msg)
+          })
+        console.log(resp.msg)
+        }
+      })
+  }
 
   onBuy(){
     //this.utenteService.addItem(X, y);
