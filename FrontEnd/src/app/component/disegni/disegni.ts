@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { BackendDisegnoService } from '../../services/backend-disegno-service';
 
 @Component({
@@ -11,7 +11,8 @@ export class Disegni implements OnInit{
   response:any;
   disegni:any;
 
-  constructor(private service:BackendDisegnoService){}
+  constructor(private service:BackendDisegnoService,
+    private cdr: ChangeDetectorRef){}
 
   ngOnInit(): void {
     console.log("ngOnInit")
@@ -20,6 +21,7 @@ export class Disegni implements OnInit{
         this.response = resp;
         console.log(resp);
         this.disegni = this.response.list;
+        this.cdr.detectChanges();
       });
   }
 }
