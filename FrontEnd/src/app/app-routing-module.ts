@@ -12,7 +12,7 @@ import { Illustrazioni } from './component/illustrazioni/illustrazioni';
 
 const routes: Routes = [
   {path: 'utente' , component : Utente, canActivate:[authGuard]},
-  {path: 'home' , component: Home, canActivate:[authGuard]},
+  {path: 'home' , component: Home },
   {path: 'login' , component: Login},
   {path: 'illustrazioni', component:Illustrazioni},
   { path: '', redirectTo: '/home', pathMatch: 'full' },
