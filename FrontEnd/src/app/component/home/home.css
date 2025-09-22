@@ -1,0 +1,143 @@
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+h2 {
+    color: #333;
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: #333;
+    font-size: 1.5rem;
+    margin-top: 40px;
+}
+
+p {
+    font-size: 1rem;
+    color: #555;
+    line-height: 1.5;
+}
+
+.prodotti {
+    padding: 40px 20px;
+    text-align: center;
+    background-color: #fff;
+}
+
+.prodotti h2 {
+    font-size: 2rem;
+    color: #333;
+}
+
+.prodotti p {
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+    font-size: 1rem;
+    color: #555;
+}
+
+.categories {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+}
+
+.category {
+    position: relative;
+    width: 30%;
+    text-align: center;
+    margin: 20px 0;
+}
+
+.category img {
+    width: 100%;
+    height: auto;
+    max-height: 250px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.category a.cta-button {
+    display: block;
+    background-color: #007bff;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    font-weight: bold;
+    margin-top: 15px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.category a.cta-button:hover {
+    background-color: #0056b3;
+}
+
+.chi-siamo {
+    padding: 40px 20px;
+    background-color: #fff;
+    text-align: center;
+}
+
+.chi-siamo h2 {
+    font-size: 2rem;
+    color: #333;
+}
+
+.chi-siamo p {
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+    font-size: 1rem;
+    color: #555;
+}
+
+.team-members {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    list-style-type: none;
+    padding: 0;
+}
+
+.team-members li {
+    width: 200px;
+    text-align: center;
+    background-color: #f8f8f8;
+    border-radius: 8px;
+    padding: 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.team-members li strong {
+    font-size: 1.2rem;
+    color: #007bff; 
+}
+
+.team-members .role {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #000000;
+}
+
+.team-members .incarico {
+    margin-top: 10px;
+    font-size: 0.9rem;
+    color: #949292;
+}
+
+.team-members .role .position {
+    display: block;
+    margin-top: 5px;
+}
