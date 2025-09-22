@@ -1,6 +1,6 @@
 <div>
     <div class="example-button-row">
-      <button mat-flat-button (click)="openDialog()">Insert</button>
+      <button mat-flat-button (click)="openInsertDialog()">Insert</button>
     </div>
 </div>
 <mat-grid-list class="container_grid" cols="3">
@@ -20,6 +20,8 @@
             </mat-card-content>
             <mat-card-actions class="button">
                 <button matButton (click)="onBuy()">Wanna buy it</button>
+                <button matButton (click)="openModifyDialog(illustrazione?.id)">Modify Image</button>
+                <button matButton (click)="openDeleteDialog(illustrazione?.id)">Delete</button>
                 <!--<button matButton>SHARE</button>-->
             </mat-card-actions>
         </mat-card>
