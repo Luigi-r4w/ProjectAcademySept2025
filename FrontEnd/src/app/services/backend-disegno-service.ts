@@ -5,20 +5,22 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class BackendDisegnoService {
-  url='http://localhost:8080/rest/disegno/';
-  constructor(private http : HttpClient) { }
+  url = 'http://localhost:8080/rest/disegno/';
+
+  constructor(private http : HttpClient) {}
 
   listDisegni(){
-    return this.http.get(this.url + 'listAll');
+    return this.http.get(this.url + 'list');
   }
-
-  findById(id:number){
-    console.log("FindById: " + id);
-    let params = new HttpParams().set('id', id);
-    return this.http.get(this.url + 'findById', {params});
+  
+  insertDisegno(body:{}){
+    return this.http.post(this.url + 'insert', body)
   }
-
+  findDisegnoByID(id:number){
+    return this.http.get(this.url + 'findById?id=' + id)
+  }
   updateDisegno(body:{}){
-    return this.http.put(this.url + 'update', body);
+    console.log("update");
+    return this.http.put(this.url + 'update', body)
   }
 }

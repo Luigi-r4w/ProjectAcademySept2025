@@ -38,7 +38,7 @@ export class Disegno implements OnInit{
       const idStr = params.get("id");
       if (idStr) {
         this.id =+ idStr; //equivalente a parseInt()
-          this.service.findById(this.id)
+          this.service.findDisegnoByID(this.id)
             .subscribe((resp:any) => {
               if (resp.rc) {
                 this.DisegnoSelezionato = resp.dati;
