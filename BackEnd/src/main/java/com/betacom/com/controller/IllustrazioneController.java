@@ -40,7 +40,7 @@ public class IllustrazioneController {
 		}
 		return r;
 	}
-	@PostMapping("/getById")
+	@GetMapping("/getById")
 	public ResponseObject<IllustrazioneDTO> getById(@RequestParam(required = true) Integer id){
 		ResponseObject<IllustrazioneDTO> r = new ResponseObject<IllustrazioneDTO>();
 		try {

@@ -93,7 +93,7 @@ export class Illustrazioni implements OnInit{
 
   modifyImage(result:any){
     console.log("Trying to modify the illustration")
-      this.service.updateDisegno(result).subscribe((resp:any) =>{
+      this.service.update(result).subscribe((resp:any) =>{
         if(resp.rc){
           console.log("Image updated")
           window.location.reload()
@@ -105,6 +105,28 @@ export class Illustrazioni implements OnInit{
         console.log(resp.msg)
         }
       })
+  }
+
+  openDeleteDialog(id:number){
+    var illustrazione:any
+    this.service.findById(id).subscribe((resp:any)=>{
+       if(resp.rc){
+        illustrazione = resp.dati
+      }else{
+        console.log(resp.msg)
+      }
+      this.changeDetectorRef.detectChanges
+
+      if(confirm("Are you sure you want to delete the image '" + illustrazione.titolo +"'?" )){
+        this.service.delete(illustrazione).subscribe((resp:any)=>{
+          console.log("Image deleted")
+          window.location.reload()
+        })
+      }else{
+        console.log("Failed delete")
+        console.log(resp.msg)
+      }
+    })
   }
 
   onBuy(){
