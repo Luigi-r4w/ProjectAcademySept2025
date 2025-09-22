@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { BackendDisegnoService } from '../../services/backend-disegno-service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -29,7 +29,8 @@ export class Disegno implements OnInit{
 });
   constructor(private route:ActivatedRoute,
     private service:BackendDisegnoService,
-  private routing:Router){}
+    private routing:Router,
+    private cdr: ChangeDetectorRef){}
   
   ngOnInit(): void {
     // controllo della variazione dei parametri di paramMap
@@ -37,7 +38,7 @@ export class Disegno implements OnInit{
       const idStr = params.get("id");
       if (idStr) {
         this.id =+ idStr; //equivalente a parseInt()
-          this.service.findById(this.id)
+          this.service.findDisegnoByID(this.id)
             .subscribe((resp:any) => {
               if (resp.rc) {
                 this.DisegnoSelezionato = resp.dati;
@@ -48,8 +49,10 @@ export class Disegno implements OnInit{
                     supporto: this.DisegnoSelezionato.supporto
                   });
                 console.log("Dati caricati. Modifica il form e clicca 'Aggiorna'");
+                this.cdr.detectChanges();
               } else {
                 this.msg = "Nessun dato trovato per questo ID.";
+                this.cdr.detectChanges();
               }
             /*
             this.updateForm = new FormGroup({
