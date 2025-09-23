@@ -28,6 +28,8 @@ import { Disegni } from './component/disegni/disegni';
 import { InfoDialog } from './component/info-dialog/info-dialog';
 import {MatDividerModule} from '@angular/material/divider';
 import { DeleteOggetto } from './dialog/delete-oggetto/delete-oggetto';
+import { ConfirmDialog } from './component/confirm-dialog/confirm-dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { NotFound } from './component/not-found/not-found';
 
 
@@ -45,6 +47,8 @@ import { NotFound } from './component/not-found/not-found';
     InfoDialog,
     Illustrazioni,
     DeleteOggetto,
+    foto,
+    ConfirmDialog,
     NotFound
   ],
   imports: [
@@ -61,7 +65,8 @@ import { NotFound } from './component/not-found/not-found';
     MatCheckboxModule,
     RouterModule,
     MatGridListModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSnackBarModule
   ],
   providers: [
     provideHttpClient((withFetch())),

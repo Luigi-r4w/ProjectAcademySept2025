@@ -6,6 +6,8 @@ import { Upload } from '../../services/upload';
 import { InfoDialog } from '../info-dialog/info-dialog';
 import { UtenteServices } from '../../services/utenteServices';
 import { Auth } from '../../services/auth/auth';
+import { ConfirmDialog } from '../confirm-dialog/confirm-dialog';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-foto',
@@ -26,7 +28,8 @@ export class Foto implements OnInit{
     private uploadService: Upload, 
     private cdr: ChangeDetectorRef,
     private utenteService: UtenteServices,
-    private auth: Auth){}
+    private auth: Auth,
+    private snackBar: MatSnackBar){}
 
   ngOnInit(): void {
     console.log("ngOnInit");
@@ -129,8 +132,22 @@ export class Foto implements OnInit{
 
   addToCart(id:number){
     let utenteID = this.auth.getId(); 
-    this.utenteService.addItem(utenteID, id).subscribe();
-    console.log("aggiunto al carrello");
+    if (this.auth.isAutentificated()){
+      this.utenteService.addItem(utenteID, id).subscribe();
+      this.snackBar.open('Articolo aggiunto!', 'Chiudi', {
+        duration: 2000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+        panelClass: ['custom-snackbar']
+      });
+    }
+    else {
+      this.dialog.open(ConfirmDialog, {
+          width: '300px',
+          enterAnimationDuration: '500ms',
+          exitAnimationDuration: '500ms'
+        });
+    }
   }
 
 }
