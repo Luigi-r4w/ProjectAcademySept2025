@@ -5,6 +5,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { Upload } from '../../services/upload';
 import { UtenteServices } from '../../services/utenteServices';
 import { Auth } from '../../services/auth/auth';
+import { InfoDialog } from '../info-dialog/info-dialog';
 
 @Component({
   selector: 'app-illustrazioni',
@@ -67,6 +68,7 @@ export class Illustrazioni implements OnInit{
     });
   }
 
+
   openModifyDialog(id:number){
     console.log("Modify illustration id: " + id)
     var illustrazione:any
@@ -95,45 +97,37 @@ export class Illustrazioni implements OnInit{
 
   modifyImage(result:any){
     console.log("Trying to modify the illustration")
-      this.service.update(result).subscribe((resp:any) =>{
-        if(resp.rc){
-          console.log("Image updated")
-          window.location.reload()
-        }else{
-          console.log("Failed update: deleting caricated image from our database")
-          this.uploadService.deleteFile(result.immagine).subscribe((respDelete:any) => {
-            console.log(respDelete.msg)
-          })
-        console.log(resp.msg)
-        }
-      })
+    this.service.update(result).subscribe((resp:any) =>{
+      if(resp.rc){
+        console.log("Image updated")
+        window.location.reload()
+      }else{
+        console.log("Failed update: deleting caricated image from our database")
+        this.uploadService.deleteFile(result.immagine).subscribe((respDelete:any) => {
+          console.log(respDelete.msg)
+        })
+      console.log(resp.msg)
+      }
+    })
   }
+
+
   addToCart(id:number){
     let utenteID = this.auth.getId(); 
     this.utenteService.addItem(utenteID, id).subscribe();
     console.log("aggiunto al carrello");
   }
-  /*openDeleteDialog(id:number){
-    var illustrazione:any
-    this.service.findById(id).subscribe((resp:any)=>{
-       if(resp.rc){
-        illustrazione = resp.dati
-      }else{
-        console.log(resp.msg)
-      }
-      this.changeDetectorRef.detectChanges
-
-      if(confirm("Are you sure you want to delete the image '" + illustrazione.titolo +"'?" )){
-        this.service.delete(illustrazione).subscribe((resp:any)=>{
-          console.log("Image deleted")
-          window.location.reload()
+  
+  openInfoDialog(illustrazione:any){
+        this.dialog.open(InfoDialog, {
+          width: '70vw',
+          maxWidth: '70vw',
+          height: '80vh',
+          enterAnimationDuration: '300ms',
+          exitAnimationDuration: '300ms',
+          data: illustrazione 
         })
-      }else{
-        console.log("Failed delete")
-        console.log(resp.msg)
-      }
-    })
-  }*/
+    }
 
  
 }
