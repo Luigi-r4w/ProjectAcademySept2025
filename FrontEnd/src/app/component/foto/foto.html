@@ -23,7 +23,7 @@
       </div>
     </mat-card-content>
     <mat-card-actions>
-      <button class="add-to-cart-btn">Aggiungi al <i class="fas fa-shopping-cart"></i></button>
+      <button class="add-to-cart-btn" (click)="addToCart(f.id); $event.stopPropagation()">Aggiungi al <i class="fas fa-shopping-cart"></i></button>
     </mat-card-actions>
   </mat-card>
 </div>
