@@ -1,12 +1,11 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FotoBackend } from '../../services/foto-backend';
 import { MatDialog } from '@angular/material/dialog';
 import { FormDialog } from '../form-dialog/form-dialog';
 import { Upload } from '../../services/upload';
 import { BackendDisegnoService } from '../../services/backend-disegno-service';
 
 @Component({
-  selector: 'app-foto',
+  selector: 'app-disegni',
   standalone: false,
   templateUrl: './disegni.html',
   styleUrl: './disegni.css'

@@ -25,9 +25,9 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { FormDialog } from './component/form-dialog/form-dialog';
 import { Illustrazioni } from './component/illustrazioni/illustrazioni'
 import { Disegni } from './component/disegni/disegni';
-import { Disegno } from './component/disegno/disegno';
 import { InfoDialog } from './component/info-dialog/info-dialog';
 import {MatDividerModule} from '@angular/material/divider';
+import { DeleteOggetto } from './dialog/delete-oggetto/delete-oggetto';
 
 
 @NgModule({
@@ -41,9 +41,9 @@ import {MatDividerModule} from '@angular/material/divider';
     Utente,
     Login,
     Disegni,
-    Disegno,
+    InfoDialog,
     Illustrazioni,
-    InfoDialog
+    DeleteOggetto
   ],
   imports: [
     BrowserModule,

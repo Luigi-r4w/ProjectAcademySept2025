@@ -4,6 +4,10 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Foto } from '../foto/foto';
 import { FotoBackend } from '../../services/foto-backend';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { BackendDisegnoService } from '../../services/backend-disegno-service';
+import { DeleteOggetto } from '../../dialog/delete-oggetto/delete-oggetto';
+import { Router } from '@angular/router';
+import { BackendIllustrazioneService } from '../../services/backend-illustrazioni-service';
 
 @Component({
   selector: 'app-form-dialog',
@@ -16,11 +20,16 @@ export class FormDialog implements OnInit{
   selectedFile?: File;
   uploadForm: any;
   readonly dialogRef = inject(MatDialogRef<FormDialog>);
+  readonly dialogDelete = inject(MatDialog);
+  oggettoRemove: any;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
     private uploadService: Upload, 
     private fotoService: FotoBackend,
-    private cdr: ChangeDetectorRef){
+    private disegnoService: BackendDisegnoService,
+    private illustrazioneService: BackendIllustrazioneService,
+    private cdr: ChangeDetectorRef,
+    private routing:Router,){
     console.log("Tipo ricevuto:", data.type);
   }
   // quando il componente viene inizializzato in base al tipo costruisce il gli input del form
@@ -226,6 +235,168 @@ export class FormDialog implements OnInit{
       this.uploadForm.addControl('widthResolution', new FormControl(oggettoSingolo.widthResolution, [Validators.required, Validators.min(1)]));
       this.uploadForm.addControl('heightResolution', new FormControl(oggettoSingolo.heightResolution, [Validators.required, Validators.min(1)]));
     }
+    else if (oggettoSingolo.oggetto.categoria === 'disegno') {
+      this.uploadForm.addControl('supporto', new FormControl(oggettoSingolo.supporto, Validators.required));
+      this.uploadForm.addControl('tecnica', new FormControl(oggettoSingolo.tecnica, Validators.required));
+    }
   }
-      
+  
+  
+  onDelete(tipo:any, id:number) {
+    console.log("onDelete");
+    const enterAnimationDuration = '500ms';
+    const exitAnimationDuration = '500ms';
+    //const id = data.id;
+    //const tipo = data.categoria;
+    console.log("id per il delete: ", id);
+    console.log("tipo per il delete: ", tipo);
+    // recupero i dati della foto che ho cliccato
+    if (tipo === 'foto') {
+      this.fotoService.getFotoByID(id).subscribe((resp:any) => {
+        console.log("resp: " + resp.dati.oggetto.titolo);
+        if(resp.rc){
+          this.oggettoRemove = resp.dati
+          console.log("titolo per il delete: " + resp.dati.oggetto.titolo)
+          this.cdr.detectChanges();
+        }
+        else{
+          console.log(resp.msg);
+          this.cdr.detectChanges();
+        }
+
+        console.log("titolo per il delete 2: " + this.oggettoRemove.oggetto.titolo)
+
+        const dialogRef = this.dialogDelete.open(DeleteOggetto, {
+          width: '250px',
+          enterAnimationDuration,
+          exitAnimationDuration,
+          data: {
+            oggettoDelete: this.oggettoRemove
+            
+          }, restoreFocus: false
+        })
+
+        dialogRef.afterClosed()
+          .subscribe((resp:any) => {
+            if(resp=='si'){
+              this.onDeleteAction();
+            }
+          })
+      })
+    } else if (tipo === 'disegno'){
+      this.disegnoService.findDisegnoByID(id).subscribe((resp:any) => {
+        console.log("resp: " + resp.rc);
+        if(resp.rc){
+          this.oggettoRemove = resp.dati
+          console.log("titolo per il delete: " + resp.dati.oggetto.titolo)
+          this.cdr.detectChanges();
+        }
+        else{
+          console.log(resp.msg);
+          this.cdr.detectChanges();
+        }
+
+        console.log("titolo per il delete 2: " + this.oggettoRemove.oggetto.titolo)
+
+        const dialogRef = this.dialogDelete.open(DeleteOggetto, {
+          width: '250px',
+          enterAnimationDuration,
+          exitAnimationDuration,
+          data: {
+            oggettoDelete: this.oggettoRemove
+            
+          }, restoreFocus: false
+        })
+
+        dialogRef.afterClosed()
+          .subscribe((resp:any) => {
+            if(resp=='si'){
+              this.onDeleteAction();
+            }
+          })
+      })
+    } else if (tipo === 'illustrazione'){
+      this.illustrazioneService.findById(id).subscribe((resp:any) => {
+        console.log("resp: " + resp.rc);
+        if(resp.rc){
+          this.oggettoRemove = resp.dati
+          console.log("titolo per il delete: " + resp.dati.oggetto.titolo)
+          this.cdr.detectChanges();
+        }
+        else{
+          console.log(resp.msg);
+          this.cdr.detectChanges();
+        }
+
+        console.log("titolo per il delete 2: " + this.oggettoRemove.oggetto.titolo)
+
+        const dialogRef = this.dialogDelete.open(DeleteOggetto, {
+          width: '250px',
+          enterAnimationDuration,
+          exitAnimationDuration,
+          data: {
+            oggettoDelete: this.oggettoRemove
+            
+          }, restoreFocus: false
+        })
+
+        dialogRef.afterClosed()
+          .subscribe((resp:any) => {
+            if(resp=='si'){
+              this.onDeleteAction();
+            }
+          })
+      })
+    }
+  }
+
+  onDeleteAction(){
+    console.log("onDeleteAction");
+    if (this.data.type === 'foto') {
+      console.log("Sono in deleteAction: " + this.oggettoRemove.oggetto.titolo)
+      this.fotoService.deleteFoto(this.oggettoRemove)
+        .subscribe((resp:any) => {
+          if (resp.rc){
+            this.uploadService.deleteFile(this.oggettoRemove.oggetto.immagine)
+              .subscribe();
+            this.routing.navigate(["/foto"])
+              .then(() => {
+                window.location.reload();
+              });
+
+            this.uploadService.deleteFile(this.oggettoRemove.oggetto.immagine);
+          }
+        });
+    } else if (this.data.type === 'disegno') {
+      console.log("Sono in deleteAction: " + this.oggettoRemove.id)
+      this.disegnoService.deleteDisegno(this.oggettoRemove)
+        .subscribe((resp:any) => {
+          if (resp.rc){
+            console.log("Rimozione oggetto dalla cartella: " + this.oggettoRemove.oggetto.immagine)
+            this.uploadService.deleteFile(this.oggettoRemove.oggetto.immagine)
+              .subscribe();
+            this.routing.navigate(["/disegni"])
+              .then(() => {
+                window.location.reload();
+              });
+          }
+        });
+    } /*else if (this.data.type === 'illustrazione') {
+      console.log("Sono in deleteAction: " + this.oggettoRemove.id)
+      this.illustrazioneService.deleteIllustrazione(this.oggettoRemove)
+        .subscribe((resp:any) => {
+          if (resp.rc){
+            this.uploadService.deleteFile(this.oggettoRemove.oggetto.immagine)
+              .subscribe();
+            this.routing.navigate(["/illustrazioni"])
+              .then(() => {
+                window.location.reload();
+              });
+
+            this.uploadService.deleteFile(this.oggettoRemove.oggetto.immagine);
+          }
+        });
+    }*/
+  }
+  
 }

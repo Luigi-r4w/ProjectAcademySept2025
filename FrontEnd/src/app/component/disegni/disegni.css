@@ -54,7 +54,7 @@ mat-card-header{
 
 
 /* GRID */
-.foto-grid {
+.disegno-grid {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 20px; /* spazio tra gli elementi (opzionale) */
