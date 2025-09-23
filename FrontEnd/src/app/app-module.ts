@@ -31,6 +31,7 @@ import { DeleteOggetto } from './dialog/delete-oggetto/delete-oggetto';
 import { ConfirmDialog } from './component/confirm-dialog/confirm-dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { NotFound } from './component/not-found/not-found';
+import {MatTooltipModule} from '@angular/material/tooltip';
 
 
 @NgModule({
@@ -65,7 +66,8 @@ import { NotFound } from './component/not-found/not-found';
     RouterModule,
     MatGridListModule,
     MatDividerModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatTooltipModule
   ],
   providers: [
     provideHttpClient((withFetch())),

@@ -17,11 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class Foto implements OnInit{
 
-  response: any;
-  foto : any;
-  msg:string = '';
-  fotoSingola:any;
-  private dialogRef: any;
+  
 
   constructor(private fotoService:FotoBackend, 
     private dialog: MatDialog, 
@@ -31,8 +27,17 @@ export class Foto implements OnInit{
     private auth: Auth,
     private snackBar: MatSnackBar){}
 
+  response: any;
+  foto : any;
+  msg:string = '';
+  fotoSingola:any;
+  private dialogRef: any;
+  isAdmin: any;
+  
+
   ngOnInit(): void {
     console.log("ngOnInit");
+    this.isAdmin = this.auth.getIsAdmin();
     this.fotoService.listFoto()
       .subscribe(resp => {
         this.response = resp;

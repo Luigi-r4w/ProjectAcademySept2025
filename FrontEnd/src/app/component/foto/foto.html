@@ -1,9 +1,18 @@
-<div class="foto-grid">
-  <div class="add-card" (click)="openDialog()">
-    <div class="add-svg-container">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M336 112C336 103.2 328.8 96 320 96C311.2 96 304 103.2 304 112L304 304L112 304C103.2 304 96 311.2 96 320C96 328.8 103.2 336 112 336L304 336L304 528C304 536.8 311.2 544 320 544C328.8 544 336 536.8 336 528L336 336L528 336C536.8 336 544 328.8 544 320C544 311.2 536.8 304 528 304L336 304L336 112z"/></svg>
-    </div>
+<div class="search-container">
+  <div class="search-field">
+    <input matInput placeholder="Search">
+    <i class="fa-solid fa-magnifying-glass"></i>
   </div>
+  
+</div>
+<div class="foto-grid">
+  @if (isAdmin) {
+    <div class="add-card" (click)="openDialog()">
+      <div class="add-svg-container">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 640"><!--!Font Awesome Free v7.0.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M336 112C336 103.2 328.8 96 320 96C311.2 96 304 103.2 304 112L304 304L112 304C103.2 304 96 311.2 96 320C96 328.8 103.2 336 112 336L304 336L304 528C304 536.8 311.2 544 320 544C328.8 544 336 536.8 336 528L336 336L528 336C536.8 336 544 328.8 544 320C544 311.2 536.8 304 528 304L336 304L336 112z"/></svg>
+      </div>
+    </div>
+  }
   @for (f of foto; track f.id) {
     <mat-card class="example-card" (click)="openInfoDialog(f)">
       <mat-card-header>
@@ -17,14 +26,20 @@
       </mat-card-header>
       <mat-card-content>
         <div class="image-container">
-          <img mat-card-image src="http://localhost:8080/images/{{f.oggetto.immagine}}" alt="Photo of a Shiba Inu">
-        </div>
-        <div class="price-section">
-          <span class="price">{{f.oggetto.prezzo | currency:'EUR' }}</span>
+          <img mat-card-image src="http://localhost:8080/images/{{f.oggetto.immagine}}" [alt]="f.oggetto.titolo">
         </div>
       </mat-card-content>
       <mat-card-actions>
-        <button class="add-to-cart-btn" (click)="addToCart(f.id); $event.stopPropagation()">Aggiungi al <i class="fas fa-shopping-cart"></i></button>
+        <button class="add-to-cart-btn" (click)="addToCart(f.id); $event.stopPropagation()" 
+        matTooltip="Aggiungi al carrello" 
+        aria-label="Button that displays a tooltip when focused or hovered over">
+          <span class="material-symbols-outlined">
+            add_shopping_cart
+          </span>
+        </button>
+        <div class="price-section">
+          <span class="price">{{f.oggetto.prezzo | currency:'EUR' }}</span>
+        </div>
       </mat-card-actions>
     </mat-card>
   }
