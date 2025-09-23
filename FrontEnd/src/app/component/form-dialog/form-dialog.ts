@@ -381,9 +381,9 @@ export class FormDialog implements OnInit{
               });
           }
         });
-    } /*else if (this.data.type === 'illustrazione') {
+    } else if (this.data.type === 'illustrazione') {
       console.log("Sono in deleteAction: " + this.oggettoRemove.id)
-      this.illustrazioneService.deleteIllustrazione(this.oggettoRemove)
+      this.illustrazioneService.delete(this.oggettoRemove)
         .subscribe((resp:any) => {
           if (resp.rc){
             this.uploadService.deleteFile(this.oggettoRemove.oggetto.immagine)
@@ -396,7 +396,7 @@ export class FormDialog implements OnInit{
             this.uploadService.deleteFile(this.oggettoRemove.oggetto.immagine);
           }
         });
-    }*/
+    }
   }
   
 }
