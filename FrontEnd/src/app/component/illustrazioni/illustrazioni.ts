@@ -4,6 +4,7 @@ import { FormDialog } from '../form-dialog/form-dialog';
 import { MatDialog } from '@angular/material/dialog';
 import { Upload } from '../../services/upload';
 import { UtenteServices } from '../../services/utenteServices';
+import { Auth } from '../../services/auth/auth';
 
 @Component({
   selector: 'app-illustrazioni',
@@ -19,7 +20,8 @@ export class Illustrazioni implements OnInit{
     private changeDetectorRef:ChangeDetectorRef,
     private dialog: MatDialog,
     private uploadService: Upload,
-    private utenteService:UtenteServices
+    private utenteService:UtenteServices,
+    private auth:Auth
   ){}
   ngOnInit(): void {
     console.log("ngOnInit Illustrazioni");
@@ -106,8 +108,12 @@ export class Illustrazioni implements OnInit{
         }
       })
   }
-
-  openDeleteDialog(id:number){
+  addToCart(id:number){
+    let utenteID = this.auth.getId(); 
+    this.utenteService.addItem(utenteID, id).subscribe();
+    console.log("aggiunto al carrello");
+  }
+  /*openDeleteDialog(id:number){
     var illustrazione:any
     this.service.findById(id).subscribe((resp:any)=>{
        if(resp.rc){
@@ -127,9 +133,7 @@ export class Illustrazioni implements OnInit{
         console.log(resp.msg)
       }
     })
-  }
+  }*/
 
-  onBuy(){
-    //this.utenteService.addItem(X, y);
-  }
+ 
 }
