@@ -1,45 +1,172 @@
-.container_grid{
-    width: stretch;
-    height: stretch;
-    display: grid;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 50% 50%;
+/* CARD */
+.add-card{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 330px;
+  height: 570px;
+  cursor: pointer;
+  border-radius: 24px;
+  transition: all 0.3s ease;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
-.container_tile{
-    width: 100%;
+
+.add-card svg {
+  width: 150px; /* imposta larghezza */
+  height: 150px; /* imposta altezza */
+  fill: #bbbbbb; /* colore dell'icona */
 }
+
 .example-card{
-    height: 100%;
-    width: 80%;
+  max-width: 330px;
+  height: 570px;
+  cursor: pointer;
+  border-radius: 24px;
+  opacity: 1;
+  transition: all 0.3s ease;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
 }
-.header{
-    align-content: center;
-    text-align: center;
-    align-self:center;
-    max-height: 20%;
+
+.example-card:hover,
+.add-card:hover{
+  opacity: 0.8;
+  transform: translateY(-5px);
 }
-.image{
-    max-height: 50%;
-    max-width:80%;
-    align-self: center;
-    width:min-content;
-    
+
+.example-card:active,
+.add-card:hover{
+  opacity: 0.6;
 }
-.title{
-    align-self:center;
-    text-align:center;
-    font-weight: bold;
-    font-size: 20px;
+
+/* INSERT BUTTON */
+.example-button-row {
+  max-width: 600px;
 }
-.author{
-    font-weight: bold;
-    font-size: 16px;
+
+.example-button-row .mat-mdc-button-base {
+  margin: 8px 8px 8px 0;
 }
-.description{
-    text-align: center;
-    height: 20%;
+
+mat-card-header{
+  padding: 24px 24px 16px 24px;
+  position: relative;
+  display: flex;
+  justify-content: center;
 }
-.button{
-    align-self: center;
-    height: 10%;
+
+.card-info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
+
+mat-card-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: black;
+  margin: 0 0 1px 0;
+}
+
+.modify-image-container{
+  position: absolute;
+  right: 20px;
+  top: 22px;
+  display: flex;
+}
+.modify-image-container i{
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.modify-image-container i:hover{
+  color: #6a6969;
+  transform: scale(1.1);
+}
+
+.modify-image-container i:active{
+  color: #a8a8a8;
+}
+
+
+/* GRID */
+.foto-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 20px; /* spazio tra gli elementi (opzionale) */
+}
+
+mat-card-content{
+  display: flex;
+  flex-direction: column;
+}
+
+.image-container{
+  margin: 0px 15px 20px 15px;
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  height: 350px;
+  box-shadow: 
+  0 1px 3px rgba(0, 0, 0, 0.12),
+  0 1px 2px rgba(0, 0, 0, 0.24),
+  0 4px 8px rgba(0, 0, 0, 0.08),
+  0 8px 16px rgba(0, 0, 0, 0.06);
+  transition: all 0.3s ease;
+}
+
+.image-container:hover{
+  box-shadow: 
+    0 4px 6px rgba(0, 0, 0, 0.12),
+    0 8px 16px rgba(0, 0, 0, 0.16),
+    0 16px 32px rgba(0, 0, 0, 0.12),
+    0 32px 64px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+}
+
+
+.image-container img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.price-section {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.price {
+  font-size: 1.3rem;
+  font-weight: 800;
+  color: #808080;
+  margin: 0;
+}
+
+mat-card-actions{
+  display: flex;
+  flex-direction: column;
+}
+
+.add-to-cart-btn {
+  padding: 14px 20px;
+  margin-top: 6px;
+  background: #e0e0e0;
+  border: none;
+  border-radius: 12px;
+  color: #333;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.add-to-cart-btn:hover{
+  background-color: #007bff; 
+  color: #fff; 
+  box-shadow: 0px 0px 20px rgba(0, 123, 255, 0.6); 
+}
+

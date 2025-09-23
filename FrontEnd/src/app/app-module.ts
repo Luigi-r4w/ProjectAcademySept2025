@@ -30,6 +30,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { DeleteOggetto } from './dialog/delete-oggetto/delete-oggetto';
 import { ConfirmDialog } from './component/confirm-dialog/confirm-dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { NotFound } from './component/not-found/not-found';
 
 
 @NgModule({
@@ -46,7 +47,9 @@ import {MatSnackBarModule} from '@angular/material/snack-bar';
     InfoDialog,
     Illustrazioni,
     DeleteOggetto,
-    ConfirmDialog
+    foto,
+    ConfirmDialog,
+    NotFound
   ],
   imports: [
     BrowserModule,
