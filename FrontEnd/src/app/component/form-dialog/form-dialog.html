@@ -1,4 +1,10 @@
-<h2 mat-dialog-title>Aggiungi una nuova foto</h2>
+@if (data.type == "foto") {
+  <h2 mat-dialog-title>Aggiungi una nuova foto</h2>
+} @else if (data.type == "disegno") {
+  <h2 mat-dialog-title>Aggiungi un nuovo disegno</h2>
+} @else if (data.type == "illustrazione") {
+  <h2 mat-dialog-title>Aggiungi una nuova illustrazione</h2>
+}
 <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
   <mat-dialog-content class="mat-typography">
     <!-- TITOLO -->
