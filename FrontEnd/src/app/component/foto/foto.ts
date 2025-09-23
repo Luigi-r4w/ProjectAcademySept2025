@@ -3,6 +3,9 @@ import { FotoBackend } from '../../services/foto-backend';
 import { MatDialog } from '@angular/material/dialog';
 import { FormDialog } from '../form-dialog/form-dialog';
 import { Upload } from '../../services/upload';
+import { InfoDialog } from '../info-dialog/info-dialog';
+import { UtenteServices } from '../../services/utenteServices';
+import { Auth } from '../../services/auth/auth';
 
 @Component({
   selector: 'app-foto',
@@ -18,7 +21,12 @@ export class Foto implements OnInit{
   fotoSingola:any;
   private dialogRef: any;
 
-  constructor(private fotoService:FotoBackend, private dialog: MatDialog, private uploadService: Upload, private cdr: ChangeDetectorRef){}
+  constructor(private fotoService:FotoBackend, 
+    private dialog: MatDialog, 
+    private uploadService: Upload, 
+    private cdr: ChangeDetectorRef,
+    private utenteService: UtenteServices,
+    private auth: Auth){}
 
   ngOnInit(): void {
     console.log("ngOnInit");
@@ -107,6 +115,22 @@ export class Foto implements OnInit{
         }
       });
     })
+  }
+  openInfoDialog(foto:any){
+      this.dialog.open(InfoDialog, {
+        width: '70vw',
+        maxWidth: '70vw',
+        height: '80vh',
+        enterAnimationDuration: '300ms',
+        exitAnimationDuration: '300ms',
+        data: foto 
+      })
+  }
+
+  addToCart(id:number){
+    let utenteID = this.auth.getId(); 
+    this.utenteService.addItem(utenteID, id).subscribe();
+    console.log("aggiunto al carrello");
   }
 
 }

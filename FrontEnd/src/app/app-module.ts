@@ -25,6 +25,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { FormDialog } from './component/form-dialog/form-dialog';
 import { Illustrazioni } from './component/illustrazioni/illustrazioni'
 import { Disegni } from './component/disegni/disegni';
+import { InfoDialog } from './component/info-dialog/info-dialog';
+import {MatDividerModule} from '@angular/material/divider';
 import { DeleteOggetto } from './dialog/delete-oggetto/delete-oggetto';
 import { NotFound } from './component/not-found/not-found';
 
@@ -40,6 +42,7 @@ import { NotFound } from './component/not-found/not-found';
     Utente,
     Login,
     Disegni,
+    InfoDialog,
     Illustrazioni,
     DeleteOggetto,
     NotFound
@@ -57,7 +60,8 @@ import { NotFound } from './component/not-found/not-found';
     MatInputModule,
     MatCheckboxModule,
     RouterModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDividerModule
   ],
   providers: [
     provideHttpClient((withFetch())),

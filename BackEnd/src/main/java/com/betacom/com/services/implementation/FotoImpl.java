@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.betacom.com.dto.FotoDTO;
 import com.betacom.com.exception.AcademyException;
@@ -42,7 +43,8 @@ public class FotoImpl implements IFotoServices{
 						.oggetto(Utilities.buildOggettoDTO(f))
 				.build()).collect(Collectors.toList());
 	}
-
+	
+	@Transactional (rollbackFor = Exception.class)
 	@Override
 	public void createFoto(FotoReq req) throws AcademyException {
 		log.debug("createFoto: " + req);
@@ -70,7 +72,8 @@ public class FotoImpl implements IFotoServices{
 		
 		fotoR.save(foto);
 	}
-
+	
+	@Transactional (rollbackFor = Exception.class)
 	@Override
 	public void deleteFoto(FotoReq req) throws AcademyException {
 		log.debug("deleteFoto: " + req);
@@ -83,7 +86,8 @@ public class FotoImpl implements IFotoServices{
 		fotoR.delete(foto.get());
 		
 	}
-
+	
+	@Transactional (rollbackFor = Exception.class)
 	@Override
 	public void updateFoto(FotoReq req) throws AcademyException {
 		log.debug("updateFoto: " + req);
@@ -97,7 +101,7 @@ public class FotoImpl implements IFotoServices{
 		
 		foto = Utilities.modificaOggetto(foto, req);
 		
-		if(req.getDevice() != null && req.getDevice().isBlank())
+		if(req.getDevice() != null)
 			foto.setDevice(req.getDevice());
 		
 		if(req.getWidthResolution() != null)

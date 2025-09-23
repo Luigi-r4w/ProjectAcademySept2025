@@ -1,0 +1,34 @@
+<!-- image-dialog.component.html -->
+<div class="dialog-container">
+  <mat-dialog-actions>
+    <i class="fa-solid fa-circle-xmark" mat-dialog-close></i>
+  </mat-dialog-actions>
+  <!-- Colonna sinistra con immagine -->
+  <div class="dialog-left">
+    <img src="http://localhost:8080/images/{{foto.oggetto.immagine}}" [alt]="foto.oggetto.title">
+  </div>
+  <!-- Colonna destra con scroll -->
+  <div class="dialog-right">
+    <!-- Toggle -->
+     <div class="dialog-right-header">
+      <div class="ai-toggle-container">
+          <span class="ai-label">AI</span>
+          <div class="toggle-switch" [class.active]="foto.oggetto.isAI">
+              <div class="toggle-slider"></div>
+          </div>
+      </div>
+      <h1 class="title">{{ foto.oggetto.titolo }}</h1>
+     </div>
+    
+    <div class="description">
+      <b>Descrizione:</b>
+      <p>{{ foto.oggetto.descrizione }}</p>
+    </div>
+    <p><b>Autore:</b> {{ foto.oggetto.autore }}</p>
+    <p><b>Data creazione:</b> {{ foto.oggetto.dataCreazione | date:'dd/MM/yyyy'}}</p>
+    <p><b>Dimensione:</b> {{ foto.oggetto.dimensione }}</p>
+    <p><b>Device:</b> {{ foto.device }}</p>
+    <p><b>Risoluzione:</b> {{ foto.widthResolution }} × {{ foto.heightResolution }}</p>
+    <p><b>Prezzo:</b> {{ foto.oggetto.prezzo | currency:'EUR' }}</p>
+  </div>
+</div>
