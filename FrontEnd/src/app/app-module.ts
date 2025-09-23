@@ -28,6 +28,8 @@ import { Disegni } from './component/disegni/disegni';
 import { InfoDialog } from './component/info-dialog/info-dialog';
 import {MatDividerModule} from '@angular/material/divider';
 import { DeleteOggetto } from './dialog/delete-oggetto/delete-oggetto';
+import { ConfirmDialog } from './component/confirm-dialog/confirm-dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
 
 
 @NgModule({
@@ -43,7 +45,8 @@ import { DeleteOggetto } from './dialog/delete-oggetto/delete-oggetto';
     Disegni,
     InfoDialog,
     Illustrazioni,
-    DeleteOggetto
+    DeleteOggetto,
+    ConfirmDialog
   ],
   imports: [
     BrowserModule,
@@ -59,7 +62,8 @@ import { DeleteOggetto } from './dialog/delete-oggetto/delete-oggetto';
     MatCheckboxModule,
     RouterModule,
     MatGridListModule,
-    MatDividerModule
+    MatDividerModule,
+    MatSnackBarModule
   ],
   providers: [
     provideHttpClient((withFetch())),

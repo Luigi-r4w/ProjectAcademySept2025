@@ -15,7 +15,7 @@
       <div *ngIf="carrello.length > 0">
         <div class="cart-item" *ngFor="let item of carrello; let i = index">
           <div class="card">
-            <img [src]="item.immagine" alt="{{ item.titolo }}" class="item-image"/>
+            <img src="http://localhost:8080/images/{{item.immagine}}" alt="{{ item.titolo }}" class="item-image"/>
             <div class="item-details">
               <h3>{{ item.titolo }}</h3>
               <p>{{ item.descrizione }}</p>
