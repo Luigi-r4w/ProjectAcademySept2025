@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, inject, Inject, OnInit } from '@angular/core';
 import { Upload } from '../../services/upload';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Foto } from '../foto/foto';
 import { FotoBackend } from '../../services/foto-backend';
 import { MAT_DIALOG_DATA, MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { BackendDisegnoService } from '../../services/backend-disegno-service';
@@ -246,26 +245,18 @@ export class FormDialog implements OnInit{
     console.log("onDelete");
     const enterAnimationDuration = '500ms';
     const exitAnimationDuration = '500ms';
-    //const id = data.id;
-    //const tipo = data.categoria;
-    console.log("id per il delete: ", id);
-    console.log("tipo per il delete: ", tipo);
-    // recupero i dati della foto che ho cliccato
+
     if (tipo === 'foto') {
       this.fotoService.getFotoByID(id).subscribe((resp:any) => {
-        console.log("resp: " + resp.dati.oggetto.titolo);
         if(resp.rc){
           this.oggettoRemove = resp.dati
-          console.log("titolo per il delete: " + resp.dati.oggetto.titolo)
           this.cdr.detectChanges();
         }
         else{
           console.log(resp.msg);
           this.cdr.detectChanges();
         }
-
-        console.log("titolo per il delete 2: " + this.oggettoRemove.oggetto.titolo)
-
+        
         const dialogRef = this.dialogDelete.open(DeleteOggetto, {
           width: '250px',
           enterAnimationDuration,
@@ -285,18 +276,14 @@ export class FormDialog implements OnInit{
       })
     } else if (tipo === 'disegno'){
       this.disegnoService.findDisegnoByID(id).subscribe((resp:any) => {
-        console.log("resp: " + resp.rc);
         if(resp.rc){
           this.oggettoRemove = resp.dati
-          console.log("titolo per il delete: " + resp.dati.oggetto.titolo)
           this.cdr.detectChanges();
         }
         else{
           console.log(resp.msg);
           this.cdr.detectChanges();
         }
-
-        console.log("titolo per il delete 2: " + this.oggettoRemove.oggetto.titolo)
 
         const dialogRef = this.dialogDelete.open(DeleteOggetto, {
           width: '250px',
@@ -317,18 +304,14 @@ export class FormDialog implements OnInit{
       })
     } else if (tipo === 'illustrazione'){
       this.illustrazioneService.findById(id).subscribe((resp:any) => {
-        console.log("resp: " + resp.rc);
         if(resp.rc){
           this.oggettoRemove = resp.dati
-          console.log("titolo per il delete: " + resp.dati.oggetto.titolo)
           this.cdr.detectChanges();
         }
         else{
           console.log(resp.msg);
           this.cdr.detectChanges();
         }
-
-        console.log("titolo per il delete 2: " + this.oggettoRemove.oggetto.titolo)
 
         const dialogRef = this.dialogDelete.open(DeleteOggetto, {
           width: '250px',
@@ -363,12 +346,9 @@ export class FormDialog implements OnInit{
               .then(() => {
                 window.location.reload();
               });
-
-            this.uploadService.deleteFile(this.oggettoRemove.oggetto.immagine);
           }
         });
     } else if (this.data.type === 'disegno') {
-      console.log("Sono in deleteAction: " + this.oggettoRemove.id)
       this.disegnoService.deleteDisegno(this.oggettoRemove)
         .subscribe((resp:any) => {
           if (resp.rc){
@@ -382,7 +362,6 @@ export class FormDialog implements OnInit{
           }
         });
     } else if (this.data.type === 'illustrazione') {
-      console.log("Sono in deleteAction: " + this.oggettoRemove.id)
       this.illustrazioneService.delete(this.oggettoRemove)
         .subscribe((resp:any) => {
           if (resp.rc){
@@ -392,8 +371,6 @@ export class FormDialog implements OnInit{
               .then(() => {
                 window.location.reload();
               });
-
-            this.uploadService.deleteFile(this.oggettoRemove.oggetto.immagine);
           }
         });
     }

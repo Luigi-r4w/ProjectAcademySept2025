@@ -42,7 +42,7 @@ export class Disegni implements OnInit{
 
   // to open insert form dialog
   openDialog() {
-    // apro il dialog (modal) e gli passo la tipologia dell'oggetto (nel mio caso 'foto')
+    // apro il dialog (modal) e gli passo la tipologia dell'oggetto (nel mio caso 'disegno')
     this.dialogRef = this.dialog.open(FormDialog, {
       width: '400px',
       data: { type: 'disegno' }
@@ -58,7 +58,7 @@ export class Disegni implements OnInit{
             window.location.reload(); // se tutto va bene refresh pagina
           }
           else {
-            // se l'insert di foto non va a buon fine elimino la foto che avevo caricato
+            // se l'insert di disegno non va a buon fine elimino il disegno che avevo caricato
             this.uploadService.deleteFile(result.immagine).subscribe((resp:any) => {
             console.log(resp.msg);
           })
@@ -73,7 +73,7 @@ export class Disegni implements OnInit{
 
   openModifyDialog(id:number){
     console.log("id: ", id);
-    // recupero i dati della foto che ho cliccato
+    // recupero i dati del disegno che ho cliccato
     this.disegnoService.findDisegnoByID(id).subscribe((resp:any) => {
       if(resp.rc){
         this.disegnoSingolo = resp.dati
@@ -85,7 +85,7 @@ export class Disegni implements OnInit{
         this.cdr.detectChanges();
       }
 
-      // apro il dialog (modal) e gli passo la tipologia dell'oggetto (nel mio caso 'foto')
+      // apro il dialog (modal) e gli passo la tipologia dell'oggetto (nel mio caso 'disegno')
       this.dialogRef = this.dialog.open(FormDialog, {
         width: '400px',
         data: { type: 'disegno', oggetto : this.disegnoSingolo }
@@ -104,14 +104,14 @@ export class Disegni implements OnInit{
               window.location.reload(); // se tutto va bene refresh pagina
             }
             else {
-              // se l'update di foto non va a buon fine elimino la foto che avevo caricato
+              // se l'update di disegno non va a buon fine elimino il disegno che avevo caricato
               this.uploadService.deleteFile(result.immagine).subscribe((resp:any) => {
-              console.log(resp.msg);
-            })
+                console.log(resp.msg);
+              })
 
-            this.msg = resp.msg;
-            console.log(this.msg);
-            }
+              this.msg = resp.msg;
+              console.log(this.msg);
+              }
           });
         }
       });
