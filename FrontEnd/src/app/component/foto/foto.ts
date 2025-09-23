@@ -107,11 +107,6 @@ export class Foto implements OnInit{
         }
       });
     })
-
-    
-
-
-    
   }
 
 }
