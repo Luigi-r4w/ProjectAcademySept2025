@@ -4,6 +4,8 @@ import { FormDialog } from '../form-dialog/form-dialog';
 import { Upload } from '../../services/upload';
 import { BackendDisegnoService } from '../../services/backend-disegno-service';
 import { Auth } from '../../services/auth/auth';
+import { InfoDialog } from '../info-dialog/info-dialog';
+import { UtenteServices } from '../../services/utenteServices';
 
 @Component({
   selector: 'app-disegni',
@@ -23,7 +25,9 @@ export class Disegni implements OnInit{
   constructor(private disegnoService:BackendDisegnoService,
     private dialog: MatDialog,
     private uploadService: Upload,
-    private cdr: ChangeDetectorRef){}
+    private cdr: ChangeDetectorRef,
+    private utenteService: UtenteServices,
+    private auth: Auth){}
 
   ngOnInit(): void {
     console.log("ngOnInit");
@@ -113,5 +117,22 @@ export class Disegni implements OnInit{
       });
     })   
   }
+
+  openInfoDialog(disegno:any){
+        this.dialog.open(InfoDialog, {
+          width: '70vw',
+          maxWidth: '70vw',
+          height: '80vh',
+          enterAnimationDuration: '300ms',
+          exitAnimationDuration: '300ms',
+          data: disegno 
+        })
+    }
+  
+    addToCart(id:number){
+      let utenteID = this.auth.getId(); 
+      this.utenteService.addItem(utenteID, id).subscribe();
+      console.log("aggiunto al carrello");
+    }
 }
 
