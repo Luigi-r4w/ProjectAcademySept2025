@@ -5,7 +5,7 @@
   </mat-dialog-actions>
   <!-- Colonna sinistra con immagine -->
   <div class="dialog-left">
-    <img src="http://localhost:8080/images/{{foto.oggetto.immagine}}" [alt]="foto.oggetto.title">
+    <img src="http://localhost:8080/images/{{obj.oggetto.immagine}}" [alt]="obj.oggetto.title">
   </div>
   <!-- Colonna destra con scroll -->
   <div class="dialog-right">
@@ -13,22 +13,34 @@
      <div class="dialog-right-header">
       <div class="ai-toggle-container">
           <span class="ai-label">AI</span>
-          <div class="toggle-switch" [class.active]="foto.oggetto.isAI">
+          <div class="toggle-switch" [class.active]="obj.oggetto.isAI">
               <div class="toggle-slider"></div>
           </div>
       </div>
-      <h1 class="title">{{ foto.oggetto.titolo }}</h1>
+      <h1 class="title">{{ obj.oggetto.titolo }}</h1>
      </div>
     
     <div class="description">
       <b>Descrizione:</b>
-      <p>{{ foto.oggetto.descrizione }}</p>
+      <p>{{ obj.oggetto.descrizione }}</p>
     </div>
-    <p><b>Autore:</b> {{ foto.oggetto.autore }}</p>
-    <p><b>Data creazione:</b> {{ foto.oggetto.dataCreazione | date:'dd/MM/yyyy'}}</p>
-    <p><b>Dimensione:</b> {{ foto.oggetto.dimensione }}</p>
-    <p><b>Device:</b> {{ foto.device }}</p>
-    <p><b>Risoluzione:</b> {{ foto.widthResolution }} × {{ foto.heightResolution }}</p>
-    <p><b>Prezzo:</b> {{ foto.oggetto.prezzo | currency:'EUR' }}</p>
+    <p><b>Autore:</b> {{ obj.oggetto.autore }}</p>
+    <p><b>Data creazione:</b> {{ obj.oggetto.dataCreazione | date:'dd/MM/yyyy'}}</p>
+    <p><b>Dimensione:</b> {{ obj.oggetto.dimensione }}</p>
+    
+    @if (obj.oggetto.categoria == 'disegno') {
+      <p><b>Supporto:</b> {{ obj.supporto }}</p>
+      <p><b>Tecnica:</b> {{ obj.tecnica }}</p>
+    }
+    @else if (obj.oggetto.categoria == 'foto') {
+      <p><b>Device:</b> {{ obj.device }}</p>
+      <p><b>Risoluzione:</b> {{ obj.widthResolution }} × {{ obj.heightResolution }}</p>
+    }
+    @else if (obj.oggetto.categoria == 'illustrazione') {
+      <p><b>UrlIllustrazione:</b> {{ obj.urlIllustrazione }}</p>
+      <p><b>Stile:</b> {{ obj.stile }}</p>
+      <p><b>DataIllustrazione:</b> {{ obj.dataIllustrazione }}</p>
+    }
+    <p><b>Prezzo:</b> {{ obj.oggetto.prezzo | currency:'EUR' }}</p>
   </div>
 </div>

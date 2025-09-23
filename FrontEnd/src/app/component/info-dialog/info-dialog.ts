@@ -8,7 +8,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrl: './info-dialog.css'
 })
 export class InfoDialog {
-  constructor(@Inject(MAT_DIALOG_DATA) public foto: any,
+  constructor(@Inject(MAT_DIALOG_DATA) public obj: any,
   private dialogRef: MatDialogRef<InfoDialog>){}
 
   onClose(){
