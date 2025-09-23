@@ -1,0 +1,227 @@
+/* image-dialog.component.css */
+.dialog-container {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  background: white;
+  position: relative;
+}
+
+mat-dialog-actions{
+  position: absolute;
+  top: 17px;
+  right: 10px;
+  font-size: 22px;
+  z-index: 999;
+  display: flex;
+}
+
+mat-dialog-actions i {
+  cursor: pointer;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+mat-dialog-actions i:hover{
+  color: #6a6969;
+  transform: scale(1.1);
+}
+
+mat-dialog-actions i:active{
+  color: #a8a8a8;
+}
+
+.dialog-left {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 35px;
+}
+
+.dialog-left img {
+  max-width: 85%;
+  max-height: 85%;
+  object-fit: contain;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.dialog-left img:hover {
+  transform: scale(1.02);
+}
+
+.dialog-right {
+  flex: 1;
+  padding: 50px 70px 60px 0px;
+  overflow-y: auto;
+  position: relative;
+}
+
+.title {
+  margin-bottom: 24px;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: black;
+  background-clip: text;
+  line-height: 1.2;
+}
+
+.author {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: black;
+}
+
+.description {
+  margin: 20px 0;
+  padding: 20px;
+  background: rgba(79, 79, 79, 0.031);
+  border-radius: 12px;
+  border-left: 4px solid black;
+}
+
+.description b {
+  color: #444;
+  font-weight: 600;
+  font-size: 1.1em;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.description p {
+  color: #666;
+  line-height: 1.6;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Stili per i campi informativi */
+p {
+  margin: 16px 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #444;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(102, 126, 234, 0.1);
+}
+
+p:last-child {
+  border-bottom: none;
+}
+
+p b {
+  font-weight: 600;
+  color: #333;
+  min-width: 120px;
+  font-size: 0.95em;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Scrollbar personalizzata */
+.dialog-right::-webkit-scrollbar {
+  width: 8px;
+}
+
+.dialog-right::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.dialog-right::-webkit-scrollbar-thumb {
+  background: #444;
+  border-radius: 10px;
+}
+
+.dialog-right::-webkit-scrollbar-thumb:hover {
+  background: #8f8f8f;;
+}
+
+/* Animazioni */
+.dialog-right > * {
+  animation: slideInRight 0.7s ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animazioni */
+.dialog-left > * {
+  animation: slideInLeft 0.7s ease-out;
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0px);
+  }
+}
+
+.dialog-right-header{
+  position: relative;
+}
+
+/* TOGGLE */
+.ai-toggle-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    position: absolute;
+    bottom: 9px;
+    right: 45px
+}
+
+.ai-label {
+    font-size: 14px;
+    font-weight: 500;
+    color: #666;
+    margin: 0;
+}
+
+.toggle-switch {
+    position: relative;
+    width: 50px;
+    height: 24px;
+    background: #ccc;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+}
+
+.toggle-switch.active {
+    background: #007bff;
+}
+
+.toggle-slider {
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background: white;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.toggle-switch.active .toggle-slider {
+    transform: translateX(26px);
+}
+
+
+

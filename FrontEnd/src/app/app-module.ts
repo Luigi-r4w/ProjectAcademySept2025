@@ -26,6 +26,8 @@ import { FormDialog } from './component/form-dialog/form-dialog';
 import { Illustrazioni } from './component/illustrazioni/illustrazioni'
 import { Disegni } from './component/disegni/disegni';
 import { Disegno } from './component/disegno/disegno';
+import { InfoDialog } from './component/info-dialog/info-dialog';
+import {MatDividerModule} from '@angular/material/divider';
 
 
 @NgModule({
@@ -40,7 +42,8 @@ import { Disegno } from './component/disegno/disegno';
     Login,
     Disegni,
     Disegno,
-    Illustrazioni
+    Illustrazioni,
+    InfoDialog
   ],
   imports: [
     BrowserModule,
@@ -55,7 +58,8 @@ import { Disegno } from './component/disegno/disegno';
     MatInputModule,
     MatCheckboxModule,
     RouterModule,
-    MatGridListModule
+    MatGridListModule,
+    MatDividerModule
   ],
   providers: [
     provideHttpClient((withFetch())),
