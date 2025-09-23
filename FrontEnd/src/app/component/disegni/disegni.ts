@@ -6,6 +6,8 @@ import { BackendDisegnoService } from '../../services/backend-disegno-service';
 import { Auth } from '../../services/auth/auth';
 import { InfoDialog } from '../info-dialog/info-dialog';
 import { UtenteServices } from '../../services/utenteServices';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ConfirmDialog } from '../confirm-dialog/confirm-dialog';
 
 @Component({
   selector: 'app-disegni',
@@ -27,7 +29,8 @@ export class Disegni implements OnInit{
     private uploadService: Upload,
     private cdr: ChangeDetectorRef,
     private utenteService: UtenteServices,
-    private auth: Auth){}
+    private auth: Auth,
+    private snackBar: MatSnackBar){}
 
   ngOnInit(): void {
     console.log("ngOnInit");
@@ -129,10 +132,24 @@ export class Disegni implements OnInit{
         })
     }
   
-    addToCart(id:number){
+  addToCart(id:number){
       let utenteID = this.auth.getId(); 
-      this.utenteService.addItem(utenteID, id).subscribe();
-      console.log("aggiunto al carrello");
+      if (this.auth.isAutentificated()){
+        this.utenteService.addItem(utenteID, id).subscribe();
+        this.snackBar.open('Articolo aggiunto!', 'Chiudi', {
+          duration: 2000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+          panelClass: ['custom-snackbar']
+        });
+      }
+      else {
+        this.dialog.open(ConfirmDialog, {
+            width: '300px',
+            enterAnimationDuration: '500ms',
+            exitAnimationDuration: '500ms'
+          });
+      }
     }
 }
 

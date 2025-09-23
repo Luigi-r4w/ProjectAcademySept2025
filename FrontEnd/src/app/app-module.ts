@@ -47,7 +47,6 @@ import { NotFound } from './component/not-found/not-found';
     InfoDialog,
     Illustrazioni,
     DeleteOggetto,
-    foto,
     ConfirmDialog,
     NotFound
   ],
