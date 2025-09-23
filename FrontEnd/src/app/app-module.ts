@@ -26,6 +26,7 @@ import { FormDialog } from './component/form-dialog/form-dialog';
 import { Illustrazioni } from './component/illustrazioni/illustrazioni'
 import { Disegni } from './component/disegni/disegni';
 import { DeleteOggetto } from './dialog/delete-oggetto/delete-oggetto';
+import { NotFound } from './component/not-found/not-found';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { DeleteOggetto } from './dialog/delete-oggetto/delete-oggetto';
     Login,
     Disegni,
     Illustrazioni,
-    DeleteOggetto
+    DeleteOggetto,
+    NotFound
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { FormDialog } from '../form-dialog/form-dialog';
 import { Upload } from '../../services/upload';
 import { BackendDisegnoService } from '../../services/backend-disegno-service';
+import { Auth } from '../../services/auth/auth';
 
 @Component({
   selector: 'app-disegni',
@@ -18,7 +19,11 @@ export class Disegni implements OnInit{
   disegnoSingolo:any;
   private dialogRef: any;
 
-  constructor(private disegnoService:BackendDisegnoService, private dialog: MatDialog, private uploadService: Upload, private cdr: ChangeDetectorRef){}
+
+  constructor(private disegnoService:BackendDisegnoService,
+    private dialog: MatDialog,
+    private uploadService: Upload,
+    private cdr: ChangeDetectorRef){}
 
   ngOnInit(): void {
     console.log("ngOnInit");
