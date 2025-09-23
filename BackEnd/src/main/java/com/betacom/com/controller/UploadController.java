@@ -57,6 +57,7 @@ public class UploadController {
 		 try {
 			 Path filePath = Path.of(uploadDir).resolve(filename);
 		     Files.deleteIfExists(filePath);
+		     log.debug("filePath: " + filePath);
 		     r.setRc(true);
 		     r.setMsg("file eliminato");
 		} catch (IOException e) {

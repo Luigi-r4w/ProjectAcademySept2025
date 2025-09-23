@@ -357,11 +357,14 @@ export class FormDialog implements OnInit{
       this.fotoService.deleteFoto(this.oggettoRemove)
         .subscribe((resp:any) => {
           if (resp.rc){
-            console.log("rc: " + resp.rc);
+            this.uploadService.deleteFile(this.oggettoRemove.oggetto.immagine)
+              .subscribe();
             this.routing.navigate(["/foto"])
               .then(() => {
                 window.location.reload();
               });
+
+            this.uploadService.deleteFile(this.oggettoRemove.oggetto.immagine);
           }
         });
     } else if (this.data.type === 'disegno') {
@@ -369,6 +372,9 @@ export class FormDialog implements OnInit{
       this.disegnoService.deleteDisegno(this.oggettoRemove)
         .subscribe((resp:any) => {
           if (resp.rc){
+            console.log("Rimozione oggetto dalla cartella: " + this.oggettoRemove.oggetto.immagine)
+            this.uploadService.deleteFile(this.oggettoRemove.oggetto.immagine)
+              .subscribe();
             this.routing.navigate(["/disegni"])
               .then(() => {
                 window.location.reload();
@@ -380,10 +386,14 @@ export class FormDialog implements OnInit{
       this.illustrazioneService.deleteIllustrazione(this.oggettoRemove)
         .subscribe((resp:any) => {
           if (resp.rc){
+            this.uploadService.deleteFile(this.oggettoRemove.oggetto.immagine)
+              .subscribe();
             this.routing.navigate(["/illustrazioni"])
               .then(() => {
                 window.location.reload();
               });
+
+            this.uploadService.deleteFile(this.oggettoRemove.oggetto.immagine);
           }
         });
     }*/
