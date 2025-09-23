@@ -25,7 +25,7 @@ import {MatDialogModule} from '@angular/material/dialog';
 import { FormDialog } from './component/form-dialog/form-dialog';
 import { Illustrazioni } from './component/illustrazioni/illustrazioni'
 import { Disegni } from './component/disegni/disegni';
-import { Disegno } from './component/disegno/disegno';
+import { DeleteOggetto } from './dialog/delete-oggetto/delete-oggetto';
 
 
 @NgModule({
@@ -39,8 +39,8 @@ import { Disegno } from './component/disegno/disegno';
     Utente,
     Login,
     Disegni,
-    Disegno,
-    Illustrazioni
+    Illustrazioni,
+    DeleteOggetto
   ],
   imports: [
     BrowserModule,

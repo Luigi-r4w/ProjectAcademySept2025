@@ -81,5 +81,6 @@
   <mat-dialog-actions align="end">
     <button matButton mat-dialog-close>Annulla</button>
     <button matButton cdkFocusInitial type="submit" [disabled]="!uploadForm.valid">Carica</button>
+    <button mat-raised-button type="button" (click)="onDelete(data?.type, data.oggetto?.id)">Delete</button>
   </mat-dialog-actions>
 </form> 

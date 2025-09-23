@@ -23,6 +23,10 @@ export class FotoBackend {
     console.log("update");
     return this.http.put(this.url + 'update', body)
   }
+  deleteFoto(body:{}){
+    console.log("delete");
+    return this.http.post(this.url + 'delete', body)
+  }
 }
 
 
