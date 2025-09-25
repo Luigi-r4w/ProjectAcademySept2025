@@ -8,6 +8,8 @@ import { InfoDialog } from '../info-dialog/info-dialog';
 import { UtenteServices } from '../../services/utenteServices';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmDialog } from '../confirm-dialog/confirm-dialog';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-disegni',
@@ -23,6 +25,7 @@ export class Disegni implements OnInit{
   disegnoSingolo:any;
   private dialogRef: any;
   isAdmin: any;
+  tit:string = '';
 
   constructor(private disegnoService:BackendDisegnoService,
     private dialog: MatDialog,
