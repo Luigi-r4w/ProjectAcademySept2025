@@ -6,6 +6,7 @@ import { Upload } from '../../services/upload';
 import { UtenteServices } from '../../services/utenteServices';
 import { Auth } from '../../services/auth/auth';
 import { InfoDialog } from '../info-dialog/info-dialog';
+import { debounceTime } from 'rxjs';
 
 @Component({
   selector: 'app-illustrazioni',
@@ -17,6 +18,7 @@ export class Illustrazioni implements OnInit{
   response:any;
   illustrazioni:any;
   msg:string = '';
+  isAdmin: any;
   constructor(private service:BackendIllustrazioneService,
     private changeDetectorRef:ChangeDetectorRef,
     private dialog: MatDialog,
@@ -26,6 +28,7 @@ export class Illustrazioni implements OnInit{
   ){}
   ngOnInit(): void {
     console.log("ngOnInit Illustrazioni");
+    this.isAdmin = this.auth.getIsAdmin();
     this.checkIllustrazioni();
   }
   checkIllustrazioni():void{
@@ -128,6 +131,5 @@ export class Illustrazioni implements OnInit{
           data: illustrazione 
         })
     }
-
  
 }
