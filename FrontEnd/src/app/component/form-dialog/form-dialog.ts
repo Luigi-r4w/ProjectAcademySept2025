@@ -243,8 +243,8 @@ export class FormDialog implements OnInit{
   
   onDelete(tipo:any, id:number) {
     console.log("onDelete");
-    const enterAnimationDuration = '500ms';
-    const exitAnimationDuration = '500ms';
+    const enterAnimationDuration = '0ms';
+    const exitAnimationDuration = '0ms';
 
     if (tipo === 'foto') {
       this.fotoService.getFotoByID(id).subscribe((resp:any) => {

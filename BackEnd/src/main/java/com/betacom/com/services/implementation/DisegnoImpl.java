@@ -112,5 +112,4 @@ public class DisegnoImpl extends Utilities implements IDisegnoServices{
 				.oggetto(buildOggettoDTO(d))
 				.build();
 	}
-
 }
