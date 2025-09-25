@@ -17,6 +17,7 @@ export class Illustrazioni implements OnInit{
   response:any;
   illustrazioni:any;
   msg:string = '';
+  isAdmin: any;
   constructor(private service:BackendIllustrazioneService,
     private changeDetectorRef:ChangeDetectorRef,
     private dialog: MatDialog,
@@ -26,6 +27,7 @@ export class Illustrazioni implements OnInit{
   ){}
   ngOnInit(): void {
     console.log("ngOnInit Illustrazioni");
+    this.isAdmin = this.auth.getIsAdmin();
     this.checkIllustrazioni();
   }
   checkIllustrazioni():void{

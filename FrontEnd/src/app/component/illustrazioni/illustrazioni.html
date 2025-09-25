@@ -1,8 +1,16 @@
-<div class="add-card" (click)="openInsertDialog()">
-    <div class="add-svg-container">
-        <span class="c-mobile__button__plus fa fa-plus"></span>
-    </div>
+<div class="search-container">
+  <div class="search-field">
+    <input matInput placeholder="Search">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </div>
 </div>
+@if (!isAdmin) {
+    <div class="add-card" (click)="openInsertDialog()">
+      <div class="add-svg-container">
+          <span class="c-mobile__button__plus fa fa-plus"></span>
+      </div>
+    </div>
+}
 <div class="foto-grid">
     @for (illustrazione of illustrazioni; track illustrazione.id){
         <mat-card class="example-card" (click)="openInfoDialog(illustrazione)">
@@ -15,17 +23,23 @@
                     <i class="fa-solid fa-pen"></i>
                 </div>
             </mat-card-header>
-            <mat-card-content>
-                <div class="image-container">
-                    <img mat-card-image src="http://localhost:8080/images/{{illustrazione.oggetto.immagine}}" alt="Photo of a Shiba Inu">
-                </div>
-                <div class="price-section">
-                    <span class="price">{{illustrazione.oggetto.prezzo | currency:'EUR' }}</span>
-                </div>
-            </mat-card-content>
-            <mat-card-actions>
-                <button class="add-to-cart-btn" (click)="addToCart(illustrazione.id); $event.stopPropagation()">Aggiungi al <i class="fas fa-shopping-cart"></i></button>
-            </mat-card-actions>
+             <mat-card-content>
+        <div class="image-container">
+          <img mat-card-image src="http://localhost:8080/images/{{illustrazione.oggetto.immagine}}" [alt]="illustrazione.oggetto.titolo">
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <button class="add-to-cart-btn" (click)="addToCart(illustrazione.id); $event.stopPropagation()" 
+        matTooltip="Aggiungi al carrello" 
+        aria-label="Button that displays a tooltip when focused or hovered over">
+          <span class="material-symbols-outlined">
+            add_shopping_cart
+          </span>
+        </button>
+        <div class="price-section">
+          <span class="price">{{illustrazione.oggetto.prezzo | currency:'EUR' }}</span>
+        </div>
+      </mat-card-actions>
         </mat-card>
     }
 </div>
