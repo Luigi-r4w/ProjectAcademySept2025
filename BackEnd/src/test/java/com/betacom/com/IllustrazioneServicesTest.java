@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import com.betacom.com.controller.IllustrazioneController;
 import com.betacom.com.dto.IllustrazioneDTO;
@@ -19,6 +20,7 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @SpringBootTest
+@DirtiesContext(classMode = DirtiesContext.ClassMode.AFTER_CLASS)
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class IllustrazioneServicesTest {
 	
