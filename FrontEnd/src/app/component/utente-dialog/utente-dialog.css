@@ -1,0 +1,17 @@
+h2[mat-dialog-title] {
+    color: #1976d2;
+    font-size: 1.5rem;
+    text-align: center;
+}
+  
+mat-dialog-actions button:first-child {
+    color: #4caf50;
+    font-size: 1.1rem;
+}
+  
+mat-dialog-actions button:last-child {
+    color: #f44336;
+    font-size: 1.1rem;
+}
+
+  

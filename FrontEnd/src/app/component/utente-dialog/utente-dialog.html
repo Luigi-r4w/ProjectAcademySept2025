@@ -1,0 +1,19 @@
+<h2 mat-dialog-title>Riepilogo Ordine</h2>
+
+<mat-dialog-content>
+  <div *ngIf="data?.carrello?.length > 0">
+    <div *ngFor="let item of data.carrello">
+      <p><strong>{{ item.titolo }}</strong></p>
+      <p>Prezzo: €{{ item.prezzo }}</p>
+    </div>
+
+    <div class="total">
+      <p><strong>Totale: €{{ data.totalAmount | number: '1.2-2' }}</strong></p>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<mat-dialog-actions>
+  <button mat-button (click)="data.onConfirm()">Conferma Acquisto</button>
+  <button mat-button (click)="data.onCancel()">Annulla</button>
+</mat-dialog-actions>

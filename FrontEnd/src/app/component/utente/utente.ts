@@ -2,6 +2,9 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Auth } from '../../services/auth/auth';
 import { UtenteServices } from '../../services/utenteServices';
 import { Router } from '@angular/router';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { UtenteDialog } from '../utente-dialog/utente-dialog';
+import { TyDialog } from '../ty-dialog/ty-dialog';
 
 @Component({
   selector: 'app-utente',
@@ -12,7 +15,7 @@ import { Router } from '@angular/router';
 
 export class Utente implements OnInit {
 
-  constructor(private auth:Auth, private utente:UtenteServices, private router:Router, private cdr: ChangeDetectorRef){}
+  constructor(private auth:Auth, private utente:UtenteServices, private router:Router, private cdr: ChangeDetectorRef,   private dialog: MatDialog  ){}
 
   nome!:string;
   email!:string;
@@ -58,19 +61,47 @@ export class Utente implements OnInit {
     }
   }
 
+  get totalAmount() {
+    return this.carrello.reduce((acc: number, item: any) => acc + item.prezzo, 0);
+  }  
+
   confirmPurchase() {
-    const confirmed = window.confirm('Sei sicuro di voler acquistare questi prodotti?');
-    if(confirmed){
-      this.utente.svuotaCarrello(this.auth.getId()).subscribe((resp: any) => {
-        console.log(resp);
-        if(resp.rc){
-          console.log("cancellazione effettuata");
-          this.ngOnInit();
-        } else{
-          console.log(resp.msg)
-        }
-      })
-    }
+    const dialogRef = this.dialog.open(UtenteDialog, {
+      width: '400px', 
+      data: {
+        carrello: this.carrello,
+        totalAmount: this.totalAmount,
+        onConfirm: () => this.finalizePurchase(dialogRef),
+        onCancel: () => dialogRef.close()
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('Dialogo chiuso', result);
+    });
+  }
+
+  finalizePurchase(dialogRef: MatDialogRef<UtenteDialog, any>) {
+    this.utente.svuotaCarrello(this.auth.getId()).subscribe((resp: any) => {
+      if (resp.rc) {
+        console.log("Acquisto effettuato");
+        dialogRef.close();
+        this.showThankYouMessage();
+      } else {
+        console.log(resp.msg);
+        this.msgEr=resp.msg;
+      }
+    });
+  }
+
+  showThankYouMessage() {
+    const dialogRef = this.dialog.open(TyDialog, {
+      width: '300px',
+    });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.router.navigate(['/home']);
+    });
   }
 
   removeItem(idItem: number) {

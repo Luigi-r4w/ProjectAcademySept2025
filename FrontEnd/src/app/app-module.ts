@@ -32,6 +32,8 @@ import { ConfirmDialog } from './component/confirm-dialog/confirm-dialog';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { NotFound } from './component/not-found/not-found';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { UtenteDialog } from './component/utente-dialog/utente-dialog';
+import { TyDialog } from './component/ty-dialog/ty-dialog';
 
 
 @NgModule({
@@ -49,7 +51,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     Illustrazioni,
     DeleteOggetto,
     ConfirmDialog,
-    NotFound
+    NotFound,
+    UtenteDialog,
+    TyDialog
   ],
   imports: [
     BrowserModule,
