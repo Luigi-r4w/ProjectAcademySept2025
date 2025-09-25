@@ -22,7 +22,7 @@ export class Disegni implements OnInit{
   msg:string = '';
   disegnoSingolo:any;
   private dialogRef: any;
-
+  isAdmin: any;
 
   constructor(private disegnoService:BackendDisegnoService,
     private dialog: MatDialog,
@@ -34,6 +34,7 @@ export class Disegni implements OnInit{
 
   ngOnInit(): void {
     console.log("ngOnInit");
+    this.isAdmin = this.auth.getIsAdmin();
     this.disegnoService.listDisegni()
       .subscribe(resp => {
         this.response = resp;
@@ -152,4 +153,3 @@ export class Disegni implements OnInit{
       }
     }
 }
-
