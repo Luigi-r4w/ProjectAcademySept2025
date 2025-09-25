@@ -1,92 +1,116 @@
-@if (data.type == "foto") {
-  <h2 mat-dialog-title>Aggiungi una nuova foto</h2>
-} @else if (data.type == "disegno") {
-  <h2 mat-dialog-title>Aggiungi un nuovo disegno</h2>
-} @else if (data.type == "illustrazione") {
-  <h2 mat-dialog-title>Aggiungi una nuova illustrazione</h2>
-}
-<form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
-  <mat-dialog-content class="mat-typography">
-    <!-- TITOLO -->
-    <mat-form-field>
-      <mat-label>Titolo</mat-label>
-      <input matInput type="text" formControlName="titolo">
-    </mat-form-field>
-    <!-- DESCRIZIONE -->
-    <mat-form-field>
-      <mat-label>Descrizione</mat-label>
-      <input matInput type="text" formControlName="descrizione">
-    </mat-form-field>
-    <!-- AUTORE -->
-    <mat-form-field>
-      <mat-label>Autore</mat-label>
-      <input matInput type="text" formControlName="autore">
-    </mat-form-field>
-    <!-- DATA CREAZIONE -->
-    <mat-form-field>
-      <mat-label>Data creazione</mat-label>
-      <input matInput type="date" formControlName="dataCreazione">
-    </mat-form-field>
-    <!-- DIMENSIONE -->
-    <mat-form-field>
-      <mat-label>Dimensione</mat-label>
-      <input matInput type="text" formControlName="dimensione">
-    </mat-form-field>
-    <!-- PREZZO -->
-    <mat-form-field>
-      <mat-label>Prezzo</mat-label>
-      <input matInput type="number" formControlName="prezzo">
-    </mat-form-field>
+<div class="form-container">
+  <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
+      @if (data.type == "foto") {
+        <h2 mat-dialog-title>Aggiungi una nuova foto</h2>
+      } @else if (data.type == "disegno") {
+        <h2 mat-dialog-title>Aggiungi un nuovo disegno</h2>
+      } @else if (data.type == "illustrazione") {
+        <h2 mat-dialog-title>Aggiungi una nuova illustrazione</h2>
+      }
+    <mat-dialog-content class="mat-typography">
+    <div class="form-col">
+      <!-- TITOLO -->
+      <mat-form-field>
+        <mat-label>Titolo</mat-label>
+        <input matInput type="text" formControlName="titolo">
+      </mat-form-field>
+      <!-- DESCRIZIONE -->
+      <mat-form-field>
+        <mat-label>Descrizione</mat-label>
+        <input matInput type="text" formControlName="descrizione">
+      </mat-form-field>
+      <!-- AUTORE -->
+      <mat-form-field>
+        <mat-label>Autore</mat-label>
+        <input matInput type="text" formControlName="autore">
+      </mat-form-field>
+      <!-- DATA CREAZIONE -->
+      <mat-form-field>
+        <mat-label>Data creazione</mat-label>
+        <input matInput type="date" formControlName="dataCreazione">
+      </mat-form-field>
+      <!-- DIMENSIONE -->
+      <mat-form-field>
+        <mat-label>Dimensione</mat-label>
+        <input matInput type="text" formControlName="dimensione">
+      </mat-form-field>
+      <!-- PREZZO -->
+      <mat-form-field>
+        <mat-label>Prezzo</mat-label>
+        <input matInput type="number" formControlName="prezzo">
+      </mat-form-field>
+      <!-- se la il tipo dell'oggetto è FOTO ci metto questi attributi -->
+      @if (data.type == "foto") {
+        <mat-form-field>
+          <mat-label>Device</mat-label>
+          <input matInput type="text" formControlName="device">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Width Resolution</mat-label>
+          <input matInput type="number" formControlName="widthResolution">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Height Resolution</mat-label>
+          <input matInput type="number" formControlName="heightResolution">
+        </mat-form-field>
+      } 
+      <!-- se la il tipo dell'oggetto è DISEGNO ci metto questi attributi -->
+      @else if (data.type == "disegno") {
+        <mat-form-field>
+          <mat-label>Supporto</mat-label>
+          <input matInput type="text" formControlName="supporto">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Tecnica</mat-label>
+          <input matInput type="text" formControlName="tecnica">
+        </mat-form-field>
+      }
+      <!-- se la il tipo dell'oggetto è ILLUSTRAZIONE ci metto questi attributi -->
+      @else if (data.type == "illustrazione") {
+        <mat-form-field>
+          <mat-label>url dell'illustrazione</mat-label>
+          <input matInput type="text" formControlName="urlIllustrazione">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Stile</mat-label>
+          <input matInput type="text" formControlName="stile">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Data Illustrazione</mat-label>
+          <input matInput type="date" formControlName="dataIllustrazione">
+        </mat-form-field>
+      }
+    </div>
     <!-- IS AI -->
-    <mat-checkbox formControlName="isAI">AI</mat-checkbox>
-    <!-- se la il tipo dell'oggetto è FOTO ci metto questi attributi -->
-    @if (data.type == "foto") {
-      <mat-form-field>
-        <mat-label>Device</mat-label>
-        <input matInput type="text" formControlName="device">
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Width Resolution</mat-label>
-        <input matInput type="number" formControlName="widthResolution">
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Height Resolution</mat-label>
-        <input matInput type="number" formControlName="heightResolution">
-      </mat-form-field>
-    } 
-    <!-- se la il tipo dell'oggetto è DISEGNO ci metto questi attributi -->
-    @else if (data.type == "disegno") {
-      <mat-form-field>
-        <mat-label>Supporto</mat-label>
-        <input matInput type="text" formControlName="supporto">
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Tecnica</mat-label>
-        <input matInput type="text" formControlName="tecnica">
-      </mat-form-field>
-    }
-    <!-- se la il tipo dell'oggetto è ILLUSTRAZIONE ci metto questi attributi -->
-    @else if (data.type == "illustrazione") {
-      <mat-form-field>
-        <mat-label>url dell'illustrazione</mat-label>
-        <input matInput type="text" formControlName="urlIllustrazione">
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Stile</mat-label>
-        <input matInput type="text" formControlName="stile">
-      </mat-form-field>
-      <mat-form-field>
-        <mat-label>Data Illustrazione</mat-label>
-        <input matInput type="date" formControlName="dataIllustrazione">
-      </mat-form-field>
-    }
-    <!-- caricamento immagine -->
-    <h2>Carica un'immagine</h2>
-    <input type="file" (change)="onFileSelected($event)" />
-  </mat-dialog-content>
-  <mat-dialog-actions align="end">
-    <button matButton mat-dialog-close>Annulla</button>
-    <button matButton cdkFocusInitial type="submit" [disabled]="!uploadForm.valid">Carica</button>
-    <button mat-raised-button type="button" (click)="onDelete(data?.type, data.oggetto?.id)">Delete</button>
-  </mat-dialog-actions>
-</form> 
+    <div class="ai-checkbox">
+        <mat-checkbox formControlName="isAI">AI</mat-checkbox>
+    </div>
+    <div class="add-image">
+      <!-- caricamento immagine -->
+      <h2>Carica un'immagine</h2>
+      <input type="file" (change)="onFileSelected($event)" />
+      <!-- Preview -->
+      <div *ngIf="selectedFile">
+        File selezionato: {{ selectedFile.name }}
+      </div>
+      <!-- Zona drag & drop -->
+      <div 
+        class="drop-zone" 
+        (dragover)="onDragOver($event)"
+        (dragleave)="onDragLeave($event)"
+        (drop)="onDrop($event)"
+        [class.dragover]="isDragOver"
+      >
+        <p>Oppure trascina qui un file</p>
+      </div>
+    </div>
+    </mat-dialog-content>
+  
+    <mat-dialog-actions>
+      <button matButton mat-dialog-close>Annulla</button>
+      <button mat-raised-button type="button" (click)="onDelete(data?.type, data.oggetto?.id)">Delete</button>
+      <button matButton cdkFocusInitial type="submit" [disabled]="!uploadForm.valid">Carica</button>
+    </mat-dialog-actions>
+  </form> 
+</div>
+

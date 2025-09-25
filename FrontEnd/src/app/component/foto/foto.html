@@ -6,12 +6,12 @@
   
 </div>
 @if (!isAdmin) {
-    <div class="add-card" (click)="openDialog()">
-      <div class="add-svg-container">
-          <span class="c-mobile__button__plus fa fa-plus"></span>
-      </div>
+  <div class="add-card" (click)="openDialog()">
+    <div class="add-svg-container">
+        <span class="c-mobile__button__plus fa fa-plus"></span>
     </div>
-  }
+  </div>
+}
 <div class="foto-grid">
   @for (f of foto; track f.id) {
     <mat-card class="example-card" (click)="openInfoDialog(f)">
