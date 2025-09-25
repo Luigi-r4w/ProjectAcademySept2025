@@ -25,7 +25,6 @@ export class Disegni implements OnInit{
   disegnoSingolo:any;
   private dialogRef: any;
   isAdmin: any;
-  tit:string = '';
 
   constructor(private disegnoService:BackendDisegnoService,
     private dialog: MatDialog,
