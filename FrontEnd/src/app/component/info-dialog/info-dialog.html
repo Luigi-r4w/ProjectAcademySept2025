@@ -9,17 +9,16 @@
   </div>
   <!-- Colonna destra con scroll -->
   <div class="dialog-right">
+    <div class="dialog-right-header">
+      <h1 class="title">{{ obj.oggetto.titolo }}</h1>
     <!-- Toggle -->
-     <div class="dialog-right-header">
       <div class="ai-toggle-container">
           <span class="ai-label">AI</span>
           <div class="toggle-switch" [class.active]="obj.oggetto.isAI">
               <div class="toggle-slider"></div>
           </div>
       </div>
-      <h1 class="title">{{ obj.oggetto.titolo }}</h1>
-     </div>
-    
+    </div>
     <div class="description">
       <b>Descrizione:</b>
       <p>{{ obj.oggetto.descrizione }}</p>

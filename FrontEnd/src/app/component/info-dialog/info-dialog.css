@@ -33,9 +33,10 @@ mat-dialog-actions i:active{
 .dialog-left {
   flex: 1;
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   padding: 35px;
+  margin-top: 50px;
 }
 
 .dialog-left img {
@@ -59,12 +60,13 @@ mat-dialog-actions i:active{
 }
 
 .title {
-  margin-bottom: 24px;
+  margin-bottom: 15px;
   font-size: 2.5rem;
   font-weight: 700;
   color: black;
   background-clip: text;
   line-height: 1.2;
+  padding-bottom: 0px;
 }
 
 .author {
@@ -174,17 +176,16 @@ p b {
 }
 
 .dialog-right-header{
-  position: relative;
+  display: flex;
+  flex-direction: column;
 }
 
 /* TOGGLE */
 .ai-toggle-container {
     display: flex;
     align-items: center;
-    gap: 8px;
-    position: absolute;
-    bottom: 9px;
-    right: 45px
+    gap: 3px;
+
 }
 
 .ai-label {
