@@ -8,6 +8,8 @@ import { InfoDialog } from '../info-dialog/info-dialog';
 import { UtenteServices } from '../../services/utenteServices';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { ConfirmDialog } from '../confirm-dialog/confirm-dialog';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-disegni',
@@ -22,7 +24,8 @@ export class Disegni implements OnInit{
   msg:string = '';
   disegnoSingolo:any;
   private dialogRef: any;
-
+  isAdmin: any;
+  tit:string = '';
 
   constructor(private disegnoService:BackendDisegnoService,
     private dialog: MatDialog,
@@ -34,6 +37,7 @@ export class Disegni implements OnInit{
 
   ngOnInit(): void {
     console.log("ngOnInit");
+    this.isAdmin = this.auth.getIsAdmin();
     this.disegnoService.listDisegni()
       .subscribe(resp => {
         this.response = resp;
@@ -152,4 +156,3 @@ export class Disegni implements OnInit{
       }
     }
 }
-

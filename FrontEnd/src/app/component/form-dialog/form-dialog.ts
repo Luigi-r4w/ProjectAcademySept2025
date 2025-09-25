@@ -44,8 +44,8 @@ export class FormDialog implements OnInit{
       dimensione: new FormControl('',Validators.required),
       prezzo: new FormControl(null, Validators.required),
       isAI: new FormControl(false),
-      categoria: new FormControl('',Validators.required),
-      immagine: new FormControl('',Validators.required)
+      categoria: new FormControl(),
+      immagine: new FormControl()
     });
 
     if (this.data.type === 'foto') {
@@ -56,7 +56,7 @@ export class FormDialog implements OnInit{
 
     if (this.data.type === 'disegno') {
       this.uploadForm.addControl('supporto', new FormControl('',Validators.required));
-      this.uploadForm.addControl('tecnica', new FormControl(Validators.required));
+      this.uploadForm.addControl('tecnica', new FormControl('',Validators.required));
     }
 
     if (this.data.type === 'illustrazione') {
@@ -262,8 +262,8 @@ export class FormDialog implements OnInit{
   
   onDelete(tipo:any, id:number) {
     console.log("onDelete");
-    const enterAnimationDuration = '500ms';
-    const exitAnimationDuration = '500ms';
+    const enterAnimationDuration = '0ms';
+    const exitAnimationDuration = '0ms';
 
     if (tipo === 'foto') {
       this.fotoService.getFotoByID(id).subscribe((resp:any) => {

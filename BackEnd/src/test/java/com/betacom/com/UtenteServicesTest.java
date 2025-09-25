@@ -2,6 +2,7 @@ package com.betacom.com;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.DirtiesContext;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
@@ -21,6 +22,7 @@ import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 @SpringBootTest
+@DirtiesContext
 @TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public class UtenteServicesTest {
 
@@ -34,6 +36,7 @@ public class UtenteServicesTest {
         utente.setEmail("email");
         utente.setPassword("pwd");
         utente.setNome("nome");
+        utente.setRole("ADMIN");
         ResponseBase rb = utenteController.create(utente);
         assertTrue(rb.getRc(), "Creazione avvenuta con successo");
     }
@@ -46,7 +49,6 @@ public class UtenteServicesTest {
         utente.setEmail("email5");
         ResponseBase rb = utenteController.aggiungiAlCarrello(5, 1);
         rb = utenteController.update(utente);
-        System.out.println(rb.getMsg());
         assertTrue(rb.getRc(), "Update avvenuta con successo");
     }
 
@@ -57,7 +59,6 @@ public class UtenteServicesTest {
         System.out.println(rb.getDati());
         System.out.println(rb.getMsg());
         System.out.println(rb.getRc());
-
         assertEquals("nome", rb.getDati().getNome(), "Il nome dell'utente dovrebbe essere 'nome'.");
     }
 

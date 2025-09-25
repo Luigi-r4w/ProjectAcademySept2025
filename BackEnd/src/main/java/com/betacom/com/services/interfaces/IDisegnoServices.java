@@ -16,6 +16,4 @@ public interface IDisegnoServices {
 	void delete(DisegnoReq req) throws AcademyException;
 	
 	void update(DisegnoReq req) throws AcademyException;
-	
-	
 }

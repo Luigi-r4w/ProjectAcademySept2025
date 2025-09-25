@@ -17,8 +17,6 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 })
 export class Foto implements OnInit{
 
-  
-
   constructor(private fotoService:FotoBackend, 
     private dialog: MatDialog, 
     private uploadService: Upload, 
@@ -154,6 +152,4 @@ export class Foto implements OnInit{
         });
     }
   }
-
 }
-
