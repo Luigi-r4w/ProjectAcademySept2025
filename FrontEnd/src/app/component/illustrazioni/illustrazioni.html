@@ -1,10 +1,10 @@
 <div class="search-container">
   <div class="search-field">
-    <input matInput placeholder="Search">
+    <input matInput placeholder="Search" #text>
     <i class="fa-solid fa-magnifying-glass"></i>
   </div>
 </div>
-@if (!isAdmin) {
+@if (isAdmin) {
     <div class="add-card" (click)="openInsertDialog()">
       <div class="add-svg-container">
           <span class="c-mobile__button__plus fa fa-plus"></span>
@@ -13,15 +13,18 @@
 }
 <div class="foto-grid">
     @for (illustrazione of illustrazioni; track illustrazione.id){
+      @if((text.value == "" || (illustrazione.oggetto.titolo | lowercase).includes(text.value |lowercase))){
         <mat-card class="example-card" (click)="openInfoDialog(illustrazione)">
             <mat-card-header>
                 <div class="card-info">
                     <mat-card-title>{{illustrazione.oggetto.titolo}}</mat-card-title>
                     <mat-card-subtitle> di {{illustrazione.oggetto.autore}}</mat-card-subtitle>
                 </div>
-                <div class="modify-image-container" (click)="openModifyDialog(illustrazione?.id); $event.stopPropagation()">
-                    <i class="fa-solid fa-pen"></i>
-                </div>
+                @if (isAdmin) {
+                  <div class="modify-image-container" (click)="openModifyDialog(illustrazione?.id); $event.stopPropagation()">
+                      <i class="fa-solid fa-pen"></i>
+                  </div>
+                }
             </mat-card-header>
              <mat-card-content>
         <div class="image-container">
@@ -41,5 +44,6 @@
         </div>
       </mat-card-actions>
         </mat-card>
+      }
     }
 </div>
