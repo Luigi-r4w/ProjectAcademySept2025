@@ -3,12 +3,13 @@
 <mat-dialog-content>
   <div *ngIf="data?.carrello?.length > 0">
     <div *ngFor="let item of data.carrello">
-      <p><strong>{{ item.titolo }}</strong></p>
-      <p>Prezzo: €{{ item.prezzo }}</p>
+      <h4><strong>{{ item.titolo }}</strong></h4>
+      <h5>Prezzo: €{{ item.prezzo }}</h5>
     </div>
 
     <div class="total">
-      <p><strong>Totale: €{{ data.totalAmount | number: '1.2-2' }}</strong></p>
+      
+      <h3><strong>Totale: €{{ data.totalAmount | number: '1.2-2' }}</strong></h3>
     </div>
   </div>
 </mat-dialog-content>

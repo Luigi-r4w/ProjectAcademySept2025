@@ -3,15 +3,39 @@ h2[mat-dialog-title] {
     font-size: 1.5rem;
     text-align: center;
 }
-  
-mat-dialog-actions button:first-child {
-    color: #4caf50;
-    font-size: 1.1rem;
-}
-  
-mat-dialog-actions button:last-child {
-    color: #f44336;
-    font-size: 1.1rem;
+
+h3{
+  font-size: 1.05rem;
+  text-align: center;
+  color: black;
+
 }
 
+h4{
+  font-size: 1rem;
+  margin-bottom: 0px;
+}
+
+h5{
+  font-size: 0.8rem;
+  margin-top: 5px;
+}
+
+mat-dialog-actions {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+  
+  mat-dialog-actions button {
+    font-size: 1.1rem;
+  }
+  
+  mat-dialog-actions button:first-child {
+    color: #4caf50;
+  }
+  
+  mat-dialog-actions button:last-child {
+    color: #f44336;
+  }
   
