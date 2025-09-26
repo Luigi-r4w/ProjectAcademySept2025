@@ -266,3 +266,8 @@ mat-card-actions{
   opacity: 0.6;
 }
 
+img{
+    display: grid;
+    align-items: center;
+    text-align: center;
+}
