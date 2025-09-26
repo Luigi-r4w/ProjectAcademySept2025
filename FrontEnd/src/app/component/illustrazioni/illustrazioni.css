@@ -89,13 +89,26 @@ mat-card-header{
   display: flex;
   flex-direction: column;
   align-items: center;
+  text-align: center;
 }
 
 mat-card-title {
+  display: inline;
   font-size: 1.5rem;
   font-weight: 700;
   color: black;
   margin: 0 0 1px 0;
+  margin-right: 20px;
+  margin-left: 20px;
+  word-wrap: break-word
+}
+
+/*this part of code might look helpful,
+but for some reasons you can't put margins
+only on the first line of a text, so it does nothing*/
+mat-card-title:first-line{
+  margin-right: 20px;
+  margin-left: 20px;
 }
 
 /* icona modify */
@@ -253,5 +266,8 @@ mat-card-actions{
   color: #666;
   pointer-events: none;
 }
-
-
+img{
+    display: grid;
+    align-items: center;
+    text-align: center;
+}
