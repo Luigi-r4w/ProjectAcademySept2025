@@ -17,10 +17,13 @@ import { BackendIllustrazioneService } from '../../services/backend-illustrazion
 export class FormDialog implements OnInit{
   uploadedFileName: string='';
   selectedFile?: File;
+  isDragOver = false;
   uploadForm: any;
   readonly dialogRef = inject(MatDialogRef<FormDialog>);
   readonly dialogDelete = inject(MatDialog);
   oggettoRemove: any;
+  msg: string = '';
+  azione: string = "Aggiungi";
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
     private uploadService: Upload, 
@@ -28,40 +31,43 @@ export class FormDialog implements OnInit{
     private disegnoService: BackendDisegnoService,
     private illustrazioneService: BackendIllustrazioneService,
     private cdr: ChangeDetectorRef,
-    private routing:Router,){
+    private routing:Router){
     console.log("Tipo ricevuto:", data.type);
   }
   // quando il componente viene inizializzato in base al tipo costruisce il gli input del form
   ngOnInit(): void {
     console.log("ngOnInit");
 
+    if(this.data.oggetto)
+      this.azione = "Modifica";
+
     this.uploadForm = new FormGroup({
-      titolo: new FormControl(),
-      descrizione: new FormControl(),
-      autore: new FormControl(),
+      titolo: new FormControl('',Validators.required),
+      descrizione: new FormControl('',Validators.required),
+      autore: new FormControl('',Validators.required),
       dataCreazione: new FormControl(),
-      dimensione: new FormControl(),
-      prezzo: new FormControl(),
+      dimensione: new FormControl('',Validators.required),
+      prezzo: new FormControl(null, Validators.required),
       isAI: new FormControl(false),
       categoria: new FormControl(),
       immagine: new FormControl()
     });
 
     if (this.data.type === 'foto') {
-      this.uploadForm.addControl('device', new FormControl());
-      this.uploadForm.addControl('widthResolution', new FormControl());
-      this.uploadForm.addControl('heightResolution', new FormControl());
+      this.uploadForm.addControl('device', new FormControl('',Validators.required));
+      this.uploadForm.addControl('widthResolution', new FormControl(null,Validators.required));
+      this.uploadForm.addControl('heightResolution', new FormControl(null, Validators.required));
     }
 
     if (this.data.type === 'disegno') {
-      this.uploadForm.addControl('supporto', new FormControl());
-      this.uploadForm.addControl('tecnica', new FormControl());
+      this.uploadForm.addControl('supporto', new FormControl('',Validators.required));
+      this.uploadForm.addControl('tecnica', new FormControl('',Validators.required));
     }
 
     if (this.data.type === 'illustrazione') {
-      this.uploadForm.addControl('urlIllustrazione', new FormControl());
-      this.uploadForm.addControl('stile', new FormControl());
-      this.uploadForm.addControl('dataIllustrazione', new FormControl());
+      this.uploadForm.addControl('urlIllustrazione', new FormControl('',Validators.required));
+      this.uploadForm.addControl('stile', new FormControl('', Validators.required));
+      this.uploadForm.addControl('dataIllustrazione', new FormControl(null,Validators.required));
 
     }
 
@@ -82,8 +88,25 @@ export class FormDialog implements OnInit{
     }
   }
 
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+    this.isDragOver = true;
+  }
+
+  onDragLeave(event: DragEvent) {
+    event.preventDefault();
+    this.isDragOver = false;
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    this.isDragOver = false;
+    if (event.dataTransfer?.files.length) {
+      this.selectedFile = event.dataTransfer.files[0];
+    }
+  }
+
   onSubmit(){
-    
     if (this.data.oggetto)
       return this.modifyForm();
     else
