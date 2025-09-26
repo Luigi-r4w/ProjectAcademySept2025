@@ -1,0 +1,16 @@
+h2[mat-dialog-title] {
+    color: #4caf50;
+    text-align: center;
+}
+
+mat-dialog-actions button {
+    color: #1976d2;
+}
+  
+mat-dialog-actions button:hover {
+    color: #1976d2;
+}
+
+mat-dialog-content p {
+    text-align: center;
+}
