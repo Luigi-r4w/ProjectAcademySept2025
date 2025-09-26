@@ -4,7 +4,7 @@
     <i class="fa-solid fa-magnifying-glass"></i>
   </div>
 </div>
-@if (!isAdmin) {
+@if (isAdmin) {
     <div class="add-card" (click)="openDialog()">
       <div class="add-svg-container">
           <span class="c-mobile__button__plus fa fa-plus"></span>

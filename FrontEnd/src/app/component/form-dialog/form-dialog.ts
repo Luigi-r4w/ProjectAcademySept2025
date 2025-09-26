@@ -22,6 +22,8 @@ export class FormDialog implements OnInit{
   readonly dialogRef = inject(MatDialogRef<FormDialog>);
   readonly dialogDelete = inject(MatDialog);
   oggettoRemove: any;
+  msg: string = '';
+  azione: string = "Aggiungi";
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
     private uploadService: Upload, 
@@ -29,12 +31,15 @@ export class FormDialog implements OnInit{
     private disegnoService: BackendDisegnoService,
     private illustrazioneService: BackendIllustrazioneService,
     private cdr: ChangeDetectorRef,
-    private routing:Router,){
+    private routing:Router){
     console.log("Tipo ricevuto:", data.type);
   }
   // quando il componente viene inizializzato in base al tipo costruisce il gli input del form
   ngOnInit(): void {
     console.log("ngOnInit");
+
+    if(this.data.oggetto)
+      this.azione = "Modifica";
 
     this.uploadForm = new FormGroup({
       titolo: new FormControl('',Validators.required),
@@ -100,7 +105,6 @@ export class FormDialog implements OnInit{
       this.selectedFile = event.dataTransfer.files[0];
     }
   }
-
 
   onSubmit(){
     if (this.data.oggetto)

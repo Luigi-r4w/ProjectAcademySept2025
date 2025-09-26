@@ -69,5 +69,6 @@ mat-form-field {
 mat-dialog-actions {
   display: flex;
   justify-content: center;
+  gap: 20px;
 }
 

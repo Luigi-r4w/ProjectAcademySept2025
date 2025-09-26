@@ -15,6 +15,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './foto.html',
   styleUrl: './foto.css'
 })
+
+
 export class Foto implements OnInit{
 
   constructor(private fotoService:FotoBackend, 
@@ -137,8 +139,8 @@ export class Foto implements OnInit{
     let utenteID = this.auth.getId(); 
     if (this.auth.isAutentificated()){
       this.utenteService.addItem(utenteID, id).subscribe();
-      this.snackBar.open('Articolo aggiunto!', 'Chiudi', {
-        duration: 2000,
+      this.snackBar.open('Articolo aggiunto!', 'Chiudi',{
+        duration: 3000,
         horizontalPosition: 'right',
         verticalPosition: 'top',
         panelClass: ['custom-snackbar']

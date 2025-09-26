@@ -23,6 +23,7 @@
   .app-header .nav-links {
     list-style: none;
     display: flex;
+    margin-bottom: 0px;
   }
   
   .app-header .nav-links li {

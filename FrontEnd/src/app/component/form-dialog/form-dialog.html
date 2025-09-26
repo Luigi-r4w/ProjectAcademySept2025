@@ -1,11 +1,11 @@
 <div class="form-container">
   <form [formGroup]="uploadForm" (ngSubmit)="onSubmit()">
       @if (data.type == "foto") {
-        <h2 mat-dialog-title>Aggiungi una nuova foto</h2>
+        <h2 mat-dialog-title>{{azione}} una foto</h2>
       } @else if (data.type == "disegno") {
-        <h2 mat-dialog-title>Aggiungi un nuovo disegno</h2>
+        <h2 mat-dialog-title>{{azione}} un disegno</h2>
       } @else if (data.type == "illustrazione") {
-        <h2 mat-dialog-title>Aggiungi una nuova illustrazione</h2>
+        <h2 mat-dialog-title>{{azione}} una illustrazione</h2>
       }
     <mat-dialog-content class="mat-typography">
     <div class="form-col">
@@ -107,9 +107,11 @@
     </mat-dialog-content>
   
     <mat-dialog-actions>
-      <button matButton mat-dialog-close>Annulla</button>
-      <button mat-raised-button type="button" (click)="onDelete(data?.type, data.oggetto?.id)">Delete</button>
-      <button matButton cdkFocusInitial type="submit" [disabled]="!uploadForm.valid">Carica</button>
+      <button mat-dialog-close class="btn btn-secondary">Annulla</button>
+      @if (data.oggetto) {
+        <button type="button" class="btn btn-danger" (click)="onDelete(data?.type, data.oggetto?.id)">Delete</button>
+      }
+      <button cdkFocusInitial type="submit" class="btn btn-success">Carica</button>
     </mat-dialog-actions>
   </form> 
 </div>
