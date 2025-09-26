@@ -252,10 +252,23 @@ mat-card-actions{
 .search-container i {
   position: absolute;
   right: 15px;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 16px;
   font-size: 18px;
   color: #666;
-  pointer-events: none;
+  cursor: pointer;
+}
+
+.search-container i:hover {
+  opacity: 0.8;
+}
+
+.search-container i:active {
+  opacity: 0.6;
+}
+
+img{
+    display: grid;
+    align-items: center;
+    text-align: center;
 }
 
