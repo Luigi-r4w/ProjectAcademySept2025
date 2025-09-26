@@ -132,6 +132,15 @@ export class FormDialog implements OnInit{
       if (this.uploadForm.controls['tecnica']?.touched)
         updateBody.tecnica = this.uploadForm.value.tecnica;
 
+      if (this.uploadForm.controls['urlIllustrazione']?.touched)
+        updateBody.urlIllustrazione = this.uploadForm.value.urlIllustrazione;
+
+      if (this.uploadForm.controls['stile']?.touched)
+        updateBody.stile = this.uploadForm.value.stile;
+
+      if (this.uploadForm.controls['dataIllustrazione']?.touched)
+        updateBody.dataIllustrazione = this.uploadForm.value.dataIllustrazione;
+
       this.dialogRef.close(updateBody);
     }
 
@@ -237,6 +246,11 @@ export class FormDialog implements OnInit{
     else if (oggettoSingolo.oggetto.categoria === 'disegno') {
       this.uploadForm.addControl('supporto', new FormControl(oggettoSingolo.supporto, Validators.required));
       this.uploadForm.addControl('tecnica', new FormControl(oggettoSingolo.tecnica, Validators.required));
+    }
+    else if (oggettoSingolo.oggetto.categoria === 'illustrazione'){
+      this.uploadForm.addControl('urlIllustrazione', new FormControl(oggettoSingolo.urlIllustrazione, Validators.required));
+      this.uploadForm.addControl('stile', new FormControl(oggettoSingolo.stile, Validators.required));
+      this.uploadForm.addControl('dataIllustrazione', new FormControl(oggettoSingolo.dataIllustrazione, Validators.required));
     }
   }
   
