@@ -58,8 +58,7 @@ p {
 
 .category img {
     width: 100%;
-    height: auto;
-    max-height: 250px;
+    height: 250px;
     object-fit: cover;
     border-radius: 8px;
 }
