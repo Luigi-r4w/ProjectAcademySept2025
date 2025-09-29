@@ -52,6 +52,7 @@ export class Utente implements OnInit {
         if(resp.rc){
           console.log("cancellazione effettuata");
           this.auth.resetAll();
+          window.location.reload();
           console.log(this.auth.isAutentificated());
           this.router.navigate(['login']);
         } else{
