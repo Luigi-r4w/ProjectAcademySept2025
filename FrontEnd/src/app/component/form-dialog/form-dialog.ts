@@ -24,6 +24,7 @@ export class FormDialog implements OnInit{
   oggettoRemove: any;
   msg: string = '';
   azione: string = "Aggiungi";
+  invalid!:boolean;
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
     private uploadService: Upload, 
@@ -107,6 +108,11 @@ export class FormDialog implements OnInit{
   }
 
   onSubmit(){
+    if (this.uploadForm.invalid){
+      this.invalid = true;
+      return;
+    }
+      
     if (this.data.oggetto)
       return this.modifyForm();
     else
@@ -191,6 +197,7 @@ export class FormDialog implements OnInit{
   createForm() {
     if (!this.selectedFile) {   // sicurezza extra
       console.log("Nessun file selezionato");
+      this.msg = "Nessun file selezionato";
       return;
     }
     // chiamo il controller upload del backend che mi torna il nome del file

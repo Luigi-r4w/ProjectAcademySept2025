@@ -90,8 +90,8 @@
       <h2>Carica un'immagine</h2>
       <input type="file" (change)="onFileSelected($event)" />
       <!-- Preview -->
-      <div *ngIf="selectedFile">
-        File selezionato: {{ selectedFile.name }}
+      <div *ngIf="selectedFile" class="file-selezionato">
+        <p>File selezionato: {{ selectedFile.name }}</p>
       </div>
       <!-- Zona drag & drop -->
       <div 
@@ -105,13 +105,21 @@
       </div>
     </div>
     </mat-dialog-content>
-  
     <mat-dialog-actions>
-      <button mat-dialog-close class="btn btn-secondary">Annulla</button>
-      @if (data.oggetto) {
-        <button type="button" class="btn btn-danger" (click)="onDelete(data?.type, data.oggetto?.id)">Delete</button>
+      @if (invalid) {
+        <p style="color: red;">Alcuni campi non sono stati compilati</p>
       }
-      <button cdkFocusInitial type="submit" class="btn btn-success">Carica</button>
+      @else if(msg){
+        <p style="color: red;">{{msg}}</p>
+      }
+      <div class="buttons">
+        <button mat-dialog-close class="btn btn-secondary">Annulla</button>
+        @if (data.oggetto) {
+          <button type="button" class="btn btn-danger" (click)="onDelete(data?.type, data.oggetto?.id)">Delete</button>
+        }
+        <button cdkFocusInitial type="submit" class="btn btn-success">Carica</button>
+      </div>
+
     </mat-dialog-actions>
   </form> 
 </div>
