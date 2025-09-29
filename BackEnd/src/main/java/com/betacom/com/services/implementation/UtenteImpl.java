@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.betacom.com.dto.OggettoDTO;
 import com.betacom.com.dto.UtenteDTO;
@@ -65,6 +66,7 @@ public class UtenteImpl implements IUtenteServices{
         return utenteRepository.save(utente).getId();
     }
 
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public void delete(UtenteReq req) throws AcademyException {
         log.debug("Utente delete : "+req);
@@ -74,6 +76,7 @@ public class UtenteImpl implements IUtenteServices{
 		}
 		utenteRepository.delete(u.get());    }
 
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public void update(UtenteReq req) throws AcademyException {
         log.debug("Utente update : "+req);
@@ -135,6 +138,7 @@ public class UtenteImpl implements IUtenteServices{
 		.collect(Collectors.toList());
 	}
 
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public void addAlCarrello(Integer utenteId, Integer oggettoId) throws AcademyException {
         Optional<Utente> u = utenteRepository.findById(utenteId);
@@ -142,13 +146,14 @@ public class UtenteImpl implements IUtenteServices{
             throw new AcademyException("utente non trovato ");
         }
         Optional<Oggetto> o = oggettoRepository.findById(oggettoId);
-        if(u.isEmpty()){
+        if(o.isEmpty()){
             throw new AcademyException("oggetto non trovato ");
         }
         u.get().getCarrello().add(o.get());
         utenteRepository.save(u.get());
     }
 
+    @Transactional(rollbackFor=Exception.class)
     @Override
     public void rmDalCarrello(Integer utenteId, Integer oggettoId) throws AcademyException {
         Optional<Utente> u = utenteRepository.findById(utenteId);
@@ -156,7 +161,7 @@ public class UtenteImpl implements IUtenteServices{
             throw new AcademyException("utente non trovato ");
         }
         Optional<Oggetto> o = oggettoRepository.findById(oggettoId);
-        if(u.isEmpty()){
+        if(o.isEmpty()){
             throw new AcademyException("oggetto non trovato ");
         }
         u.get().getCarrello().remove(o.get());
@@ -180,6 +185,7 @@ public class UtenteImpl implements IUtenteServices{
             .build();
     }
 
+    @Transactional(rollbackFor=Exception.class)
 	@Override
 	public void svuotaCarrello(Integer utenteId) throws AcademyException {
 		Optional<Utente> optionalU = utenteRepository.findById(utenteId);
