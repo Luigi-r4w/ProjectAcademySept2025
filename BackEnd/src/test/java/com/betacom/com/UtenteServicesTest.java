@@ -7,13 +7,19 @@ import org.springframework.test.annotation.DirtiesContext;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import java.time.LocalDate;
+
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
 
+import com.betacom.com.controller.IllustrazioneController;
 import com.betacom.com.controller.UtenteController;
 import com.betacom.com.dto.UtenteDTO;
+import com.betacom.com.request.IllustrazioneReq;
 import com.betacom.com.request.UtenteReq;
 import com.betacom.com.response.ResponseBase;
 import com.betacom.com.response.ResponseObject;
@@ -104,6 +110,77 @@ public class UtenteServicesTest {
         utente.setId(99);
         ResponseBase rb = utenteController.delete(utente);
         assertFalse(rb.getRc(), "Delete non avvenuto con successo");
+    }
+    
+    @Test
+	@Order(9)
+    public void nuovoUtenteError() {
+    	 UtenteReq utente = new UtenteReq();
+         utente.setEmail("admin");
+         utente.setPassword("admin");
+         utente.setNome("admin");
+         utente.setRole("ADMIN");
+         ResponseBase rb = utenteController.create(utente);
+         rb = utenteController.create(utente);
+         Assertions.assertThat(rb.getRc()).isEqualTo(false);
+    }
+    
+    @Test
+    @Order(10)
+    public void listAll() {
+    	ResponseBase rb = utenteController.list();
+    	Assertions.assertThat(rb.getRc()).isEqualTo(true);
+    }
+    @Test
+    @Order(11)
+    public void autenticate() {
+    	UtenteReq ur = new UtenteReq();
+    	ur.setEmail("admin"); ur.setPassword("admin");
+    	ResponseBase rb = utenteController.login(ur);
+    	Assertions.assertThat(rb.getRc()).isEqualTo(true);
+    }
+    
+    @Autowired
+	private IllustrazioneController illustrazioneC;
+    
+    @Test
+    @Order(12)
+    public void aggiungiAlCarrello() {
+    	IllustrazioneReq req = new IllustrazioneReq();
+		req.setCategoria("illustrazione");
+		req.setPrezzo(20d); 
+		req.setDescrizione("Arte troppo moderna"); 
+		req.setTitolo("Pane al latte"); 
+		req.setDataCreazione(LocalDate.of(2025, 9, 15)); 
+		req.setDimensione("1920x1080"); 
+		req.setAutore("Alex"); 
+		req.setImmagine("bread.jpg"); 
+		req.setIsAI(false);
+		req.setDataIllustrazione(LocalDate.MIN);
+		req.setStile("bread");
+		req.setUrlIllustrazione("pijama.html");
+		illustrazioneC.create(req);
+		
+		ResponseBase rb = utenteController.aggiungiAlCarrello(2, 1);
+		Assertions.assertThat(rb.getRc()).isEqualTo(true);
+		
+		rb = utenteController.aggiungiAlCarrello(2, 2);
+		Assertions.assertThat(rb.getRc()).isEqualTo(false);	
+    }
+    
+    @Test
+    @Order(12)
+    public void rimuoviDalCarrello() {
+    	utenteController.aggiungiAlCarrello(2, 1);
+    	ResponseBase rb = utenteController.rimuoviDalCarrello(2, 1);
+		Assertions.assertThat(rb.getRc()).isEqualTo(true);
+    }
+    @Test
+    @Order(13)
+    public void svuotaCarrello() {
+    	ResponseBase rb = utenteController.aggiungiAlCarrello(2, 1);
+    	rb = utenteController.svuotaCarello(2);
+		Assertions.assertThat(rb.getRc()).isEqualTo(true);
     }
 
 }
