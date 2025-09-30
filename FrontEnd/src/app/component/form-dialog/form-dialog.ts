@@ -79,6 +79,40 @@ export class FormDialog implements OnInit{
     
   }
 
+  onSubmit(){
+    if (this.uploadForm.invalid){
+      this.invalid = true;
+      return;
+    }
+      
+    if (this.data.oggetto)
+      this.modifyForm();
+    else
+      this.createForm();
+
+  }
+
+  createForm() {
+    if (!this.selectedFile) {   // sicurezza extra
+      this.msg = "Nessun file selezionato";
+      console.log(this.msg);
+      return;
+    }
+    // chiamo il controller uploadFile del backend che mi torna il nome del file
+    this.uploadService.upload(this.selectedFile!).subscribe((resp: any) => {
+      console.log('Risposta backend: ', resp);
+      
+      // assegno il nome del file
+      this.uploadedFileName = resp;
+
+      this.uploadForm.value.categoria = this.data.type;
+      this.uploadForm.value.immagine = this.uploadedFileName
+
+      // chiudo il dialog e ritorno l'oggetto compreso di tutti i suoi dati (nel mio caso a foto.ts)
+      this.dialogRef.close(this.uploadForm.value);
+    });
+  }
+
   onFileSelected(event: Event) {
     console.log("sono qui");
     // event.target è l'elemento che ha generato l'evento
@@ -89,41 +123,10 @@ export class FormDialog implements OnInit{
     }
   }
 
-  onDragOver(event: DragEvent) {
-    event.preventDefault();
-    this.isDragOver = true;
-  }
-
-  onDragLeave(event: DragEvent) {
-    event.preventDefault();
-    this.isDragOver = false;
-  }
-
-  onDrop(event: DragEvent) {
-    event.preventDefault();
-    this.isDragOver = false;
-    if (event.dataTransfer?.files.length) {
-      this.selectedFile = event.dataTransfer.files[0];
-    }
-  }
-
-  onSubmit(){
-    if (this.uploadForm.invalid){
-      this.invalid = true;
-      return;
-    }
-      
-    if (this.data.oggetto)
-      return this.modifyForm();
-    else
-      return this.createForm();
-
-  }
-
   modifyForm(){
     const updateBody: any = {id: this.data.oggetto.id}
 
-    // funzione insterna
+    // funzione interna
     const completaFormEInvia = () => {
       if (this.uploadForm.controls['titolo'].touched)
       updateBody.titolo = this.uploadForm.value.titolo;
@@ -191,64 +194,6 @@ export class FormDialog implements OnInit{
     else{
       completaFormEInvia();
     }
-
-  }
-
-  createForm() {
-    if (!this.selectedFile) {   // sicurezza extra
-      console.log("Nessun file selezionato");
-      this.msg = "Nessun file selezionato";
-      return;
-    }
-    // chiamo il controller upload del backend che mi torna il nome del file
-    this.uploadService.upload(this.selectedFile!).subscribe((resp: any) => {
-      console.log('Risposta backend: ', resp);
-      
-      // assegno il nome del file
-      this.uploadedFileName = resp;
-
-      // riempo i campi di oggetto
-      const campiInComune = {
-        titolo: this.uploadForm.value.titolo,
-        descrizione: this.uploadForm.value.descrizione,
-        autore: this.uploadForm.value.autore,
-        dataCreazione: this.uploadForm.value.dataCreazione,
-        dimensione: this.uploadForm.value.dimensione,
-        prezzo: this.uploadForm.value.prezzo,
-        isAI: this.uploadForm.value.isAI,
-        categoria: this.data.type,
-        immagine: this.uploadedFileName
-      }
-
-      // faccio una copia e la inserisco in payload
-      let payload: any = { ...campiInComune };
-
-      if (this.data.type === 'foto') {
-      payload = {
-        ...campiInComune,
-        device: this.uploadForm.value.device,
-        widthResolution: this.uploadForm.value.widthResolution,
-        heightResolution: this.uploadForm.value.heightResolution
-        };
-      }
-      if (this.data.type === 'disegno') {
-      payload = {
-        ...campiInComune,
-        supporto: this.uploadForm.value.supporto,
-        tecnica: this.uploadForm.value.tecnica
-        };
-      }
-      if (this.data.type === 'illustrazione') {
-      payload = {
-        ...campiInComune,
-        urlIllustrazione: this.uploadForm.value.urlIllustrazione,
-        stile: this.uploadForm.value.stile,
-        dataIllustrazione:this.uploadForm.value.dataIllustrazione
-        };
-      }
-      // chiudo il dialog e ritorno l'oggetto compreso di tutti i suoi dati (nel mio caso a foto.ts)
-      this.dialogRef.close(payload);
-    });
   }
 
   // mi riempe i campi del form se voglio modificare
@@ -283,7 +228,25 @@ export class FormDialog implements OnInit{
       this.uploadForm.addControl('dataIllustrazione', new FormControl(oggettoSingolo.dataIllustrazione, Validators.required));
     }
   }
-  
+
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+    this.isDragOver = true;
+  }
+
+  onDragLeave(event: DragEvent) {
+    event.preventDefault();
+    this.isDragOver = false;
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    this.isDragOver = false;
+    if (event.dataTransfer?.files.length) {
+      this.selectedFile = event.dataTransfer.files[0];
+    }
+  }
+
   
   onDelete(tipo:any, id:number) {
     console.log("onDelete");

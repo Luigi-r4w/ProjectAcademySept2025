@@ -41,10 +41,9 @@ public class UploadController {
 		 Path dir = Path.of(uploadDir).toAbsolutePath();
 		 Files.createDirectories(dir);
 		 
-		 // crea un nome random e lo mette il file nella cartella
-		 String filename = UUID.randomUUID() + "." + ext;
-		 Path dest = dir.resolve(filename);
-		 file.transferTo(dest.toFile()); // .toFile() converte il path in file
+		 String filename = UUID.randomUUID() + "." + ext; // crea un nome random
+		 Path dest = dir.resolve(filename); // crea la destinazione finale contenente il file png (es: C:/progetto/images/b07e1d7a-...png.)
+		 file.transferTo(dest.toFile()); // il file viene copiato fisicamente sul disco a quell'indirizzo
 		 
 		 return filename;
 	 }
