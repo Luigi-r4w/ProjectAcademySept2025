@@ -1,10 +1,12 @@
+<!-- SEARCH container-->
 <div class="search-container">
   <div class="search-field">
     <input matInput placeholder="Search" #text>
     <i class="fa-solid fa-magnifying-glass"></i>
   </div>
-  
 </div>
+
+<!-- Button per aggiungere immagine -->
 @if (isAdmin) {
     <div class="add-card" (click)="openDialog()">
       <div class="add-svg-container">
@@ -12,15 +14,17 @@
       </div>
     </div>
 }
+<!-- GRIGLIA delle foto -->
 <div class="foto-grid">
   @for (f of foto; track f.id) {
     @if((text.value == "" || (f.oggetto.titolo | lowercase).includes(text.value |lowercase))){
-    <mat-card class="example-card" (click)="openInfoDialog(f)">
+    <mat-card class="example-card" (click)="openInfoDialog(f)"> <!-- al click apre un dialog che mostra piu info dell'immagine -->
       <mat-card-header>
         <div class="card-info">
           <mat-card-title>{{f.oggetto.titolo}}</mat-card-title>
           <mat-card-subtitle> di {{f.oggetto.autore}}</mat-card-subtitle>
         </div>
+        <!-- ICONA per modifica foto -->
         @if (isAdmin){
           <div class="modify-image-container" (click)="openModifyDialog(f?.id); $event.stopPropagation()">
             <i class="fa-solid fa-pen"></i>
@@ -33,6 +37,7 @@
         </div>
       </mat-card-content>
       <mat-card-actions>
+        <!-- Button per aggiungere al carrello-->
         @if (!isAdmin){
         <button class="add-to-cart-btn" (click)="addToCart(f.id); $event.stopPropagation()" 
         matTooltip="Aggiungi al carrello" >

@@ -34,7 +34,6 @@ export class Foto implements OnInit{
   private dialogRef: any;
   isAdmin: any;
   
-
   ngOnInit(): void {
     console.log("ngOnInit");
     this.isAdmin = this.auth.getIsAdmin();
@@ -50,6 +49,7 @@ export class Foto implements OnInit{
   // to open insert form dialog
   openDialog() {
     // apro il dialog (modal) e gli passo la tipologia dell'oggetto (nel mio caso 'foto')
+    // salvo l'observable nella variabile dialogRef
     this.dialogRef = this.dialog.open(FormDialog, {
       width: '400px',
       data: { type: 'foto' }
@@ -71,7 +71,6 @@ export class Foto implements OnInit{
           })
 
           this.msg = resp.msg;
-          console.log(this.msg);
           }
         });
       }

@@ -89,7 +89,6 @@
       <!-- caricamento immagine -->
       <h2>Carica un'immagine</h2>
       <input type="file" (change)="onFileSelected($event)" />
-      <!-- Preview -->
       <div *ngIf="selectedFile" class="file-selezionato">
         <p>File selezionato: {{ selectedFile.name }}</p>
       </div>
@@ -99,21 +98,24 @@
         (dragover)="onDragOver($event)"
         (dragleave)="onDragLeave($event)"
         (drop)="onDrop($event)"
-        [class.dragover]="isDragOver"
-      >
+        [class.dragover]="isDragOver" 
+      > <!-- quindi [class.dragover] serve per dire quando isDragOver è true la classe diventa class="drop-zone dragover"-->
         <p>Oppure trascina qui un file</p>
       </div>
     </div>
     </mat-dialog-content>
     <mat-dialog-actions>
+      <!-- Se ci sono campi non compilati -->
       @if (invalid) {
         <p style="color: red;">Alcuni campi non sono stati compilati</p>
       }
+      <!-- Se tutti i campi sono stati compilati ma il file non è stato aggiunto -->
       @else if(msg){
         <p style="color: red;">{{msg}}</p>
       }
       <div class="buttons">
         <button mat-dialog-close class="btn btn-secondary">Annulla</button>
+        <!-- button delete presente solo se ricevo l'oggetto-->
         @if (data.oggetto) {
           <button type="button" class="btn btn-danger" (click)="onDelete(data?.type, data.oggetto?.id)">Delete</button>
         }
